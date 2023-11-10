@@ -1,0 +1,132 @@
+<div class="sticky bg-gradient-to-r from-orange-400 to-orange-600 w-full h-32">
+    <div class="grid col-span-2 grid-flow-row w-8/12 m-auto pt-1">
+        <div class="firstLine">
+            <div class="grid row-span-2 grid-flow-col text-base text-white">
+                <div class="grid row-span-3 grid-flow-col w-96">
+                    <a href="" class="border-r-2 order-stone-50"  id="label-title">Kênh Người Bán</a>
+                    <a href="" class="border-r-2 order-stone-50 pl-2"  id="label-title">Tải ứng dụng</a>
+                    <div class="pl-2">
+                        <div class="grid row-span-3 grid-flow-col w-15">
+                           <span>Kết Nối</span>
+                           <a href="">
+                                <mat-icon>facebook</mat-icon>
+                           </a> 
+                           <a href="">
+                                <mat-icon>add_a_photo</mat-icon>
+                           </a> 
+                        </div>
+                    </div>
+                </div>
+                <div class="grid row-span-4 grid-flow-col justify-end ">
+                        <div class="grid row-span-2 grid-flow-col mr-4" id="label-title">
+                            <mat-icon>notifications_none</mat-icon>
+                            <div (mouseenter)="notificationPopUp.toggle($event)">
+                                Thông Báo
+                            </div>
+                            <p-overlayPanel #notificationPopUp (mouseleave)="notificationPopUp.hide()">
+                                <ng-template  pTemplate="content">
+                                    <div class="grid grid-rows-3 grid-flow-col h-44 max-w-xl gap-15 w-full">
+                                        <div class="row-span-1">
+                                            <div class="grid grid-cols-3 grid-flow-row cursor-pointer hover:bg-gray-100">
+                                                <div class="cols-span-1 w-32 m-auto">
+                                                    <img class="w-full m-auto" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScm3EFlRXb0P8mBevP2AyYtCN1VqIp_VaqQg&usqp=CAU">
+                                                    </div>
+                                                <div class="cols-span-2 col-start-2 col-end-4 w-full">
+                                                    <p>{{'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam venenatis et lorem sit amet vehicula. Etiam vel nibh nec nisi euismod mollis ultrices condimentum velit. Proin velit libero, interdum ac rhoncus sit amet, pellentesque ac turpis. Quisque ac luctus turpis, vel efficitur ante. Cras convallis risus vel vehicula dapibus. Donec eget neque fringilla, faucibus mi quis, porttitor magna. Cras pellentesque leo est, et luctus neque rutrum eu. Aliquam consequat velit sed sem posuere, vitae sollicitudin mi consequat. Mauris eget ipsum sed dui rutrum fringilla. Donec varius vehicula magna sit amet auctor. Ut co' | truncateText: 200}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row-span-1 text-center w-full mt-10 cursor-pointer justify-center">
+                                            <div class="grid grid-cols-1 grid-flow-row h-14 hover:bg-gray-100 pt-3">
+                                                <p>Xem tất cả</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </ng-template>
+                            </p-overlayPanel>
+                        </div>
+                        <div class="grid row-span-2 grid-flow-col mr-4" id="label-title">
+                            <mat-icon>contact_support</mat-icon>
+                            <span>Hỗ Trợ</span>
+                        </div>
+                        <div class="grid row-span-2 grid-flow-col mr-4" id="label-title"> 
+                            <p-overlayPanel #op (mouseleave)="op.hide()">
+                                <ng-template  pTemplate="content">
+                                    <div class="grid grid-rows-2 grid-flow-col gap-4">
+                                        <a href="" id="language">Tiếng Việt</a>
+                                        <a href="" id="language">Tiếng Anh</a>
+                                    </div>
+                                </ng-template>
+                            </p-overlayPanel>
+                            <div class="grid grid-cols-4 grid-flow-row w-32" (mouseenter)="op.toggle($event)">
+                                <span class="col-span-1"><mat-icon>language</mat-icon></span>
+                                <span class="col-span-3">Ngôn Ngữ</span>
+                            </div>
+                        </div>
+                        <div class="grid row-span-2 grid-flow-col" id="label-title">
+                            <mat-icon>account_circle</mat-icon>
+                            <span>Account</span>
+                        </div>
+                   
+                </div>
+            </div>
+          
+        </div>
+        <div class="secondLine w-full mt-2">
+            <div class="grid grid-cols-5 grid-rows-2 w-full h-24">
+               <div class="col-span-1 row-span-2" id="title-logo">
+                    <div class="grid grid-cols-2 grid-flow-row h-full">
+                        <div class="m-auto">
+                            <mat-icon  class=" text-5xl text-end" id="icon" >shopping_basket</mat-icon>
+                        </div>
+                        <div class="my-auto text-start text-4xl text-white -ml-8  icon-logo">
+                            <span class="">Shopee</span>
+                        </div>
+                    </div>
+               </div>
+               <div class="col-span-3">
+                  
+                    <div class="p-inputgroup w-full h-14">
+                        <form class="example-form w-full" id="input-search">
+                            <input type="text"
+                                   placeholder="Search for a street"
+                                   [formControl]="controlSearchInput"
+                                   [matAutocomplete]="auto"
+                                   class="w-full h-full pl-5 text-xl focus:outline-none"
+                                   >
+                                <mat-autocomplete #auto="matAutocomplete">
+                                    <mat-option *ngFor="let data of filteredSearchInput | async" [value]="data">
+                                      {{ data }}
+                                    </mat-option>
+                                </mat-autocomplete>
+                          </form>
+                        
+                        <button type="button" pButton icon="pi pi-refresh" styleClass="p-button-primary" class="bg-red-500 text-white p-4" >
+                            <mat-icon>search</mat-icon>
+                        </button> 
+                        
+                        
+
+                    </div>
+ 
+                    <div class="grid grid-cols-8 grid-flow-row text-white mt-1 hide-element">
+                        <a href="">LEGO Ninjago</a>
+                        <a href="">LEGO Ninjago</a>
+                        <a href="">LEGO Ninjago</a>
+                        <a href="">LEGO Ninjago</a>
+                        <a href="">LEGO Ninjago</a>
+                        <a href="">LEGO Ninjago</a>
+                        <a href="">LEGO Ninjago</a>
+                        <a href="">LEGO Ninjago</a>
+                       
+                    </div>
+                </div>
+               <div class="col-span-1 row-span-2 m-auto" id="title-logo">
+                    <mat-icon class=" text-5xl text-end " id="icon">shopping_cart</mat-icon>
+               </div>
+            </div>
+        </div>
+     
+    </div>
+</div>
