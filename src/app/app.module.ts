@@ -35,19 +35,22 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { TruncateTextPipe } from './utils/truncate-text.pipe';
 
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+// import { CarouselModule } from '@coreui/angular';
+import { CarouselComponent } from './components/carousel/carousel.component';
 
+
+import { CarouselModule } from 'primeng/carousel';
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     HeaderComponent,
-    TruncateTextPipe
-    
+    TruncateTextPipe,
+    CarouselComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
     BrowserAnimationsModule,
     MatSidenavModule,
     MatGridListModule,
@@ -73,7 +76,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     InputTextModule,
     CheckboxModule,
     RadioButtonModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    CarouselModule
   ],
   providers: [],
   bootstrap: [AppComponent]
