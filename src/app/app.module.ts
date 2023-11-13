@@ -22,8 +22,8 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInput, MatInputModule} from '@angular/material/input';
-import {FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { DropdownModule } from 'primeng/dropdown';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
@@ -31,22 +31,38 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { CheckboxModule } from 'primeng/checkbox';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 
 import { TruncateTextPipe } from './utils/truncate-text.pipe';
 
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
-// import { CarouselModule } from '@coreui/angular';
 import { CarouselComponent } from './components/carousel/carousel.component';
 
-
+import { CardModule } from 'primeng/card';
 import { CarouselModule } from 'primeng/carousel';
+import { CategoryCarouselComponent } from './components/carousel/category-carousel/category-carousel.component';
+import { TipCarouselComponent } from './components/carousel/tip-carousel/tip-carousel.component';
+import { ProductsComponent } from './components/products/products.component';
+import { DetailProductComponent } from './components/products/detail-product/detail-product.component';
+
+import { InfiniteScrollModule } from "ngx-infinite-scroll";
+import { FooterComponent } from './components/footer/footer.component';
+import { LoadingUtilComponent } from './utils/loading-util/loading-util.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     HeaderComponent,
     TruncateTextPipe,
-    CarouselComponent
+    CarouselComponent,
+    CategoryCarouselComponent,
+    TipCarouselComponent,
+    ProductsComponent,
+    DetailProductComponent,
+    FooterComponent,
+    LoadingUtilComponent
   ],
   imports: [
     BrowserModule,
@@ -77,7 +93,10 @@ import { CarouselModule } from 'primeng/carousel';
     CheckboxModule,
     RadioButtonModule,
     MatAutocompleteModule,
-    CarouselModule
+    CarouselModule,
+    CardModule,
+    InfiniteScrollModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
