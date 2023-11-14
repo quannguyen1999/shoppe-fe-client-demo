@@ -1,12 +1,10 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
-  // ,
-  // encapsulation: ViewEncapsulation.None
 })
 export class ProductsComponent implements OnInit{
 
@@ -18,7 +16,9 @@ export class ProductsComponent implements OnInit{
   toggleLoading = () =>  this.isLoading=!this.isLoading;
 
 
-  constructor(private productService: ProductService){
+  constructor(private productService: ProductService,
+            private router: Router
+    ){
 
   }
 
@@ -45,10 +45,13 @@ export class ProductsComponent implements OnInit{
     })
   }
 
-  
   onScroll= ()=>{
     this.currentPage++;
     this.appendData();
+   }
+
+   detailProduct(id: string){
+    this.router.navigate(['/product/detail', id]);
    }
 
 

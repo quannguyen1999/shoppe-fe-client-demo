@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable, map, startWith } from 'rxjs';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -13,6 +13,10 @@ export class HeaderComponent {
   dataFakeSearch: string[] = ['NinJago', 'Robot', 'Bakugan', 'Áo lọt khe'];
 
   filteredSearchInput!: Observable<string[]>;
+
+  constructor(private router: Router){
+
+  }
 
   ngOnInit() {
     this.filteredSearchInput = this.controlSearchInput.valueChanges.pipe(
@@ -28,5 +32,9 @@ export class HeaderComponent {
 
   private convertText(value: string): string {
     return value.toLowerCase().replace(/\s/g, '');
+  }
+
+  redirectHomePage(){
+    this.router.navigate(['/']);
   }
 }

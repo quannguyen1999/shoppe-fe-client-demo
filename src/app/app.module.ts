@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -10,7 +11,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatButtonModule } from '@angular/material/button';
+import { MatButton, MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -25,13 +26,14 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { DropdownModule } from 'primeng/dropdown';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { CheckboxModule } from 'primeng/checkbox';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
+import { GalleriaModule } from 'primeng/galleria';
 
 
 import { TruncateTextPipe } from './utils/truncate-text.pipe';
@@ -45,7 +47,7 @@ import { CategoryCarouselComponent } from './components/carousel/category-carous
 import { TipCarouselComponent } from './components/carousel/tip-carousel/tip-carousel.component';
 import { ProductsComponent } from './components/products/products.component';
 import { DetailProductComponent } from './components/products/detail-product/detail-product.component';
-
+import { DropdownModule } from 'primeng/dropdown';
 import { InfiniteScrollModule } from "ngx-infinite-scroll";
 import { FooterComponent } from './components/footer/footer.component';
 import { LoadingUtilComponent } from './utils/loading-util/loading-util.component';
@@ -62,7 +64,8 @@ import { LoadingUtilComponent } from './utils/loading-util/loading-util.componen
     ProductsComponent,
     DetailProductComponent,
     FooterComponent,
-    LoadingUtilComponent
+    LoadingUtilComponent,
+    DetailProductComponent
   ],
   imports: [
     BrowserModule,
@@ -96,8 +99,13 @@ import { LoadingUtilComponent } from './utils/loading-util/loading-util.componen
     CarouselModule,
     CardModule,
     InfiniteScrollModule,
-    MatProgressSpinnerModule
-  ],
+    MatProgressSpinnerModule,
+    RouterLink,
+    RouterLinkActive,
+    RouterOutlet,
+    GalleriaModule,
+    MatButtonModule
+ ],
   providers: [],
   bootstrap: [AppComponent]
 })

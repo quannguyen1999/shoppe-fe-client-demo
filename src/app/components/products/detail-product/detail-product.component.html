@@ -1,1 +1,120 @@
-<p>detail-product works!</p>
+<div class="grid grid-cols-7 grid-flow-row w-full h-full">
+    <div class="col-span-3">
+        <div style="width:100%; background-color: transparent;"> 
+            <p-galleria [numVisible]="4" [value]="images"      activeIndexChange="print($event)"> 
+                <ng-template pTemplate="item" let-item>
+                    <!-- <div class="w-full m-auto">
+                        <div class="mt-10 item-top col-span-1 absolute w-full"  (mouseover)="testClick(item.image)">
+                            <img   [src]="item.image" />
+                        </div>
+                        <div class="item-bottom col-span-1 z-10 w-full">
+                            <img src="https://down-vn.img.susercontent.com/file/vn-50009109-4efce4541b088cd8e07f320804e8846d">
+                        </div>
+                    </div>  -->
+                    <img   [src]="item.image" class="w-full" />
+                </ng-template> 
+                <ng-template pTemplate="thumbnail" let-item width="20%" class="bg-transparent mt-20"> 
+                    <div class="grid grid-nogutter justify-content-center"> 
+                        <img 
+                        [src]="item.image" width=100% (mouseover)="testClick(item.image)"/> 
+                    </div> 
+                </ng-template> 
+            </p-galleria> 
+        </div>
+    </div>
+    <div class="col-span-4 bg-gray-100 pt-12">
+        <div class="flex flex-col leading-9">
+           
+                <span class="text-lg">79pcs Ninjago Shinobi Hunter Hover Cole Nindroid Techno-Blade Lưỡi cưa quay 10218 Đồ chơi lắp ráp Hình khối Tương thích với Mô hình gạch...</span>
+                <div class="grid grid-cols-8 grid-flow-row text-center">
+                    <div class="col-span-2">
+                        <div class="flex flex-row text-orange-600">
+                            <span class="mr-2 ml-2"><u>{{starFake}}</u></span> 
+                            <mat-icon *ngFor="let item of [].constructor(starFake)">star</mat-icon>
+                        </div>
+                      
+                    </div>
+                    <div class="col-span-1 border-l-gray-400">
+                        <u>3</u> Đánh giá
+                    </div>
+                    <div class="col-span-1 border-l-gray-400">
+                        <u>3</u> Đã Bán
+                    </div>
+                    <div class="col-span-4 text-end pr-5">
+                        Tố cáo
+                    </div>
+                </div>
+                <div>
+                    <div class="bg-gray-200 h-14 text-2xl pt-4 pl-4 text-orange-700 w-11/12 m-auto">
+                        <span> {{122645 | currency}} - {{151421 | currency}}</span>
+                    </div>
+                </div>
+                <div class="mt-5">
+                    <div class="grid grid-cols-5 ml-5">
+                        <div class="col-span-1 row-span-2">
+                            Vận Chuyển
+                        </div>
+                        <div class="col-span-4">
+                            <div class="flex flex-row">
+                                <div class="flex flex-row">
+                                    <mat-icon class="mt-1 mr-3" >shopping_cart</mat-icon>
+                                    <p>Miễn phí vận chuyển</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-col">
+                                <div class="flex flex-row">
+                                    <mat-icon>shopping_cart</mat-icon>
+                                    <p>Vận Chuyễn tới</p>
+                                    <div class="card flex justify-content-center w-5 h-5">
+                                        <form>
+                                            <p-dropdown
+                                                class="h-2"
+                                            formControlName="city" [options]="cities"></p-dropdown>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="flex">
+                                    <mat-icon>shopping_cart</mat-icon>
+                                    <p>Phí Vận Chuyển</p>
+                                    <!-- <div class="card flex justify-content-center">
+                                        <form>
+                                            <p-dropdown formControlName="city" [options]="cities" optionLabel="name"></p-dropdown>
+                                        </form>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-5 grid-flow-row">
+                    <div class="col-span-1 row-span-2">
+                        Số Lượng
+                    </div>
+                    <div class="col-span-4">
+                            <div class="flex flex-row ">
+                                <div class="grid grid-cols-4 text-center border-2 border-gray-400 border-solid h-8 mr-10">
+                                    <div class="col-span-1 mt-1 cursor-pointer border-r-2 border-gray-400">
+                                        <mat-icon>remove</mat-icon>
+                                    </div>
+                                    <div class="col-span-2">
+                                        <span>1</span>
+                                    </div>
+                                    <div class="cols-span-1  mt-1 cursor-pointer  border-l-2 border-gray-400">
+                                        <mat-icon>remove</mat-icon>
+                                    </div>
+                                </div>
+                                <span>4 sản phẩm có sẵn</span>
+                            </div>
+                    </div>
+                </div>
+                <div class="mt-10">
+                    <div class="flex flex-row">
+                        <button class="ml-10 mr-10" mat-raised-button color="warn">Thêm vào giỏ hàng</button>
+                      
+                        <button mat-raised-button color="warn">Mua Ngay</button>
+                    </div>
+                </div>
+           
+        </div>
+    </div>
+</div>

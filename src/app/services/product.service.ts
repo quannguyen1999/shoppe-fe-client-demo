@@ -14,7 +14,7 @@ export class ProductService {
    const items=[];
    for(let i=startIndex;i<endIndex;i++){
     if(i < this.totalItems){
-      items.push(`Item ${i+1}`);
+      items.push(`${i+1}`);
     }
    }
    return of(items).pipe(delay(500));

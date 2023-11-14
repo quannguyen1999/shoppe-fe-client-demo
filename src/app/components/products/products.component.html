@@ -5,7 +5,7 @@
         (scrolled)="onScroll()"
         [scrollWindow]="true">
         <div class="col-span-1" *ngFor="let product of listProduct">
-            <p-card  [style]="{ width: '220px' }" class="cursor-pointer">
+            <p-card  [style]="{ width: '220px' }" class="cursor-pointer" (click)="detailProduct(product)" >
                 <ng-template pTemplate="header">
                     <div class="grid grid-cols-1 relative">
                         <div class="item-top col-span-1 absolute">
