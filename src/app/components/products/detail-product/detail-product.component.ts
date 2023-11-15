@@ -19,6 +19,8 @@ export class DetailProductComponent implements OnInit {
 
   currentImage: string = '';
 
+  numberOfItem: number = 1;
+
   responsiveOptions: any[] = [
       {
           breakpoint: '1024px',
@@ -54,4 +56,14 @@ export class DetailProductComponent implements OnInit {
   testClick(image: string){
       this.currentImage = image;
   }
+
+  plusItem(){
+    this.numberOfItem++;
+  }
+
+  removeItem(){
+    this.numberOfItem--;
+  }
+
+
 }

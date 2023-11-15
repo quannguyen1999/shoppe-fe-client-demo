@@ -1,17 +1,9 @@
-<div class="grid grid-cols-7 grid-flow-row w-full h-full">
+<div class="grid grid-cols-7 grid-flow-row w-full h-80">
     <div class="col-span-3">
         <div style="width:100%; background-color: transparent;"> 
             <p-galleria [numVisible]="4" [value]="images"      activeIndexChange="print($event)"> 
                 <ng-template pTemplate="item" let-item>
-                    <!-- <div class="w-full m-auto">
-                        <div class="mt-10 item-top col-span-1 absolute w-full"  (mouseover)="testClick(item.image)">
-                            <img   [src]="item.image" />
-                        </div>
-                        <div class="item-bottom col-span-1 z-10 w-full">
-                            <img src="https://down-vn.img.susercontent.com/file/vn-50009109-4efce4541b088cd8e07f320804e8846d">
-                        </div>
-                    </div>  -->
-                    <img   [src]="item.image" class="w-full" />
+                    <img   [src]="item.image" class="w-full cursor-pointer" />
                 </ng-template> 
                 <ng-template pTemplate="thumbnail" let-item width="20%" class="bg-transparent mt-20"> 
                     <div class="grid grid-nogutter justify-content-center"> 
@@ -25,7 +17,7 @@
     <div class="col-span-4 bg-gray-100 pt-12">
         <div class="flex flex-col leading-9">
            
-                <span class="text-lg">79pcs Ninjago Shinobi Hunter Hover Cole Nindroid Techno-Blade Lưỡi cưa quay 10218 Đồ chơi lắp ráp Hình khối Tương thích với Mô hình gạch...</span>
+                <span class="text-lg ml-2">79pcs Ninjago Shinobi Hunter Hover Cole Nindroid Techno-Blade Lưỡi cưa quay 10218 Đồ chơi lắp ráp Hình khối Tương thích với Mô hình gạch...</span>
                 <div class="grid grid-cols-8 grid-flow-row text-center">
                     <div class="col-span-2">
                         <div class="flex flex-row text-orange-600">
@@ -40,7 +32,7 @@
                     <div class="col-span-1 border-l-gray-400">
                         <u>3</u> Đã Bán
                     </div>
-                    <div class="col-span-4 text-end pr-5">
+                    <div class="col-span-4 text-end pr-5 cursor-pointer">
                         Tố cáo
                     </div>
                 </div>
@@ -50,7 +42,7 @@
                     </div>
                 </div>
                 <div class="mt-5">
-                    <div class="grid grid-cols-5 ml-5">
+                    <div class="grid grid-cols-5 ml-10">
                         <div class="col-span-1 row-span-2">
                             Vận Chuyển
                         </div>
@@ -76,31 +68,29 @@
                                 <div class="flex">
                                     <mat-icon>shopping_cart</mat-icon>
                                     <p>Phí Vận Chuyển</p>
-                                    <!-- <div class="card flex justify-content-center">
-                                        <form>
-                                            <p-dropdown formControlName="city" [options]="cities" optionLabel="name"></p-dropdown>
-                                        </form>
-                                    </div> -->
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="grid grid-cols-5 grid-flow-row">
+                <div class="grid grid-cols-5 grid-flow-row ml-10">
                     <div class="col-span-1 row-span-2">
                         Số Lượng
                     </div>
                     <div class="col-span-4">
                             <div class="flex flex-row ">
-                                <div class="grid grid-cols-4 text-center border-2 border-gray-400 border-solid h-8 mr-10">
-                                    <div class="col-span-1 mt-1 cursor-pointer border-r-2 border-gray-400">
+                                <div class="flex flex-row text-center h-6 mr-8 border-2 border-black">
+                                    <div class="border-r-2 border-black cursor-pointer bg-orange-600 text-white" (click)="removeItem()">
                                         <mat-icon>remove</mat-icon>
                                     </div>
-                                    <div class="col-span-2">
-                                        <span>1</span>
+                                    <div class="w-10">
+                                        <div class="-m-2">
+                                            <span class="">{{numberOfItem}}</span>
+                                        </div>
                                     </div>
-                                    <div class="cols-span-1  mt-1 cursor-pointer  border-l-2 border-gray-400">
-                                        <mat-icon>remove</mat-icon>
+                                   
+                                    <div class="border-l-2 border-black cursor-pointer bg-orange-600 text-white" (click)="plusItem()">
+                                        <mat-icon >add</mat-icon>
                                     </div>
                                 </div>
                                 <span>4 sản phẩm có sẵn</span>
@@ -110,11 +100,57 @@
                 <div class="mt-10">
                     <div class="flex flex-row">
                         <button class="ml-10 mr-10" mat-raised-button color="warn">Thêm vào giỏ hàng</button>
-                      
                         <button mat-raised-button color="warn">Mua Ngay</button>
                     </div>
                 </div>
-           
         </div>
     </div>
+</div>
+<div class="flex flex-col mt-96  ">
+    <div class="bg-gray-100 p-10">
+        <span class="font-bold text-2xl">CHI TIẾT SẢN PHẨM</span>
+    </div>
+    <div class="grid grid-cols-10 grid-flow-row ml-10 mt-10 leading-10">
+        <div class="col-span-2">
+            Danh Mục 
+        </div>
+        <div class="col-span-8">
+            <a href="#">Shopee</a>
+        </div>
+        <div class="col-span-2">
+            Kho hàng
+        </div>
+        <div class="col-span-8">
+            <span>4</span>
+        </div>
+        <div class="col-span-2">
+            Gởi từ
+        </div>
+        <div class="col-span-8">
+            <span>Nước ngoài</span>
+        </div>
+    </div>
+    <div>
+        <div class="bg-gray-100 p-10">
+            <span class="font-bold text-2xl">MÔ TẢ SẢN PHẨM</span>
+        </div>
+        <div class="flex flex-col ml-10 mt-10 leading-8">
+            <span>Thương Hiệu : LEGO / LEGO</span>
+            <span>Mô hình: NJO</span>
+            <span>Độ tuổi áp dụng: 12 tuổi, 14 tuổi, trên 14 tuổi, 6 tuổi, 8 tuổi, 7 tuổi, 11 tuổi, 9 tuổi, 10 tuổi, 13 tuổi</span>
+            <span>Xuất xứ: Châu Âu</span>
+            <span>Dành cho: Unisex</span>
+            <span>Loại đồ chơi: Khối xây dựng lắp ráp</span>
+            <span>Danh mục sản phẩm: Nhựa / Keo</span>
+            <span>Phân loại màu sắc: Một vũ khí Ninja trắng, Một không có hình nhỏ, Một vũ khí Ninja màu đen, Một vũ khí Ninja màu đen không có hình nhỏ, Một vũ khí Ninja màu đỏ, Một không có Minifigure, Một vũ khí Ninja màu xanh lam, Một không có Minifigure</span>
+            <span>Nhóm tuổi áp dụng: Chung</span>
+        </div>
+    </div>
+</div>
+<app-review-product></app-review-product>
+<div class="flex flex-col">
+    <div class="bg-gray-100 p-10">
+        <span class="font-bold text-2xl"> CÓ THỂ BẠN CŨNG THÍCH</span>
+    </div>
+    <app-products></app-products>
 </div>

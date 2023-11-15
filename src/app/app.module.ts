@@ -51,6 +51,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { InfiniteScrollModule } from "ngx-infinite-scroll";
 import { FooterComponent } from './components/footer/footer.component';
 import { LoadingUtilComponent } from './utils/loading-util/loading-util.component';
+import { ReviewProductComponent } from './components/products/review-product/review-product.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { LoadingUtilComponent } from './utils/loading-util/loading-util.componen
     DetailProductComponent,
     FooterComponent,
     LoadingUtilComponent,
-    DetailProductComponent
+    DetailProductComponent,
+    ReviewProductComponent
   ],
   imports: [
     BrowserModule,
