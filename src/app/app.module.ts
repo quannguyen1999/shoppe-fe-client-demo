@@ -52,7 +52,9 @@ import { InfiniteScrollModule } from "ngx-infinite-scroll";
 import { FooterComponent } from './components/footer/footer.component';
 import { LoadingUtilComponent } from './utils/loading-util/loading-util.component';
 import { ReviewProductComponent } from './components/products/review-product/review-product.component';
-
+import { ProgressBarModule } from 'primeng/progressbar';
+import { ToastModule } from 'primeng/toast';
+import { FlashProductComponent } from './components/products/flash-product/flash-product.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,7 +69,8 @@ import { ReviewProductComponent } from './components/products/review-product/rev
     FooterComponent,
     LoadingUtilComponent,
     DetailProductComponent,
-    ReviewProductComponent
+    ReviewProductComponent,
+    FlashProductComponent
   ],
   imports: [
     BrowserModule,
@@ -106,7 +109,9 @@ import { ReviewProductComponent } from './components/products/review-product/rev
     RouterLinkActive,
     RouterOutlet,
     GalleriaModule,
-    MatButtonModule
+    MatButtonModule,
+    ProgressBarModule,
+    ToastModule
  ],
   providers: [],
   bootstrap: [AppComponent]
