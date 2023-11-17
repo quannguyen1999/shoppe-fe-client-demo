@@ -36,6 +36,10 @@ export class DetailProductComponent implements OnInit {
       }
   ];
 
+  constructor(private router: Router){
+    
+  }
+
   ngOnInit() {
     this.images = [{id: 1, type:'image', image: imageDataFakeOne},
     {id: 2, type:'video', image: imageDataFakeTwo},
@@ -63,6 +67,10 @@ export class DetailProductComponent implements OnInit {
 
   removeItem(){
     this.numberOfItem--;
+  }
+
+  Checkout(){
+    this.router.navigate(['/cart']);
   }
 
 

@@ -1,17 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
-
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatButton, MatButtonModule } from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -32,15 +30,10 @@ import { InputTextModule } from 'primeng/inputtext';
 import { CheckboxModule } from 'primeng/checkbox';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-
 import { GalleriaModule } from 'primeng/galleria';
-
-
 import { TruncateTextPipe } from './utils/truncate-text.pipe';
-
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { CarouselComponent } from './components/carousel/carousel.component';
-
 import { CardModule } from 'primeng/card';
 import { CarouselModule } from 'primeng/carousel';
 import { CategoryCarouselComponent } from './components/carousel/category-carousel/category-carousel.component';
@@ -55,6 +48,9 @@ import { ReviewProductComponent } from './components/products/review-product/rev
 import { ProgressBarModule } from 'primeng/progressbar';
 import { ToastModule } from 'primeng/toast';
 import { FlashProductComponent } from './components/products/flash-product/flash-product.component';
+import { CartComponent } from './components/cart/cart.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,7 +66,8 @@ import { FlashProductComponent } from './components/products/flash-product/flash
     LoadingUtilComponent,
     DetailProductComponent,
     ReviewProductComponent,
-    FlashProductComponent
+    FlashProductComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
@@ -111,7 +108,8 @@ import { FlashProductComponent } from './components/products/flash-product/flash
     GalleriaModule,
     MatButtonModule,
     ProgressBarModule,
-    ToastModule
+    ToastModule,
+    MatCheckboxModule
  ],
   providers: [],
   bootstrap: [AppComponent]

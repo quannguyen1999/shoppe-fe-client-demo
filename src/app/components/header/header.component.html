@@ -1,5 +1,5 @@
 <div class="sticky top-0 z-20 bg-gradient-to-r from-orange-400 to-orange-600 w-full h-32">
-    <div class="grid col-span-2 grid-flow-row w-8/12 m-auto pt-1">
+    <div class="grid col-span-2 grid-flow-row w-8/12 m-auto pt-1 ">
         <div class="firstLine">
             <div class="grid row-span-2 grid-flow-col text-base text-white">
                 <div class="grid row-span-3 grid-flow-col w-96">
@@ -73,7 +73,7 @@
             </div>
           
         </div>
-        <div class="secondLine w-full mt-2">
+        <div class="secondLine w-full mt-2" *ngIf="isShopping; else cartPageHeader">
             <div class="grid grid-cols-5 grid-rows-2 w-full h-24">
                <div class="col-span-1 row-span-2" id="title-logo">
                     <div class="grid grid-cols-2 grid-flow-row h-full cursor-pointer" (click)="redirectHomePage()">
@@ -121,5 +121,30 @@
                </div>
             </div>
         </div>
+        <ng-template #cartPageHeader>
+            <div class="flex flex-row w-full h-24">
+                <div class="flex flex-row w-1/2 m-auto h-full p-6">
+                    <div class="grid grid-cols-3 grid-flow-row h-full cursor-pointer" (click)="redirectHomePage()">
+                        <div class="m-auto mr-10">
+                            <mat-icon  class="text-5xl text-end" id="icon" >shopping_basket</mat-icon>
+                        </div>
+                        <div class="my-auto text-start text-4xl text-white -ml-8 mr-10  icon-logo border-r-2 border-red-500 border-solid pr-2 hide-element">
+                            <span class="">Shopee</span>
+                        </div>
+                        <div class="my-auto text-start text-2xl text-white -ml-8 mt-4 icon-logo hide-element">
+                            <span class="">Giỏ Hàng</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex  w-1/2">
+                    <div class="p-inputgroup h-10 m-auto">
+                        <input type="text" pInputText placeholder="SHOPEE THỜI TRANG" class="pl-1"/>
+                        <button class="text-white px-6 bg-red-700" type="button" pButton icon="pi pi-refresh" styleClass="p-button-warn">
+                            <mat-icon>search</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+          </ng-template>
     </div>
 </div>

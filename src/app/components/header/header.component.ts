@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Observable, map, startWith } from 'rxjs';
-import { Router } from '@angular/router';
+import { Observable, filter, map, startWith } from 'rxjs';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -14,15 +14,18 @@ export class HeaderComponent {
 
   filteredSearchInput!: Observable<string[]>;
 
+  isShopping!: boolean;
+  
   constructor(private router: Router){
-
-  }
+    router.events.subscribe((val) => {
+      if(val instanceof NavigationEnd){
+        let url = val.url;
+        this.isShopping = url !== '/cart';
+      }
+    })
+  } 
 
   ngOnInit() {
-    this.filteredSearchInput = this.controlSearchInput.valueChanges.pipe(
-      startWith(''),
-      map(value => this.searchValue(value || '')),
-    );
   }
 
   private searchValue(value: string): string[] {
