@@ -9,3 +9,16 @@
     </div>
 </div>
 
+<p-dialog [(visible)]="visible" [modal]="true" [style]="{ 'background-color': 'transparent', 'border':'none', 'box-shadow':'none' }" [draggable]="false" [resizable]="false">
+    <div class="relative">'
+        <div class="grid grid-cols-1 relative">
+            <div class="item-top col-span-1 absolute right-0">
+               <button (click)="closePopup()" class="bg-orange-600 text-white p-2"><mat-icon>close</mat-icon></button>
+            </div>
+            <div class="item-bottom col-span-1 ">
+                <img [src]="imgFake">
+            </div>
+        </div>
+    </div>
+    
+</p-dialog>

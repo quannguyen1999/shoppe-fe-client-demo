@@ -1,3 +1,13 @@
 .content{
     width: 1200px;
 }
+
+::ng-deep .p-dialog-content{
+    background-color: transparent;
+    border: none;
+}
+
+::ng-deep .p-dialog-header{
+    background-color: transparent;
+    display: none;
+}

@@ -50,6 +50,8 @@ import { ToastModule } from 'primeng/toast';
 import { FlashProductComponent } from './components/products/flash-product/flash-product.component';
 import { CartComponent } from './components/cart/cart.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { PopupComponent } from './utils/popup/popup.component';
+import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
   declarations: [
@@ -67,7 +69,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     DetailProductComponent,
     ReviewProductComponent,
     FlashProductComponent,
-    CartComponent
+    CartComponent,
+    PopupComponent
   ],
   imports: [
     BrowserModule,
@@ -109,7 +112,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatButtonModule,
     ProgressBarModule,
     ToastModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    DialogModule
  ],
   providers: [],
   bootstrap: [AppComponent]

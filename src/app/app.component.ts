@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { imageDataFakeThree } from './constants/data-fake.model';
 
 @Component({
   selector: 'app-root',
@@ -7,5 +8,9 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-
+  imgFake: string = imageDataFakeThree;
+  visible: boolean = true;
+  closePopup(){
+    this.visible = false;
+  }
 }
