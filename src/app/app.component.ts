@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { imageDataFakeThree } from './constants/data-fake.model';
 
 @Component({
@@ -7,10 +7,23 @@ import { imageDataFakeThree } from './constants/data-fake.model';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   imgFake: string = imageDataFakeThree;
-  visible: boolean = true;
+  visible: boolean = false;
+
   closePopup(){
     this.visible = false;
+  }
+
+  constructor(private router: Router){
+   
+  }
+  ngOnInit(): void {
+    this.router.events.subscribe((val) => {
+      if(val instanceof NavigationEnd){
+        let url = val.url;
+        this.visible = url === '/home' || url === '/';
+      }
+    })
   }
 }
