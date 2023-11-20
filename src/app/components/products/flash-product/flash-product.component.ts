@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Product } from 'src/app/models/product.model';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-flash-product',
@@ -6,16 +9,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./flash-product.component.scss']
 })
 export class FlashProductComponent implements OnInit{
-  listProductFlashSaleFake: Array<number> = [];
-
-  listItemCategory: Array<string> = [];
+  listTopProductSale: Array<Product> = [];
   
+  constructor (private router: Router,
+              private productService: ProductService
+  ){}
 
   ngOnInit(): void {
-    this.listProductFlashSaleFake = [1,2,3,4,5,6]
+    this.listTopProductSale = this.productService.getTopProductSale();
+  }
 
-    this.listItemCategory = ['1','2','3','4','5','6','7','8']
-
+  detailProduct(id: string){
+    this.router.navigate(['/product/detail', id]);
   }
  
 

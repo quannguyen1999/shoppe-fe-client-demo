@@ -9,7 +9,6 @@ import { ImageCommon } from 'src/app/models/image-common.model';
   styleUrls: ['./detail-product.component.scss']
 })
 export class DetailProductComponent implements OnInit {
-
   cities!: string[];
 
   images: ImageCommon[] | undefined;

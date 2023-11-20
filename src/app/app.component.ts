@@ -9,20 +9,20 @@ import { imageDataFakeThree } from './constants/data-fake.model';
 })
 export class AppComponent implements OnInit{
   imgFake: string = imageDataFakeThree;
-  visible: boolean = false;
+  visible: boolean = true;
 
   closePopup(){
     this.visible = false;
   }
 
-  constructor(private router: Router){
-   
-  }
+  constructor(private router: Router){}
+
   ngOnInit(): void {
     this.router.events.subscribe((val) => {
       if(val instanceof NavigationEnd){
         let url = val.url;
-        this.visible = url === '/home' || url === '/';
+        // this.visible = url === '/home' || url === '/';
+        this.visible = false;
       }
     })
   }

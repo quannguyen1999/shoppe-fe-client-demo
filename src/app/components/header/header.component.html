@@ -20,7 +20,7 @@
                 <div class="grid row-span-4 grid-flow-col justify-end ">
                         <div class="grid row-span-2 grid-flow-col mr-4" id="label-title">
                             <mat-icon>notifications_none</mat-icon>
-                            <div (mouseenter)="notificationPopUp.toggle($event)">
+                            <div (click)="notificationPopUp.toggle($event)">
                                 Thông Báo
                             </div>
                             <p-overlayPanel #notificationPopUp (mouseleave)="notificationPopUp.hide()">
@@ -100,16 +100,12 @@
                                       {{ data }}
                                     </mat-option>
                                 </mat-autocomplete>
-                          </form>
-                        
+                          </form> 
                         <button type="button" pButton icon="pi pi-refresh" styleClass="p-button-primary" class="bg-red-500 text-white p-4" >
                             <mat-icon>search</mat-icon>
                         </button> 
-                        
-                        
-
                     </div>
- 
+
                     <div class="grid grid-cols-8 grid-flow-row text-white mt-1 hide-element">
                         <a href="" class="text-white no-underline text-xs">LEGO Ninjago</a>
                         <a href="" class="text-white no-underline text-xs">LEGO Ninjago</a>
@@ -117,7 +113,7 @@
                     </div>
                 </div>
                <div class="col-span-1 row-span-2 m-auto" id="title-logo">
-                    <mat-icon class=" text-5xl text-end " id="icon">shopping_cart</mat-icon>
+                    <mat-icon class=" text-4xl text-end "  matBadge="15" id="icon" matBadgeColor="warn">shopping_cart</mat-icon>
                </div>
             </div>
         </div>

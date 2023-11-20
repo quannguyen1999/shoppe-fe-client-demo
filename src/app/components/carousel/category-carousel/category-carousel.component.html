@@ -4,7 +4,7 @@
     <ng-template let-images pTemplate="item">
         <div class="grid grid-cols-10 grid-rows-2 mb-5"> 
             <ng-container *ngIf="images === '1'">
-                <div  class="grid grid-rows-2 grid-flow-col border-gray-200 border-2 hover:shadow-lg hover:border-gray-400 cursor-pointer" *ngFor="let item of listItemCategoryGroupOne">
+                <div  class="grid grid-rows-2 grid-flow-col border-gray-200 border-2 hover:shadow-lg hover:border-gray-400 cursor-pointer" *ngFor="let item of listItemCategoryGroupOne" (click)="getPageCategory(item)">
                     <div class="grid-rows-1">
                         <img [src]="srcImageFake" alt=""  class="w-20 block m-auto">
                     </div>
@@ -14,7 +14,7 @@
                 </div>
             </ng-container>
             <ng-container *ngIf="images === '2'">
-                <div class="grid grid-rows-2 grid-flow-col border-gray-200 border-2 hover:shadow-lg hover:border-gray-400 cursor-pointer" *ngFor="let item of listItemCategoryGroupTwo">
+                <div class="grid grid-rows-2 grid-flow-col border-gray-200 border-2 hover:shadow-lg hover:border-gray-400 cursor-pointer" *ngFor="let item of listItemCategoryGroupTwo" (click)="getPageCategory(item)">
                     <div class="grid-rows-1">
                         <img [src]="srcImageFake" alt=""  class="w-20 block m-auto">
                     </div>

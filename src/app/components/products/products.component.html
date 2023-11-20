@@ -3,7 +3,8 @@
         [infiniteScrollDistance]="2"
         [infiniteScrollThrottle]="500"
         (scrolled)="onScroll()"
-        [scrollWindow]="true">
+        [scrollWindow]="true"
+        >
         <div class="col-span-1" *ngFor="let product of listProduct">
             <p-card  [style]="{ width: '220px' }" class="cursor-pointer" (click)="detailProduct(product)" >
                 <ng-template pTemplate="header">

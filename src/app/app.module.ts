@@ -52,6 +52,7 @@ import { CartComponent } from './components/cart/cart.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { PopupComponent } from './utils/popup/popup.component';
 import { DialogModule } from 'primeng/dialog';
+import { CategoryComponent } from './components/category/category.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { DialogModule } from 'primeng/dialog';
     ReviewProductComponent,
     FlashProductComponent,
     CartComponent,
-    PopupComponent
+    PopupComponent,
+    CategoryComponent
   ],
   imports: [
     BrowserModule,
@@ -92,7 +94,10 @@ import { DialogModule } from 'primeng/dialog';
     MatSnackBarModule,
     MatSelectModule,
     MatInputModule,
-    MatFormFieldModule, MatSelectModule, FormsModule, ReactiveFormsModule,
+    MatFormFieldModule, 
+    MatSelectModule, 
+    FormsModule, 
+    ReactiveFormsModule,
     HttpClientModule,
     DropdownModule,
     OverlayPanelModule,

@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, delay, of } from 'rxjs';
+import { Product } from '../models/product.model';
+import { imageDataFakeOne } from '../constants/data-fake.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +20,67 @@ export class ProductService {
     }
    }
    return of(items).pipe(delay(500));
+  }
+
+  getTopProductSale(): Array<Product>{
+    return [
+      {
+        id: 1,
+        type: 'Sex toy',
+        description: 'xnxx',
+        image: imageDataFakeOne,
+        price: 10000
+      },
+      {
+        id: 1,
+        type: 'Sex toy',
+        description: 'xnxx',
+        image: imageDataFakeOne,
+        price: 10000
+      },
+      {
+        id: 1,
+        type: 'Sex toy',
+        description: 'xnxx',
+        image: imageDataFakeOne,
+        price: 10000
+      },
+      {
+        id: 1,
+        type: 'Sex toy',
+        description: 'xnxx',
+        image: imageDataFakeOne,
+        price: 10000
+      },
+      {
+        id: 1,
+        type: 'Sex toy',
+        description: 'xnxx',
+        image: imageDataFakeOne,
+        price: 10000
+      },
+      {
+        id: 1,
+        type: 'Sex toy',
+        description: 'xnxx',
+        image: imageDataFakeOne,
+        price: 10000
+      },
+      {
+        id: 1,
+        type: 'Sex toy',
+        description: 'xnxx',
+        image: imageDataFakeOne,
+        price: 10000
+      },
+      {
+        id: 1,
+        type: 'Sex toy',
+        description: 'xnxx',
+        image: imageDataFakeOne,
+        price: 10000
+      }
+    ]
   }
 
   constructor() { }

@@ -1,0 +1,14 @@
+<div id="carousel" class="overflow-hidden grid grid-cols-1 grid-flow-row">
+    <div class="col-span-2">
+        <p-carousel [value]="cars" [autoplayInterval]="3000"> 
+            <ng-template let-car pTemplate="item"> 
+                <div class="product-item cursor-pointer"> 
+                    <div class="product-item-content"> 
+                        <div class="p-mb-3"></div> 
+                        <img [src]="srcImageFake" alt="" id="main-img-carousel" class="w-full max-h-96">
+                    </div> 
+                </div> 
+            </ng-template> 
+        </p-carousel>
+    </div>
+</div>
