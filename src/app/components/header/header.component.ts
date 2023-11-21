@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable, filter, map, startWith } from 'rxjs';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
@@ -7,7 +7,10 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit{
+
+  isAccountLogin: boolean = false;
+
   controlSearchInput = new FormControl('');
 
   dataFakeSearch: string[] = ['NinJago', 'Robot', 'Bakugan', 'Áo lọt khe'];
@@ -26,6 +29,10 @@ export class HeaderComponent {
   } 
 
   ngOnInit() {
+    this.filteredSearchInput = this.controlSearchInput.valueChanges.pipe(
+      startWith(''),
+      map(value => this.searchValue(value || '')),
+    );
   }
 
   private searchValue(value: string): string[] {

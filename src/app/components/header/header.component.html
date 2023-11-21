@@ -20,7 +20,7 @@
                 <div class="grid row-span-4 grid-flow-col justify-end ">
                         <div class="grid row-span-2 grid-flow-col mr-4" id="label-title">
                             <mat-icon>notifications_none</mat-icon>
-                            <div (click)="notificationPopUp.toggle($event)">
+                            <div (click)="notificationPopUp.toggle($event)" class="cursor-pointer">
                                 Thông Báo
                             </div>
                             <p-overlayPanel #notificationPopUp (mouseleave)="notificationPopUp.hide()">
@@ -46,7 +46,7 @@
                                 </ng-template>
                             </p-overlayPanel>
                         </div>
-                        <div class="grid row-span-2 grid-flow-col mr-4" id="label-title">
+                        <div class="grid row-span-2 grid-flow-col mr-4" id="label-title cursor-pointer">
                             <mat-icon>contact_support</mat-icon>
                             <span>Hỗ Trợ</span>
                         </div>
@@ -64,11 +64,16 @@
                                 <span class="col-span-3">Ngôn Ngữ</span>
                             </div>
                         </div>
-                        <div class="grid row-span-2 grid-flow-col" id="label-title">
-                            <mat-icon>account_circle</mat-icon>
+                        <div class="grid row-span-2 grid-flow-col" id="label-title" *ngIf="isAccountLogin, else accountNotLogin">
+                            <mat-icon class="mr-2">account_circle</mat-icon>
                             <span>Account</span>
                         </div>
-                   
+                        <ng-template #accountNotLogin>
+                            <div class="grid row-span-2 grid-flow-col" id="label-title">
+                                <a href="/login" class="pr-2 mr-2  border-r-2 border-gray-300 border-solid">Đăng Nhập</a>
+                                <a href="/register">Đăng Ký</a>
+                            </div>
+                        </ng-template>
                 </div>
             </div>
           
@@ -81,7 +86,7 @@
                             <mat-icon  class=" text-5xl text-end" id="icon" >shopping_basket</mat-icon>
                         </div>
                         <div class="my-auto text-start text-4xl text-white -ml-8  icon-logo">
-                            <span class="">Shopee</span>
+                            <span class="text-5xl">Shopee</span>
                         </div>
                     </div>
                </div>
@@ -94,6 +99,7 @@
                                    [formControl]="controlSearchInput"
                                    [matAutocomplete]="auto"
                                    class="w-full h-full pl-5 text-xl focus:outline-none"
+                                 
                                    >
                                 <mat-autocomplete #auto="matAutocomplete">
                                     <mat-option *ngFor="let data of filteredSearchInput | async" [value]="data">

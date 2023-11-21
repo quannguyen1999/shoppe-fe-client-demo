@@ -53,6 +53,11 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { PopupComponent } from './utils/popup/popup.component';
 import { DialogModule } from 'primeng/dialog';
 import { CategoryComponent } from './components/category/category.component';
+import { CartService } from './services/cart.service';
+import { ProductService } from './services/product.service';
+import { CategoryService } from './services/category.service';
+import { MessageService } from 'primeng/api';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +77,8 @@ import { CategoryComponent } from './components/category/category.component';
     FlashProductComponent,
     CartComponent,
     PopupComponent,
-    CategoryComponent
+    CategoryComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -120,7 +126,7 @@ import { CategoryComponent } from './components/category/category.component';
     MatCheckboxModule,
     DialogModule
  ],
-  providers: [],
+  providers: [CartService, ProductService, CategoryService, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

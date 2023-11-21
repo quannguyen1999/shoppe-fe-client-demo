@@ -1,0 +1,163 @@
+
+<div class="flex flex-row bg-orange-600 w-full self-stretch" style="height: 565px;">
+    <div class="flex flex-col w-1/2 items-center m-auto  text-white">
+        <div class="">
+            <div class="justify-center">
+                 <mat-icon class="text-center" id="icon" >shopping_cart</mat-icon>
+            </div>       
+        </div>
+        <span class="text-5xl font-bold flex-1">Shopee</span>
+        <span class="mt-10 text-center text-2xl mx-10">Nền tảng thương mại điện tử yêu thích ở Động Nam Á & Đài Loan</span>
+    </div>
+    <div class="flex flex-col w-1/2 m-auto ">
+        <form class="bg-white flex flex-col p-5 m-5 max-w-md h-auto shadow-2xl" [formGroup]="formLogin" *ngIf="!isPageRegister">
+            <div class="flex flex-row">
+                <div class="m-auto">
+                    <span class="text-2xl">{{ isQRCode ? 'Đăng nhập với mã QR' : 'Đăng Nhập' }}</span>
+                </div>
+                <div class="bg-yellow-100 text-yellow-500 font-bold border-2 border-solid border-yellow-500 m-auto p-4 h-16">
+                    
+                    {{ isQRCode ? 'Đăng nhập với mật khẩu' : 'Đăng nhập với mã QR' }}
+                </div>
+                <div class="m-auto">
+                    <img [src]="imageFake" class="w-14 cursor-pointer" alt="" (click)="changeTypeLogin()">
+                </div>
+            </div>
+            <div *ngIf="!isQRCode">
+                <input type="text" 
+                formControlName="username" 
+                placeholder="Email/Số điện thoại/Tên đăng nhập" 
+                required class="w-full border-2 border-solid"
+                [ngClass]="formLogin.get('username')?.hasError('username') && formLogin.get('username')?.touched ? 'border-red-600 p-4 mt-6 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent' :'border-gray-200 p-4 mt-6 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent'"
+                >
+            </div>
+            <div class="mx-2"  *ngIf="!isQRCode && formLogin.get('username')?.hasError('required') && formLogin.get('username')?.touched">
+                <span class="text-red-600">Account is required</span> 
+            </div>
+            <div *ngIf="!isQRCode">
+                <input type="password" 
+                formControlName="password" 
+                placeholder="Mật khẩu" 
+                class="w-full border-2 border-solid " 
+                required
+                [ngClass]="formLogin.get('password')?.hasError('required') && formLogin.get('password')?.touched ? 'border-red-600 p-4 mt-6 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent' :'border-gray-200 p-4 mt-6 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent'"
+                >
+            </div>
+            <div class="mx-2"  *ngIf="!isQRCode && formLogin.get('password')?.hasError('required') && formLogin.get('password')?.touched">
+                <span class="text-red-600">Password is required</span>
+            </div>
+            <div *ngIf="!isQRCode">
+                <button (click)="submitLoginPage()" class="uppercase w-full mt-5 p-4" [ngClass]="formLogin.invalid ? 'bg-orange-100 text-black cursor-not-allowed' : 'bg-orange-600 text-white '">Đăng Nhập</button>
+            </div>
+            <div *ngIf="!isQRCode">
+                <div class="flex flex-row my-2">
+                    <div class="w-1/2">
+                        <a href="#" class="text-blue-500 hover:text-red-600">Quên mật khẩu</a>
+                    </div>
+                    <div class="w-1/2 text-end">
+                        <a href="#" class="text-blue-500 hover:text-red-600">Đăng nhập với SMS</a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center w-full text-gray-400 text-xl" *ngIf="!isQRCode">
+                <span class="text-center">Hoặc</span>
+            </div>
+            <div class="flex flex-row my-2" *ngIf="!isQRCode">
+              
+                    <button class="border-2 w-1/2 border-gray-400 border-solid mx-4">
+                        <div class="flex flex-row">
+                            <div class="m-auto mt-2 w-1/6">
+                                <mat-icon class="text-blue-600">facebook</mat-icon>
+                            </div>
+                            <div class="w-2/3 m-auto -ml-8 text-sm">
+                                <span>Facebook</span>
+                            </div>
+                        </div>
+                    </button>
+             
+               
+                    <button class="border-2 w-1/2 border-gray-400 border-solid mx-4">
+                        <div class="flex flex-row">
+                            <div class="m-auto mt-2 w-1/6">
+                                <mat-icon class="text-blue-600">facebook</mat-icon>
+                            </div>
+                            <div class="w-2/3 m-auto -ml-8 text-sm">
+                                <span>Facebook</span>
+                            </div>
+                        </div>
+                    </button>
+              
+            </div>
+
+            <div *ngIf="isQRCode">
+                <img [src]="imageFake" class="w-72 m-auto cursor-pointer" alt="">
+            </div>
+            <div *ngIf="isQRCode" class="text-center text-xl">
+                <span>Quét mã QR bằng ứng dụng Shopee</span>
+            </div>
+            <div *ngIf="isQRCode"  class="text-center text-xl my-4">
+                <a href="#" class="text-blue-500">Làm thế nào Để Quét Mã</a>
+            </div>
+            <div class="text-center">
+                <span class="text-gray-400">Bạn mới biết đến Shopee? <span  class="text-orange-600 m-3 cursor-pointer" (click)="replacePage()">Đăng ký</span></span>
+            </div>
+        </form>
+        <form class="bg-white flex flex-col p-5 m-5 max-w-md h-auto shadow-2xl" *ngIf="isPageRegister" [formGroup]="formRegister">
+            <div class="flex flex-row items-start">
+                <div class="m-auto">
+                    <span class="text-2xl">Đăng Ký</span>
+                </div>
+            </div>
+            <div>
+                <input type="number" 
+                formControlName="phone" 
+                placeholder="Số điện thoại" 
+                required class="w-full border-2 border-solid"
+                [ngClass]="formRegister.get('phone')?.hasError('phone') && formRegister.get('phone')?.touched ? 'border-red-600 p-4 mt-6 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent' :'border-gray-200 p-4 mt-6 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent'"
+                >
+            </div>
+            <div class="mx-2"  *ngIf="formRegister.get('phone')?.hasError('required') && formRegister.get('phone')?.touched">
+                <span class="text-red-600">Phone is required</span> 
+            </div>
+            <div class="mx-2"  *ngIf="formRegister.get('phone')?.hasError('minlength')  && formRegister.get('phone')?.touched">
+                <span class="text-red-600">phone is require 10 character</span> 
+            </div>
+            <div>
+                <button (click)="submitRegister()" class="uppercase w-full mt-5 p-4" [ngClass]="formRegister.invalid ? 'bg-orange-100 text-black cursor-not-allowed' : 'bg-orange-600 text-white '">Đăng Ký</button>
+            </div>
+            
+            <div class="text-center w-full text-gray-400 text-xl mt-4">
+                <span class="text-center">Hoặc</span>
+            </div>
+            <div class="flex flex-row my-2">
+                    <button class="border-2 w-1/2 border-gray-400 border-solid mx-4">
+                        <div class="flex flex-row">
+                            <div class="m-auto mt-2 w-1/6">
+                                <mat-icon class="text-blue-600">facebook</mat-icon>
+                            </div>
+                            <div class="w-2/3 m-auto -ml-8 text-sm">
+                                <span>Facebook</span>
+                            </div>
+                        </div>
+                    </button>
+                    <button class="border-2 w-1/2 border-gray-400 border-solid mx-4">
+                        <div class="flex flex-row">
+                            <div class="m-auto mt-2 w-1/6">
+                                <mat-icon class="text-blue-600">facebook</mat-icon>
+                            </div>
+                            <div class="w-2/3 m-auto -ml-8 text-sm">
+                                <span>Facebook</span>
+                            </div>
+                        </div>
+                    </button>
+            </div>
+            <div *ngIf="isQRCode"  class="text-center text-xs my-4">
+                <a href="#" class="text-blue-500">Bằng việc đăng kí, bạn đã đồng ý với Shopee</a>
+            </div>
+            <div class="text-center">
+                <span class="text-gray-400">Bạn đã có tài khoản? <span class="text-orange-600 m-3 cursor-pointer" (click)="replacePage()">Đăng nhập</span></span>
+            </div>
+        </form>
+        
+    </div>
+</div>

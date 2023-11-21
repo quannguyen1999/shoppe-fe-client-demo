@@ -1,13 +1,15 @@
-
 <app-header></app-header>
-<div class="m-auto flex flex-col">
-    <div class="content m-auto">
-        <router-outlet></router-outlet>
-    </div>
-    <div class="bg-gray-100 mt-10 border-t-4 border-orange-600 border-solid">
-        <app-footer></app-footer>
+<div class="w-full" [ngClass]="isLoginPage || isRegisterPage ? 'bg-orange-600' : 'bg-white'">
+    <div class="m-auto flex flex-col">
+        <div class="content m-auto">
+            <router-outlet></router-outlet>
+        </div>
+        <div class="bg-gray-100 border-t-4 border-orange-600 border-solid">
+            <app-footer></app-footer>
+        </div>
     </div>
 </div>
+
 
 <p-dialog [visible]="visible" [modal]="true" [style]="{ 'background-color': 'transparent', 'border':'none', 'box-shadow':'none' }" [draggable]="false" [resizable]="false">
     <div class="relative">'

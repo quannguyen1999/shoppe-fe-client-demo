@@ -1,3 +1,7 @@
+<div class="card">
+    <p-toast></p-toast>
+</div>
+
 <div class="grid grid-cols-7 grid-flow-row w-full h-80">
     <div class="col-span-3">
         <div style="width:100%; background-color: transparent;"> 
@@ -57,11 +61,11 @@
                                     <mat-icon>shopping_cart</mat-icon>
                                     <p>Vận Chuyễn tới</p>
                                     <div class="card flex justify-content-center w-5 h-5">
-                                        <form>
+                                        <!-- <form>
                                             <p-dropdown
                                                 class="h-2"
                                             formControlName="city" [options]="cities"></p-dropdown>
-                                        </form>
+                                        </form> -->
                                     </div>
                                 </div>
                                 <div class="flex">
@@ -97,8 +101,8 @@
                     </div>
                 </div>
                 <div class="mt-10">
-                    <div class="flex flex-row">
-                        <button class="ml-10 mr-10" mat-raised-button color="warn">Thêm vào giỏ hàng</button>
+                    <div class="flex flex-row card">
+                        <button class="ml-10 mr-10" mat-raised-button color="warn" (click)="addToCart()">Thêm vào giỏ hàng</button>
                         <button mat-raised-button color="warn" (click)="Checkout()">Mua Ngay</button>
                     </div>
                 </div>

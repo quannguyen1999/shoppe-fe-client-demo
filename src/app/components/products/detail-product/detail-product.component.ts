@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { imageDataFakeOne, imageDataFakeTwo } from 'src/app/constants/data-fake.model';
 import { ImageCommon } from 'src/app/models/image-common.model';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-detail-product',
@@ -35,7 +37,10 @@ export class DetailProductComponent implements OnInit {
       }
   ];
 
-  constructor(private router: Router){
+  constructor(private router: Router,
+            private cartService: CartService,
+            private messageService: MessageService
+    ){
     
   }
 
@@ -71,6 +76,11 @@ export class DetailProductComponent implements OnInit {
   Checkout(){
     this.router.navigate(['/cart']);
   }
+
+  addToCart(){
+    this.cartService.addToCart();
+  }
+
 
 
 }

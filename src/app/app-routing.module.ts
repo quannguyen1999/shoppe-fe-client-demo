@@ -5,11 +5,24 @@ import { DetailProductComponent } from './components/products/detail-product/det
 import { CartComponent } from './components/cart/cart.component';
 import { ProductsComponent } from './components/products/products.component';
 import { CategoryComponent } from './components/category/category.component';
+import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent
+  },
+  {
+    path: `cart`,
+    component: CartComponent
+  },
+  {
+    path: `login`,
+    component: LoginComponent
+  },
+  {
+    path: `register`,
+    component: LoginComponent
   },
   {
     path: `category/:id`,
@@ -18,10 +31,6 @@ const routes: Routes = [
   {
     path: `product/detail/:id`,
     component: DetailProductComponent
-  },
-  {
-    path: `cart`,
-    component: CartComponent
   },
   {
     path: '',
