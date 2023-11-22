@@ -1,4 +1,5 @@
-<div class="sticky top-0 z-20 bg-gradient-to-r from-orange-400 to-orange-600 w-full h-32">
+
+<div class="fixed top-0 z-20 bg-gradient-to-r from-orange-400 to-orange-600 w-full h-32"  >
     <div class="grid col-span-2 grid-flow-row w-8/12 m-auto pt-1 ">
         <div class="firstLine">
             <div class="grid row-span-2 grid-flow-col text-base text-white">
@@ -20,48 +21,45 @@
                 <div class="grid row-span-4 grid-flow-col justify-end ">
                         <div class="grid row-span-2 grid-flow-col mr-4" id="label-title">
                             <mat-icon>notifications_none</mat-icon>
-                            <div (click)="notificationPopUp.toggle($event)" class="cursor-pointer">
+                            <div [matMenuTriggerFor]="menuNotification" class="cursor-pointer">
                                 Thông Báo
                             </div>
-                            <p-overlayPanel #notificationPopUp (mouseleave)="notificationPopUp.hide()">
-                                <ng-template  pTemplate="content">
-                                    <div class="grid grid-rows-3 grid-flow-col h-44 max-w-xl gap-15 w-full">
-                                        <div class="row-span-1">
-                                            <div class="grid grid-cols-3 grid-flow-row cursor-pointer hover:bg-gray-100">
-                                                <div class="cols-span-1 w-32 m-auto">
-                                                    <img class="w-full m-auto" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScm3EFlRXb0P8mBevP2AyYtCN1VqIp_VaqQg&usqp=CAU">
-                                                    </div>
-                                                <div class="cols-span-2 col-start-2 col-end-4 w-full">
-                                                    <p>{{'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam venenatis et lorem sit amet vehicula. Etiam vel nibh nec nisi euismod mollis ultrices condimentum velit. Proin velit libero, interdum ac rhoncus sit amet, pellentesque ac turpis. Quisque ac luctus turpis, vel efficitur ante. Cras convallis risus vel vehicula dapibus. Donec eget neque fringilla, faucibus mi quis, porttitor magna. Cras pellentesque leo est, et luctus neque rutrum eu. Aliquam consequat velit sed sem posuere, vitae sollicitudin mi consequat. Mauris eget ipsum sed dui rutrum fringilla. Donec varius vehicula magna sit amet auctor. Ut co' | truncateText: 200}}</p>
+                            <mat-menu #menuNotification="matMenu">
+                                <div class="grid grid-rows-2 grid-flow-col h-auto max-w-xl gap-1">
+                                    <div class="row-span-1">
+                                        <div class="grid grid-cols-3 grid-flow-row cursor-pointer hover:bg-gray-100">
+                                            <div class="cols-span-1 w-32 m-auto">
+                                                <img class="w-full m-auto" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScm3EFlRXb0P8mBevP2AyYtCN1VqIp_VaqQg&usqp=CAU">
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="row-span-1 text-center w-full mt-10 cursor-pointer justify-center">
-                                            <div class="grid grid-cols-1 grid-flow-row h-14 hover:bg-gray-100 pt-3">
-                                                <p>Xem tất cả</p>
+                                            <div class="cols-span-2 col-start-2 col-end-4 w-full">
+                                                <p>{{'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam venenatis et lorem sit amet vehicula. Etiam vel nibh nec nisi euismod mollis ultrices condimentum velit. Proin velit libero, interdum ac rhoncus sit amet, pellentesque ac turpis. Quisque ac luctus turpis, vel efficitur ante. Cras convallis risus vel vehicula dapibus. Donec eget neque fringilla, faucibus mi quis, porttitor magna. Cras pellentesque leo est, et luctus neque rutrum eu. Aliquam consequat velit sed sem posuere, vitae sollicitudin mi consequat. Mauris eget ipsum sed dui rutrum fringilla. Donec varius vehicula magna sit amet auctor. Ut co' | truncateText: 200}}</p>
                                             </div>
                                         </div>
                                     </div>
-
-                                </ng-template>
-                            </p-overlayPanel>
+                                    <div class="row-span-1 text-center w-full mt-3 cursor-pointer justify-center">
+                                        <div class="grid grid-cols-1 grid-flow-row h-14 hover:bg-gray-100 pt-2">
+                                            <p>Xem tất cả</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </mat-menu>
                         </div>
                         <div class="grid row-span-2 grid-flow-col mr-4" id="label-title cursor-pointer">
                             <mat-icon>contact_support</mat-icon>
                             <span>Hỗ Trợ</span>
                         </div>
-                        <div class="grid row-span-2 grid-flow-col mr-4" id="label-title"> 
-                            <p-overlayPanel #op (mouseleave)="op.hide()">
-                                <ng-template  pTemplate="content">
-                                    <div class="grid grid-rows-2 grid-flow-col gap-4">
-                                        <a href="" id="language">Tiếng Việt</a>
-                                        <a href="" id="language">Tiếng Anh</a>
-                                    </div>
-                                </ng-template>
-                            </p-overlayPanel>
-                            <div class="grid grid-cols-4 grid-flow-row w-32" (mouseenter)="op.toggle($event)">
-                                <span class="col-span-1"><mat-icon>language</mat-icon></span>
-                                <span class="col-span-3">Ngôn Ngữ</span>
+                        <div class="grid row-span-2 grid-flow-col w-32" id="label-title"> 
+                            <div class="flex flex-row w-full grid-flow-col mr-4 cursor-pointer">   
+                                <div class="w-2/6">
+                                    <mat-icon>contact_support</mat-icon>
+                                </div>
+                                <div class="w-full">
+                                    <span [matMenuTriggerFor]="menuLanguage">Ngôn Ngữ</span>
+                                    <mat-menu #menuLanguage="matMenu">
+                                        <button mat-menu-item (click)="selectLanguage('Tiếng Việt')">Tiếng Việt</button>
+                                        <button mat-menu-item (click)="selectLanguage('Tiếng Anh')">Tiếng Anh</button>
+                                    </mat-menu>
+                                </div>  
                             </div>
                         </div>
                         <div class="grid row-span-2 grid-flow-col" id="label-title" *ngIf="isAccountLogin, else accountNotLogin">
@@ -90,7 +88,7 @@
                         </div>
                     </div>
                </div>
-               <div class="col-span-3">
+               <div class="col-span-3 ml-10">
                   
                     <div class="p-inputgroup w-full h-14">
                         <form class="example-form w-full" id="input-search">

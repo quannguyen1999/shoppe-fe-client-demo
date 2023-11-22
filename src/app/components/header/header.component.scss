@@ -7,6 +7,9 @@
 .label-language:hover{
     background-color: red;
 }
+::ng-deep .mat-mdc-menu-panel{
+    max-width: none !important;
+  }
 #icon{
     width: 50px;
     height: 50px;

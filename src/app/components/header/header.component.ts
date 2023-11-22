@@ -1,13 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable, filter, map, startWith } from 'rxjs';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { OverlayPanel } from 'primeng/overlaypanel';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit{
+
+  selectedLanguage!: string;
 
   isAccountLogin: boolean = false;
 
@@ -35,6 +38,11 @@ export class HeaderComponent implements OnInit{
     );
   }
 
+  selectLanguage(language: string) {
+    // Update the selectedLanguage variable when a language is selected
+    this.selectedLanguage = language;
+  }
+
   private searchValue(value: string): string[] {
     const filterValue = this.convertText(value);
     return this.dataFakeSearch.filter(dataFakeSearch => this.convertText(dataFakeSearch).includes(filterValue));
@@ -47,4 +55,6 @@ export class HeaderComponent implements OnInit{
   redirectHomePage(){
     this.router.navigate(['/']);
   }
+
+
 }
