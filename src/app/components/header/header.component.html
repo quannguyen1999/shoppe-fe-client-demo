@@ -5,7 +5,24 @@
             <div class="grid row-span-2 grid-flow-col text-base text-white">
                 <div class="grid row-span-3 grid-flow-col w-96">
                     <a href="" class="border-r-2 order-stone-50 no-underline text-white"  id="label-title">Kênh Người Bán</a>
-                    <a href="" class="border-r-2 order-stone-50 pl-2  no-underline text-white"  id="label-title">Tải ứng dụng</a>
+                    <button class="border-r-2 order-stone-50 pl-2  no-underline text-white"  id="label-title" [matMenuTriggerFor]="menuApplication">Tải ứng dụng</button>
+                    <mat-menu #menuApplication="matMenu" (menuOpen)="true">
+                        <div class="flex flex-col">
+                            <img src="w-full" alt="" [src]="imageFake">
+                            <div class="flex flex-row w-full p-2">
+                                <div class="flex flex-row w-1/2">
+                                    <mat-icon>facebook</mat-icon>
+                                    <span>facebook</span>
+                                </div>
+                                <div class="flex flex-row w-1/2 justify-end">
+                                    <mat-icon>facebook</mat-icon>
+                                    <div class="float-right">
+                                        <span>facebook</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-menu>
                     <div class="pl-2">
                         <div class="grid row-span-3 grid-flow-col w-15">
                            <span>Kết Nối</span>
@@ -76,7 +93,7 @@
             </div>
           
         </div>
-        <div class="secondLine w-full mt-2" *ngIf="isShopping; else cartPageHeader">
+        <div class="secondLine w-full mt-2" *ngIf="!isAuthorization && isShopping">
             <div class="grid grid-cols-5 grid-rows-2 w-full h-24">
                <div class="col-span-1 row-span-2" id="title-logo">
                     <div class="grid grid-cols-2 grid-flow-row h-full cursor-pointer" (click)="redirectHomePage()">
@@ -117,12 +134,47 @@
                     </div>
                 </div>
                <div class="col-span-1 row-span-2 m-auto" id="title-logo">
-                    <mat-icon class=" text-4xl text-end "  matBadge="15" id="icon" matBadgeColor="warn">shopping_cart</mat-icon>
-               </div>
+                    <mat-icon [matMenuTriggerFor]="menuCart" class=" text-4xl text-end cursor-pointer"  matBadge="15" id="icon" matBadgeColor="warn">shopping_cart</mat-icon>
+                    <mat-menu #menuCart="matMenu">
+                        <div class="flex flex-col bg-gray-100 gap-3 p-2" style="width: 500px;">
+                            <div>
+                                <span class="uppercase text-start text-gray-300 font-bold">sản phẩm mới thêm</span>
+                            </div>
+                            <div class="flex flex-row">
+                                <img [src]="imageFake" alt="" class="w-20">
+                                <div class="w-72 mx-2">
+                                    <span>{{dataLoremFake | truncateText:90}}</span>
+                                </div> 
+                                <span>{{600000 | currency}}</span>
+                            </div>
+                            <div class="flex flex-row">
+                                <img [src]="imageFake" alt="" class="w-20">
+                                <div class="w-72 mx-2">
+                                    <span>{{dataLoremFake | truncateText:90}}</span>
+                                </div> 
+                                <span>{{600000 | currency}}</span>
+                            </div>
+                            <div class="flex flex-row">
+                                <img [src]="imageFake" alt="" class="w-20">
+                                <div class="w-72 mx-2">
+                                    <span>{{dataLoremFake | truncateText:90}}</span>
+                                </div> 
+                                <span>{{600000 | currency}}</span>
+                            </div>
+                            <div class="flex flex-row">
+                                <div class="w-1/2">
+                                    <span>1 thêm hàng vào giỏ</span>
+                                </div>
+                                <div class="w-1/2 text-end">
+                                    <button class="bg-orange-600 text-white p-2 " (click)="getPageCart()">Xem giỏ hàng</button>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-menu>
+                </div>
             </div>
         </div>
-        <ng-template #cartPageHeader>
-            <div class="flex flex-row w-full h-24">
+            <div class="flex flex-row w-full h-24" *ngIf="!isAuthorization && !isShopping">
                 <div class="flex flex-row w-1/2 m-auto h-full p-6">
                     <div class="grid grid-cols-3 grid-flow-row h-full cursor-pointer" (click)="redirectHomePage()">
                         <div class="m-auto mr-10">
@@ -144,7 +196,24 @@
                         </button>
                     </div>
                 </div>
+            </div>    
+            <div class="flex flex-row w-full h-24"  *ngIf="isAuthorization">
+                <div class="flex flex-row w-1/2 m-auto h-full p-6">
+                    <div class="grid grid-cols-3 grid-flow-row h-full " >
+                        <div class="m-auto mr-10" (click)="redirectHomePage()">
+                            <mat-icon  class="text-5xl cursor-pointer text-end" id="icon" >shopping_basket</mat-icon>
+                        </div>
+                        <div class="my-auto text-start text-4xl cursor-pointer text-white -ml-8 mr-10  icon-logo border-r-2 border-red-500 border-solid pr-2 hide-element" (click)="redirectHomePage()">
+                            <span class="">Shopee</span>
+                        </div>
+                        <div class="my-auto text-start text-2xl text-white -ml-8 mt-4 icon-logo hide-element">
+                            <span class="">Đăng Nhập</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex  w-1/2">
+                    
+                </div>
             </div>
-          </ng-template>
     </div>
 </div>

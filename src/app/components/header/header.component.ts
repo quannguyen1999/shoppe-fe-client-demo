@@ -1,14 +1,21 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild,Input  } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable, filter, map, startWith } from 'rxjs';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { OverlayPanel } from 'primeng/overlaypanel';
+import { dataLoremFake, imageDataFakeOne } from 'src/app/constants/data-fake.model';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit{
+
+  @Input() isAuthorization: boolean = false;
+
+  imageFake: string = imageDataFakeOne;
+
+  dataLoremFake: string = dataLoremFake;
 
   selectedLanguage!: string;
 
@@ -54,6 +61,10 @@ export class HeaderComponent implements OnInit{
 
   redirectHomePage(){
     this.router.navigate(['/']);
+  }
+
+  getPageCart(){
+    this.router.navigate(['/cart']);
   }
 
 

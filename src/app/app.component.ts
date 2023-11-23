@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { imageDataFakeThree } from './constants/data-fake.model';
+import { dataLoremFake, imageDataFakeThree } from './constants/data-fake.model';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -12,6 +12,7 @@ export class AppComponent implements OnInit, OnDestroy{
 
   private routerSubscription!: Subscription;
 
+  dataLoremFake: string = dataLoremFake;
   imgFake: string = imageDataFakeThree;
   visible: boolean = true;
 
