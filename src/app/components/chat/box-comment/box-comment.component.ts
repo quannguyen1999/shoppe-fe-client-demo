@@ -159,6 +159,10 @@ export class BoxCommentComponent implements OnInit{
 
   onEnterComment(){
 
+    if(this.inputValueComment === ''){
+      return;
+    }
+
     if(this.currentReplyComment !== undefined){
       this.isShowReplyBox = false;
     }
@@ -252,6 +256,7 @@ export class BoxCommentComponent implements OnInit{
     }
 
     onReplyMessage(comment: Comment){
+      
       this.currentReplyComment = comment;
       this.isShowReplyBox  = true;
     }

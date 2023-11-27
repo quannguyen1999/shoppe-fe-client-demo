@@ -1,8 +1,8 @@
 
-    <div class="w-full h-16 shadow-lg">
+    <div class="h-16 shadow-lg" style="width: 95%;">
         <div class="flex flex-row p-2">
             <div>
-                <img [src]="imageTitleFake" alt="" class="w-16 rounded-full border-2 border-gray-300 vorder-solid">
+                <img [src]="imageTitleFake" alt="" class="w-14 rounded-full border-2 border-gray-300 vorder-solid">
             </div>
             <div class="w-4/5">
                 <span>{{ titleBoxComment | truncateText:70}}</span>
@@ -18,7 +18,7 @@
             </div>
         </div>
     </div>
-    <div class="w-full overflow-auto flex flex-col h-screen"  #messageContainer  [ngStyle]="{'height': isShowReplyBox ? '480px' :'530px'}">
+    <div style="width: 95%;"  class="overflow-auto flex flex-col h-screen"  #messageContainer  [ngStyle]="{'height': isShowReplyBox ? '465px' :'530px'}">
         <div class="text-center pt-2">
             <span class="text-bold text-xs pt-2">Today</span>
         </div>
@@ -45,7 +45,7 @@
                 </div>
                 <div class="p-2 ">
                     <mat-icon class="cursor-pointer"  [matMenuTriggerFor]="menuFaceSpecific">tag_faces</mat-icon>
-                    <mat-menu #menuFaceSpecific="matMenu" (menuOpened)="true">
+                    <mat-menu #menuFaceSpecific="matMenu" (menuOpened)="true" yPosition="above" xPosition="before">
                         <div (click)="handleEmojiClick($event)">
                             <emoji-mart
                             [i18n]="{ search: 'Recherche', categories: { search: 'Résultats de recherche', recent: 'Récents' } }"
@@ -75,7 +75,7 @@
         </div>
     </div>
     
-    <div class="flex flex-row w-full h-16 border-t-2 border-solid border-gray-300" *ngIf="isShowReplyBox && currentReplyComment !== undefined" >
+    <div style="width: 95%;" class="flex flex-row h-16 border-t-2 border-solid border-gray-300" *ngIf="isShowReplyBox && currentReplyComment !== undefined" >
         <div class="flex flex-col p-3 w-1/2">
             <div>
                 <span class="font-bold text-xl">Replying to {{currentReplyComment.username}}</span>
@@ -89,7 +89,7 @@
             <mat-icon class="cursor-pointer" (click)="onCloseReply()">close</mat-icon>
         </div>
     </div>
-    <div class="flex flex-row w-full h-16 border-t-2 p-3 border-solid border-gray-300">
+    <div style="width: 95%;" class="flex flex-row h-16 border-t-2 p-3 border-solid border-gray-300">
         <div class="p-2">
             <mat-icon  [matMenuTriggerFor]="menuAdd"  class="cursor-pointer">add</mat-icon>
             <mat-menu #menuAdd="matMenu" (menuOpened)="true">
