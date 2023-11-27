@@ -1,0 +1,9 @@
+/* Optionally, you can animate the scroll for a smoother effect */
+@keyframes scrollAnimation {
+    from {
+      scrollTop: 0;
+    }
+    to {
+      scrollTop: 100%; /* Set to the maximum value to scroll to the bottom */
+    }
+  }

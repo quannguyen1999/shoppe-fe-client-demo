@@ -1,0 +1,127 @@
+
+    <div class="w-full h-16 shadow-lg">
+        <div class="flex flex-row p-2">
+            <div>
+                <img [src]="imageTitleFake" alt="" class="w-16 rounded-full border-2 border-gray-300 vorder-solid">
+            </div>
+            <div class="w-4/5">
+                <span>{{ titleBoxComment | truncateText:70}}</span>
+            </div>
+            <div>
+                <mat-icon class="cursor-pointer text-orange-600">phone</mat-icon>
+            </div>
+            <div>
+                <mat-icon class="cursor-pointer text-orange-600">videocam</mat-icon>
+            </div>
+            <div>
+                <mat-icon class="cursor-pointer text-orange-600">close</mat-icon>
+            </div>
+        </div>
+    </div>
+    <div class="w-full overflow-auto flex flex-col h-screen"  #messageContainer  [ngStyle]="{'height': isShowReplyBox ? '480px' :'530px'}">
+        <div class="text-center pt-2">
+            <span class="text-bold text-xs pt-2">Today</span>
+        </div>
+        <div *ngFor="let comment of listComment" class="p-2 text-xl">
+            <div *ngIf="currentAccount != comment.username, else notCurrentAccount" class="flex flex-row ">
+                <div>
+                    <img [src]="comment.avatar" alt="" class="shadow-lg rounded-full" style="max-width: 50px;">  
+                </div>
+                <div class="flex flex-col border-2 border-solid border-gray-200 shadow-xl p-2 rounded-lg relative">
+                    <div class="absolute -bottom-3 -right-6 flex flex-row">
+                        <div class="flex flex-row" *ngFor="let emotion of comment.emotions">
+                            <div>
+                                <span>{{emotion.comment}}</span>
+                            </div>   
+                            <span class="text-sm text-black m-auto -mt-0">{{emotion.total}}</span>
+                        </div>
+                    </div>
+                    <div class="font-bold">
+                        <span>{{comment.username}}</span>
+                    </div>
+                    <div class="text-base">
+                        {{comment.comment}}
+                    </div>
+                </div>
+                <div class="p-2 ">
+                    <mat-icon class="cursor-pointer"  [matMenuTriggerFor]="menuFaceSpecific">tag_faces</mat-icon>
+                    <mat-menu #menuFaceSpecific="matMenu" (menuOpened)="true">
+                        <div (click)="handleEmojiClick($event)">
+                            <emoji-mart
+                            [i18n]="{ search: 'Recherche', categories: { search: 'Résultats de recherche', recent: 'Récents' } }"
+                            [darkMode]="false"
+                            (emojiSelect)="handleEmojiSpecific($event, comment.id)"
+                            ></emoji-mart>
+                        </div>  
+                    </mat-menu>
+                </div>
+                <div class="p-2 ">
+                    <mat-icon class="cursor-pointer" (click)="onReplyMessage(comment)">reply</mat-icon>
+                </div>
+                <div class="p-2 ">
+                    <mat-icon class="cursor-pointer">add</mat-icon>
+                </div>
+
+            </div>
+            <ng-template #notCurrentAccount>
+                <div class="flex flex-row text-end justify-end items-end ">
+                    <div class="flex flex-col  shadow-lg rounded-full p-4">
+                        <div class="text-base">
+                            {{comment.comment}}
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+    
+    <div class="flex flex-row w-full h-16 border-t-2 border-solid border-gray-300" *ngIf="isShowReplyBox && currentReplyComment !== undefined" >
+        <div class="flex flex-col p-3 w-1/2">
+            <div>
+                <span class="font-bold text-xl">Replying to {{currentReplyComment.username}}</span>
+            </div>
+            <div>
+                <span>{{currentReplyComment.comment | truncateText: 40}}</span>
+            </div>
+            
+        </div>
+        <div class="text-end w-1/2 pr-4">
+            <mat-icon class="cursor-pointer" (click)="onCloseReply()">close</mat-icon>
+        </div>
+    </div>
+    <div class="flex flex-row w-full h-16 border-t-2 p-3 border-solid border-gray-300">
+        <div class="p-2">
+            <mat-icon  [matMenuTriggerFor]="menuAdd"  class="cursor-pointer">add</mat-icon>
+            <mat-menu #menuAdd="matMenu" (menuOpened)="true">
+                <span class="p-2">Not Support Yet</span>
+                
+            </mat-menu>
+        </div>
+        <div class="p-2">
+            <input type="file" #inputAttachment (change)="onFileSelected($event)" style="display: none;">
+            <mat-icon class="cursor-pointer" (click)="inputAttachment.click()">attachment</mat-icon>
+        </div>
+        <div class="p-2">
+            <mat-icon  [matMenuTriggerFor]="menuFace" class="cursor-pointer" >tag_faces</mat-icon>
+            <mat-menu #menuFace="matMenu" (menuOpened)="true">
+                <div (click)="handleEmojiClick($event)">
+                    <emoji-mart
+                    [i18n]="{ search: 'Recherche', categories: { search: 'Résultats de recherche', recent: 'Récents' } }"
+                    [darkMode]="false"
+                    (emojiSelect)="handleEmojiSelect($event)"
+                    ></emoji-mart>
+                </div>  
+            </mat-menu>
+        </div>
+        <div class="p-2">
+            <mat-icon class="cursor-pointer">gif</mat-icon>
+        </div>
+        <div class="p-1">
+            <input [(ngModel)]="inputValueComment" type="text" class="border-2 border-solid border-gray-300 rounded-xl w-72 h-8 pl-1" placeholder="enter comment here..." (keydown.enter)="onEnterComment()">
+        </div>
+        <div class="p-2">
+            <mat-icon class="cursor-pointer text-orange-600" (click)="onChangeLike()">thumb_up</mat-icon>
+        </div>
+
+    </div>
+

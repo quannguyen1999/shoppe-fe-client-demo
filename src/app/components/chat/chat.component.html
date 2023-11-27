@@ -1,0 +1,112 @@
+<div *ngIf="!isDisplayChat, else openChat" 
+    class="fixed bottom-0 right-3 z-20 bg-gradient-to-r w-28 h-14 cursor-pointer shadow-2xl border-2 border-gray-200 border-solid bg-white" 
+    (click)="onChangeChat()">
+    <div class="flex flex-row text-orange-600 m-auto w-full h-full shadow-2xl">
+        <div class="w-3/2 text-end m-auto mt-4">
+            <mat-icon>chat</mat-icon>
+        </div>
+        <div class="w-1/2 text-2xl m-auto">
+            <span>Chat</span>
+        </div>
+    </div>
+</div>
+<ng-template #openChat>
+    <div [ngStyle]="{'width' : isDisplayComment ? '770px' : '330px'}"
+    style="height: 700px;"
+     class="fixed bottom-0 right-3 z-20 bg-gradient-to-r shadow-2xl border-2 border-gray-200 border-solid bg-white" (click)="isDisplayChat">
+        <div class="flex flex-col">
+            <div class="w-full h-10 p-2 flex flex-row border-b-2 border-solid border-gray-300">
+                <div class="w-4/5">
+                    <span class="text-orange-600 font-bold text-2xl" (click)="onChangeComment()">Chat</span>
+                </div>
+                <div class="w-2/12 text-end cursor-pointer">
+                    <mat-icon *ngIf="isDisplayComment, else lastPage" (click)="onChangeComment()">last_page</mat-icon>
+                    <ng-template #lastPage>
+                        <mat-icon (click)="onChangeComment()">first_page</mat-icon>
+                    </ng-template>
+                </div>
+                <div>
+                    <mat-icon class="text-orange-500 cursor-pointer"  (click)="onChangeChat()">arrow_drop_down_circle</mat-icon>
+                </div>
+            </div>
+            <div class="flex flex-row h-full">
+                <div class="w-2/5 flex flex-col" [ngClass]="isDisplayComment ? 'w-2/5' : 'w-screen'">
+                    <div class="flex flex-row p-2">
+                        <div class="w-48">
+                            <span class="p-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <input type="text" pInputText [(ngModel)]="valueSearch" class="w-full p-2 border-2 border-solid " placeholder="TÌm Kiếm"/>
+                            </span>
+                        </div>
+                        <div class="w-16 m-auto text-center">
+                            <div class="flex flex-row w-full grid-flow-col mr-4 cursor-pointer">   
+                                <div class="w-full">
+                                    <span [matMenuTriggerFor]="menuApplication" class="text-black text-xs">Tất cả</span>
+                                    <mat-menu #menuApplication="matMenu" (menuOpen)="true">
+                                        <div class="flex flex-col">
+                                            <!-- <img src="w-full" alt="" [src]="imageFake"> -->
+                                            <div class="flex flex-col w-full p-2 text-center leading-10">
+                                                <div>
+                                                    <span class="cursor-pointer">Chưa Đọc</span>
+                                                </div>
+                                                <div>
+                                                    <span class="cursor-pointer">Đã Ghim</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </mat-menu>
+                                </div>  
+                                <div class="w-2/6">
+                                    <mat-icon [matMenuTriggerFor]="menuApplication">keyboard_arrow_down</mat-icon>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="flex flex-row h-screen" *ngIf="listChat.length <= 0, else noListChat">
+                       
+                        <span class="mt-64 text-gray-600 m-auto">Không tìm thấy Cuộc Hội Thoại Nào</span>
+                    </div>
+                    <ng-template #noListChat>
+                        <div class="flex flex-col h-screen">
+                            <div class="p-2 flex flex-row leading-4 border-2 border-solid border-gray-100 hover:bg-orange-500 hover:text-white cursor-pointer"
+                             *ngFor="let chat of listChat" (click)="onClickDetailChat(chat)">
+                                <div class="mr-1">
+                                    <img [src]="chat.avatar" class="w-20 rounded-full border-2 border-gray-200 border-solid" alt="">
+                                </div>
+                                <div class="flex flex-col">
+                                    <div class="font-bold text-xl">
+                                        <span>{{chat.name}}</span>
+                                    </div>
+                                    <div>
+                                        <span>{{chat.comment | truncateText: 35}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+
+                </div>
+                <div class="w-3/4 h-screen bg-gray-200 m-auto text-center pt-60 -mt-0.5"   *ngIf="isDisplayWelcome, else noDisplayColumn" >
+                    <mat-icon class="w-10 h-16 text-8xl"  style="width: 7rem; height: 6rem;">
+                        computer
+                    </mat-icon>
+                    <br>
+                    <span class="text-2xl text-black" >Chào mừng bạn đến với Shopee Chat</span>
+                </div>
+                <ng-template #noDisplayColumn>
+                    <div class="w-3/4 h-screen bg-gray-50 -mt-0.5" *ngIf="isDisplayComment">
+                       <app-box-comment>
+                       </app-box-comment>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+    </div> 
+</ng-template>
+
+
+
+
+

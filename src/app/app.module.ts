@@ -58,6 +58,9 @@ import { ProductService } from './services/product.service';
 import { CategoryService } from './services/category.service';
 import { MessageService } from 'primeng/api';
 import { LoginComponent } from './components/login/login.component';
+import { ChatComponent } from './components/chat/chat.component';
+import { BoxCommentComponent } from './components/chat/box-comment/box-comment.component';
+import { PickerComponent } from '@ctrl/ngx-emoji-mart';
 
 @NgModule({
   declarations: [
@@ -78,7 +81,9 @@ import { LoginComponent } from './components/login/login.component';
     CartComponent,
     PopupComponent,
     CategoryComponent,
-    LoginComponent
+    LoginComponent,
+    ChatComponent,
+    BoxCommentComponent
   ],
   imports: [
     BrowserModule,
@@ -124,7 +129,8 @@ import { LoginComponent } from './components/login/login.component';
     ProgressBarModule,
     ToastModule,
     MatCheckboxModule,
-    DialogModule
+    DialogModule,
+    PickerComponent
  ],
   providers: [CartService, ProductService, CategoryService, MessageService],
   bootstrap: [AppComponent]
