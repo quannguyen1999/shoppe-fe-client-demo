@@ -59,7 +59,11 @@
                     <mat-icon class="cursor-pointer" (click)="onReplyMessage(comment)">reply</mat-icon>
                 </div>
                 <div class="p-2 ">
-                    <mat-icon class="cursor-pointer">add</mat-icon>
+                    <mat-icon  [matMenuTriggerFor]="menuCommentBox" class="cursor-pointer">add</mat-icon>
+                    <mat-menu #menuCommentBox="matMenu">
+                        <button mat-menu-item>Xoá</button>
+                        <button mat-menu-item>Pin</button>
+                    </mat-menu>
                 </div>
 
             </div>

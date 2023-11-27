@@ -70,20 +70,24 @@
                     </div>
                     <ng-template #noListChat>
                         <div class="flex flex-col h-screen">
-                            <div class="p-2 flex flex-row leading-4 border-2 border-solid border-gray-100 hover:bg-orange-500 hover:text-white cursor-pointer"
-                             *ngFor="let chat of listChat" (click)="onClickDetailChat(chat)">
-                                <div class="mr-1">
-                                    <img [src]="chat.avatar" class="w-20 rounded-full border-2 border-gray-200 border-solid" alt="">
-                                </div>
-                                <div class="flex flex-col">
-                                    <div class="font-bold text-xl">
-                                        <span>{{chat.name}}</span>
+                            <div   *ngFor="let chat of listChat" (click)="onClickDetailChat(chat)">
+                                <div class="p-2 flex flex-row leading-4 border-2 border-solid border-gray-100 hover:bg-orange-500 hover:text-white cursor-pointer"
+                                        [ngClass]="currentSelectChat !== undefined && currentSelectChat.id == chat.id ? 'bg-orange-500 text-white' : ''"
+                                >
+                                    <div class="mr-1">
+                                        <img [src]="chat.avatar" class="w-20 rounded-full border-2 border-gray-200 border-solid" alt="">
                                     </div>
-                                    <div>
-                                        <span>{{chat.comment | truncateText: 35}}</span>
+                                    <div class="flex flex-col">
+                                        <div class="font-bold text-xl">
+                                            <span>{{chat.name}}</span>
+                                        </div>
+                                        <div>
+                                            <span>{{chat.comment | truncateText: 35}}</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                           
                         </div>
                     </ng-template>
 
