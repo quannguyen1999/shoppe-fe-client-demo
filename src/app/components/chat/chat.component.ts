@@ -12,11 +12,11 @@ export class ChatComponent implements OnInit{
 
   currentSelectChat: Chat | undefined;
   
-  isDisplayChat: boolean = false;
+  isDisplayChat: boolean = true;
 
   isDisplayComment: boolean = true;
 
-  isDisplayWelcome: boolean = true;
+  isDisplayWelcome: boolean = false;
 
   listChat: Array<Chat> = [];
 

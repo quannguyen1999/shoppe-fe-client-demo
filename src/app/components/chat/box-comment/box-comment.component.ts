@@ -145,13 +145,19 @@ export class BoxCommentComponent implements OnInit{
       emotions: []
     })
 
+    const idRandom = generateRandomId();
     this.listComment.push({
-      id: generateRandomId(),
+      id: idRandom,
       username: 'client',
       comment: 'fuck this shit',
       dateCreated: new Date(),
       avatar: imageDataFakeOne,
-      emotions: []
+      emotions: [],
+      referComment: this.currentReplyComment !== undefined ? {
+        id: this.currentReplyComment.id,
+        username: this.currentReplyComment.username,
+        comment: this.currentReplyComment.comment
+      } : undefined
     })
 
     // this.scrollToBottom();
@@ -173,7 +179,12 @@ export class BoxCommentComponent implements OnInit{
       comment: this.inputValueComment,
       dateCreated: new Date(),
       avatar: imageDataFakeOne,
-      emotions: []
+      emotions: [],
+      referComment: this.currentReplyComment !== undefined ? {
+        id: this.currentReplyComment.id,
+        username: this.currentReplyComment.username,
+        comment: this.currentReplyComment.comment
+      } : undefined
     })
 
     this.inputValueComment = '';
@@ -256,7 +267,6 @@ export class BoxCommentComponent implements OnInit{
     }
 
     onReplyMessage(comment: Comment){
-      
       this.currentReplyComment = comment;
       this.isShowReplyBox  = true;
     }
