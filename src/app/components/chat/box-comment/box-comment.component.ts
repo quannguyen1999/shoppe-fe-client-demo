@@ -127,6 +127,7 @@ export class BoxCommentComponent implements OnInit{
       }]
     })
 
+    let idRandom = generateRandomId();
     this.listComment.push({
       id: generateRandomId(),
       username: 'admin',
@@ -136,28 +137,35 @@ export class BoxCommentComponent implements OnInit{
       emotions: []
     })
 
+    idRandom = generateRandomId();
     this.listComment.push({
-      id: generateRandomId(),
+      id: idRandom,
       username: 'admin',
       comment: 'o o o ',
       dateCreated: new Date(),
       avatar: imageDataFakeOne,
-      emotions: []
+      emotions: [],
+      referComment:{
+        id: idRandom,
+        username: 'client',
+        comment: 'o o o ',
+      }
     })
 
-    const idRandom = generateRandomId();
+  
     this.listComment.push({
-      id: idRandom,
+      id: generateRandomId(),
       username: 'client',
       comment: 'fuck this shit',
       dateCreated: new Date(),
       avatar: imageDataFakeOne,
       emotions: [],
-      referComment: this.currentReplyComment !== undefined ? {
-        id: this.currentReplyComment.id,
-        username: this.currentReplyComment.username,
-        comment: this.currentReplyComment.comment
-      } : undefined
+      referComment:{
+        id: idRandom,
+        username: 'admin',
+        comment: 'o o o ',
+      },
+      isElementVisible: true
     })
 
     // this.scrollToBottom();
@@ -218,6 +226,8 @@ export class BoxCommentComponent implements OnInit{
 
     handleEmojiSelect(event: any) {
       this.inputValueComment += event.emoji.native;
+
+    
     }
 
     handleEmojiSpecific(event: any, idComment: number ){
@@ -227,7 +237,6 @@ export class BoxCommentComponent implements OnInit{
         const existingEmotion: Emotion = existingComment.emotions.find(emotion => emotion.comment = event.emoji.native)!;
         // console.log(existingEmotion)
         if(existingEmotion !== undefined){
-           console.log('fuck')
           existingEmotion.total += 1;
         }else{
           existingComment.emotions.push({
@@ -274,6 +283,16 @@ export class BoxCommentComponent implements OnInit{
     onCloseReply(){
       this.currentReplyComment = undefined;
       this.isShowReplyBox = !this.isShowReplyBox;
+    }
+
+    showElementComment(comment: Comment){
+      this.listComment.find(data => data.id === comment.id)!
+        .isElementVisible = true;
+    }
+
+    hideElementComment(comment: Comment){
+      this.listComment.find(data => data.id === comment.id)!
+      .isElementVisible = false;
     }
 
 

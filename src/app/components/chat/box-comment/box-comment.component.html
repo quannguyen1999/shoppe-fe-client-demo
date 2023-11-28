@@ -23,55 +23,101 @@
             <span class="text-bold text-xs pt-2">Today</span>
         </div>
         <div *ngFor="let comment of listComment" class="p-2 text-xl">
-            <div *ngIf="currentAccount != comment.username, else notCurrentAccount" class="flex flex-row ">
-                <div>
-                    <img [src]="comment.avatar" alt="" class="shadow-lg rounded-full" style="max-width: 50px;">  
-                </div>
-                <div class="flex flex-col border-2 border-solid border-gray-200 shadow-xl p-2 rounded-lg relative">
-                    <div class="absolute -bottom-3 -right-6 flex flex-row">
-                        <div class="flex flex-row" *ngFor="let emotion of comment.emotions">
-                            <div>
-                                <span>{{emotion.comment}}</span>
-                            </div>   
-                            <span class="text-sm text-black m-auto -mt-0">{{emotion.total}}</span>
+            <div *ngIf="currentAccount != comment.username, else IsCurrentAccount" class="flex flex-row ">
+                <div class="flex flex-col">
+                    <div *ngIf="comment.referComment !== undefined" class="p-2 ml-14 bg-gray-200 rounded-tr-lg text-gray-400 cursor-pointer w-32">
+                        <div>
+                            <span>{{comment.referComment.comment  | truncateText:10}}</span>
                         </div>
                     </div>
-                    <div class="font-bold">
-                        <span>{{comment.username}}</span>
+                    <div class="flex flex-row" 
+                        (mouseenter)="showElementComment(comment)"
+                        (mouseleave)="hideElementComment(comment)"
+                    >
+                        <div>
+                            <img [src]="comment.avatar" alt="" class="shadow-lg rounded-full" style="max-width: 50px;">  
+                        </div>
+                        <div class="flex flex-col border-2 border-solid border-gray-200 shadow-xl p-2 rounded-lg relative" style="max-width: 250px;">
+                            <div class="absolute -bottom-3 -right-6 flex flex-row">
+                                <div class="flex flex-row" *ngFor="let emotion of comment.emotions">
+                                    <div>
+                                        <span>{{emotion.comment}}</span>
+                                    </div>   
+                                    <span class="text-sm text-black m-auto -mt-0">{{emotion.total}}</span>
+                                </div>
+                            </div>
+                            <div class="font-bold">
+                                <span>{{comment.username}}</span>
+                            </div>
+                            <div class="text-base">
+                                {{comment.comment}}
+                            </div>
+                        </div>
+                        <div class="p-2">
+                            <mat-icon class="cursor-pointer"  [matMenuTriggerFor]="menuFaceSpecific">tag_faces</mat-icon>
+                            <mat-menu #menuFaceSpecific="matMenu" (menuOpened)="true" yPosition="above" xPosition="before">
+                                <div (click)="handleEmojiClick($event)">
+                                    <emoji-mart
+                                    [i18n]="{ search: 'Recherche', categories: { search: 'Résultats de recherche', recent: 'Récents' } }"
+                                    [darkMode]="false"
+                                    (emojiSelect)="handleEmojiSpecific($event, comment.id)"
+                                    ></emoji-mart>
+                                </div>  
+                            </mat-menu>
+                        </div>
+                        <div class="p-2 "  *ngIf="comment.isElementVisible">
+                            <mat-icon class="cursor-pointer" (click)="onReplyMessage(comment)">reply</mat-icon>
+                        </div>
+                        <div class="p-2 "  *ngIf="comment.isElementVisible">
+                            <mat-icon  [matMenuTriggerFor]="menuCommentBox" class="cursor-pointer">add</mat-icon>
+                            <mat-menu #menuCommentBox="matMenu">
+                                <button mat-menu-item>Xoá</button>
+                                <button mat-menu-item>Pin</button>
+                            </mat-menu>
+                        </div>
                     </div>
-                    <div class="text-base">
-                        {{comment.comment}}
-                    </div>
                 </div>
-                <div class="p-2 ">
-                    <mat-icon class="cursor-pointer"  [matMenuTriggerFor]="menuFaceSpecific">tag_faces</mat-icon>
-                    <mat-menu #menuFaceSpecific="matMenu" (menuOpened)="true" yPosition="above" xPosition="before">
-                        <div (click)="handleEmojiClick($event)">
-                            <emoji-mart
-                            [i18n]="{ search: 'Recherche', categories: { search: 'Résultats de recherche', recent: 'Récents' } }"
-                            [darkMode]="false"
-                            (emojiSelect)="handleEmojiSpecific($event, comment.id)"
-                            ></emoji-mart>
-                        </div>  
-                    </mat-menu>
-                </div>
-                <div class="p-2 ">
-                    <mat-icon class="cursor-pointer" (click)="onReplyMessage(comment)">reply</mat-icon>
-                </div>
-                <div class="p-2 ">
-                    <mat-icon  [matMenuTriggerFor]="menuCommentBox" class="cursor-pointer">add</mat-icon>
-                    <mat-menu #menuCommentBox="matMenu">
-                        <button mat-menu-item>Xoá</button>
-                        <button mat-menu-item>Pin</button>
-                    </mat-menu>
-                </div>
+                
 
             </div>
-            <ng-template #notCurrentAccount>
-                <div class="flex flex-row text-end justify-end items-end ">
-                    <div class="flex flex-col  shadow-lg rounded-full p-4">
-                        <div class="text-base">
-                            {{comment.comment}}
+            <ng-template #IsCurrentAccount>
+                <div class="flex flex-col"
+                (mouseenter)="showElementComment(comment)"
+                (mouseleave)="hideElementComment(comment)"
+                >
+                    <div *ngIf="comment.referComment !== undefined"  class="flex flex-row text-end justify-end items-end max-w-2xl">
+                        <div  class="rounded-lg p-1 rounded-r-lg bg-gray-200 text-gray-400 -mb-3  rounded-xl-full max-w-2xl cursor-pointer">
+                            <span class="p-4">{{comment.referComment.comment | truncateText:10}}</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-row text-end justify-end items-end ">
+                        <div class="p-2 " *ngIf="comment.isElementVisible">
+                            <mat-icon  [matMenuTriggerFor]="menuCommentBox" class="cursor-pointer">add</mat-icon>
+                            <mat-menu #menuCommentBox="matMenu">
+                                <button mat-menu-item>Xoá</button>
+                                <button mat-menu-item>Pin</button>
+                            </mat-menu>
+                        </div>
+                        <div class="p-2">
+                            <mat-icon class="cursor-pointer"  [matMenuTriggerFor]="menuFaceSpecific">tag_faces</mat-icon>
+                            <mat-menu #menuFaceSpecific="matMenu" (menuOpened)="true" yPosition="above" xPosition="before">
+                                <div (click)="handleEmojiClick($event)">
+                                    <emoji-mart
+                                    [i18n]="{ search: 'Recherche', categories: { search: 'Résultats de recherche', recent: 'Récents' } }"
+                                    [darkMode]="false"
+                                    (emojiSelect)="handleEmojiSpecific($event, comment.id)"
+                                    ></emoji-mart>
+                                </div>  
+                            </mat-menu>
+                        </div>
+                        <div class="p-2 " *ngIf="comment.isElementVisible">
+                            <mat-icon class="cursor-pointer" (click)="onReplyMessage(comment)">reply</mat-icon>
+                        </div>
+                       
+                        <div class="flex flex-col  shadow-lg rounded-lg p-4">
+                            <div class="text-base">
+                                {{comment.comment}}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -82,7 +128,7 @@
     <div style="width: 95%;" class="flex flex-row h-16 border-t-2 border-solid border-gray-300" *ngIf="isShowReplyBox && currentReplyComment !== undefined" >
         <div class="flex flex-col p-3 w-1/2">
             <div>
-                <span class="font-bold text-xl">Replying to {{currentReplyComment.username}}</span>
+                <span class="font-bold text-xl">Replying to {{currentReplyComment.username === currentAccount ? 'YourSelf' : currentReplyComment.username}}</span>
             </div>
             <div>
                 <span>{{currentReplyComment.comment | truncateText: 30}}</span>

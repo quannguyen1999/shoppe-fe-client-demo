@@ -14,7 +14,8 @@ export interface Comment {
     dateCreated: Date;
     avatar: string;
     emotions: Array<Emotion>;
-    referComment?: referComment
+    referComment?: referComment;
+    isElementVisible?: boolean | false;
 }
 
 
