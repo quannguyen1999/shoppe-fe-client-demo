@@ -1,7 +1,7 @@
 
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
-import { dataLoremFake, imageDataFakeOne } from 'src/app/constants/data-fake.model';
+import { dataLoremFake, imageDataFakeOne, listComment } from 'src/app/constants/data-fake.model';
 import { Comment } from 'src/app/models/comment.model';
 import { Emotion } from 'src/app/models/emotion.model';
 import { generateRandomId } from 'src/app/utils/util-fnc.model';
@@ -11,7 +11,10 @@ import { generateRandomId } from 'src/app/utils/util-fnc.model';
   templateUrl: './box-comment.component.html',
   styleUrls: ['./box-comment.component.scss']
 })
-export class BoxCommentComponent implements OnInit{
+export class BoxCommentComponent implements OnInit, AfterViewInit{
+  ngAfterViewInit(): void {
+    this.scrollToBottom();
+  }
 
   currentReplyComment: Comment | undefined;
 
@@ -25,7 +28,7 @@ export class BoxCommentComponent implements OnInit{
 
   inputValueComment: string = '';
 
-  listComment: Array<Comment> = [];
+  listComment: Array<Comment> = listComment;
 
   shouldScrollToBottom: boolean = false;
 
@@ -35,140 +38,6 @@ export class BoxCommentComponent implements OnInit{
   @ViewChild('messageContainer') messageContainer!: ElementRef;
 
   ngOnInit(): void {
-    this.listComment.push({
-      id: generateRandomId(),
-      username: 'admin',
-      comment: 'this con me',
-      dateCreated: new Date(),
-      avatar: imageDataFakeOne,
-      emotions: [{
-        id: generateRandomId(),
-        comment: '👍',
-        total: 2,
-        dateCreated:  new Date(),
-      }]
-    })
-
-    this.listComment.push({
-      id: generateRandomId(),
-      username: 'client',
-      comment: 'fuck this shit',
-      dateCreated: new Date(),
-      avatar: imageDataFakeOne,
-      emotions: [{
-        id: generateRandomId(),
-        comment: '👍',
-        total: 2,
-        dateCreated:  new Date(),
-      }]
-    })
-
-    this.listComment.push({
-      id: generateRandomId(),
-      username: 'admin',
-      comment: 'hehe ewqeqwe ',
-      dateCreated: new Date(),
-      avatar: imageDataFakeOne,
-      emotions: [{
-        id: generateRandomId(),
-        comment: '👍',
-        total: 2,
-        dateCreated:  new Date(),
-      }]
-    })
-
-    this.listComment.push({
-      id: generateRandomId(),
-      username: 'admin',
-      comment: 'o o o ',
-      dateCreated: new Date(),
-      avatar: imageDataFakeOne,
-      emotions: []
-    })
-
-    this.listComment.push({
-      id: generateRandomId(),
-      username: 'client',
-      comment: 'fuck this shit',
-      dateCreated: new Date(),
-      avatar: imageDataFakeOne,
-      emotions: []
-    })
-
-    this.listComment.push({
-      id: generateRandomId(),
-      username: 'admin',
-      comment: 'hehe ewqeqwe ',
-      dateCreated: new Date(),
-      avatar: imageDataFakeOne,
-      emotions: []
-    })
-
-    this.listComment.push({
-      id: generateRandomId(),
-      username: 'admin',
-      comment: 'o o o ',
-      dateCreated: new Date(),
-      avatar: imageDataFakeOne,
-      emotions: []
-    })
-
-    this.listComment.push({
-      id: generateRandomId(),
-      username: 'client',
-      comment: dataLoremFake + dataLoremFake,
-      dateCreated: new Date(),
-      avatar: imageDataFakeOne,
-      emotions: [{
-        id: generateRandomId(),
-        comment: '👍',
-        total: 1,
-        dateCreated:  new Date(),
-      }]
-    })
-
-    let idRandom = generateRandomId();
-    this.listComment.push({
-      id: generateRandomId(),
-      username: 'admin',
-      comment: 'hehe ewqeqwe ',
-      dateCreated: new Date(),
-      avatar: imageDataFakeOne,
-      emotions: []
-    })
-
-    idRandom = generateRandomId();
-    this.listComment.push({
-      id: idRandom,
-      username: 'admin',
-      comment: 'o o o ',
-      dateCreated: new Date(),
-      avatar: imageDataFakeOne,
-      emotions: [],
-      referComment:{
-        id: idRandom,
-        username: 'client',
-        comment: 'o o o ',
-      }
-    })
-
-  
-    this.listComment.push({
-      id: generateRandomId(),
-      username: 'client',
-      comment: 'fuck this shit',
-      dateCreated: new Date(),
-      avatar: imageDataFakeOne,
-      emotions: [],
-      referComment:{
-        id: idRandom,
-        username: 'admin',
-        comment: 'o o o ',
-      },
-      isElementVisible: true
-    })
-
-    // this.scrollToBottom();
   }
 
   onEnterComment(){
@@ -199,7 +68,7 @@ export class BoxCommentComponent implements OnInit{
 
     // Set the flag to true so that scrollToBottom will be triggered
     this.shouldScrollToBottom = true;
- 
+
     this.scrollToBottom();
   }
 
@@ -287,7 +156,7 @@ export class BoxCommentComponent implements OnInit{
 
     showElementComment(comment: Comment){
       this.listComment.find(data => data.id === comment.id)!
-        .isElementVisible = true;
+      .isElementVisible = true;
     }
 
     hideElementComment(comment: Comment){

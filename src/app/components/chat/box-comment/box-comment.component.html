@@ -57,11 +57,11 @@
                             <mat-icon class="cursor-pointer"  [matMenuTriggerFor]="menuFaceSpecific">tag_faces</mat-icon>
                             <mat-menu #menuFaceSpecific="matMenu" (menuOpened)="true" yPosition="above" xPosition="before">
                                 <div (click)="handleEmojiClick($event)">
-                                    <emoji-mart
+                                    <!-- <emoji-mart
                                     [i18n]="{ search: 'Recherche', categories: { search: 'Résultats de recherche', recent: 'Récents' } }"
                                     [darkMode]="false"
                                     (emojiSelect)="handleEmojiSpecific($event, comment.id)"
-                                    ></emoji-mart>
+                                    ></emoji-mart> -->
                                 </div>  
                             </mat-menu>
                         </div>
@@ -102,11 +102,11 @@
                             <mat-icon class="cursor-pointer"  [matMenuTriggerFor]="menuFaceSpecific">tag_faces</mat-icon>
                             <mat-menu #menuFaceSpecific="matMenu" (menuOpened)="true" yPosition="above" xPosition="before">
                                 <div (click)="handleEmojiClick($event)">
-                                    <emoji-mart
+                                    <!-- <emoji-mart
                                     [i18n]="{ search: 'Recherche', categories: { search: 'Résultats de recherche', recent: 'Récents' } }"
                                     [darkMode]="false"
                                     (emojiSelect)="handleEmojiSpecific($event, comment.id)"
-                                    ></emoji-mart>
+                                    ></emoji-mart> -->
                                 </div>  
                             </mat-menu>
                         </div>
@@ -155,11 +155,11 @@
             <mat-icon  [matMenuTriggerFor]="menuFace" class="cursor-pointer" >tag_faces</mat-icon>
             <mat-menu #menuFace="matMenu" (menuOpened)="true">
                 <div (click)="handleEmojiClick($event)">
-                    <emoji-mart
+                    <!-- <emoji-mart
                     [i18n]="{ search: 'Recherche', categories: { search: 'Résultats de recherche', recent: 'Récents' } }"
                     [darkMode]="false"
                     (emojiSelect)="handleEmojiSelect($event)"
-                    ></emoji-mart>
+                    ></emoji-mart> -->
                 </div>  
             </mat-menu>
         </div>

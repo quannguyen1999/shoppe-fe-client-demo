@@ -4,13 +4,16 @@
         <div class="firstLine">
             <div class="grid row-span-2 grid-flow-col text-base text-white">
                 <div class="grid row-span-3 grid-flow-col w-96">
-                    <a href="" class="border-r-2 order-stone-50 no-underline text-white"  id="label-title">Kênh Người Bán</a>
-                    <button class="border-r-2 order-stone-50 pl-2  no-underline text-white"  id="label-title" [matMenuTriggerFor]="menuApplication">Tải ứng dụng</button>
+                    <span [matMenuTriggerFor]="menuSeller" class="border-r-2 order-stone-50 no-underline text-white cursor-pointer"  id="label-title">Kênh Người Bán</span>
+                    <mat-menu #menuSeller="matMenu" (menuOpen)="true">
+                        <span class="p-2">Not Support Yet</span>
+                    </mat-menu>
+                    <button class="border-r-2 order-stone-50 pl-2 -mt-1  no-underline text-white"  id="label-title" [matMenuTriggerFor]="menuApplication">Tải ứng dụng</button>
                     <mat-menu #menuApplication="matMenu" (menuOpen)="true">
                         <div class="flex flex-col">
                             <img src="w-full" alt="" [src]="imageFake">
                             <div class="flex flex-row w-full p-2">
-                                <div class="flex flex-row w-1/2">
+                                <div class="flex flex-row w-1/2 ">
                                     <mat-icon>facebook</mat-icon>
                                     <span>facebook</span>
                                 </div>
@@ -26,10 +29,10 @@
                     <div class="pl-2">
                         <div class="grid row-span-3 grid-flow-col w-15">
                            <span>Kết Nối</span>
-                           <a href="" class="text-white">
+                           <a href="" class="text-white hover:text-gray-200">
                                 <mat-icon>facebook</mat-icon>
                            </a> 
-                           <a href="" class="text-white">
+                           <a href="" class="text-white hover:text-gray-200">
                                 <mat-icon>add_a_photo</mat-icon>
                            </a> 
                         </div>
@@ -61,7 +64,7 @@
                                 </div>
                             </mat-menu>
                         </div>
-                        <div class="grid row-span-2 grid-flow-col mr-4" id="label-title cursor-pointer">
+                        <div class="grid row-span-2 grid-flow-col mr-4 cursor-pointer text-white hover:text-gray-200" id="label-title ">
                             <mat-icon>contact_support</mat-icon>
                             <span>Hỗ Trợ</span>
                         </div>
@@ -85,8 +88,8 @@
                         </div>
                         <ng-template #accountNotLogin>
                             <div class="grid row-span-2 grid-flow-col" id="label-title">
-                                <a href="/login" class="pr-2 mr-2  border-r-2 border-gray-300 border-solid">Đăng Nhập</a>
-                                <a href="/register">Đăng Ký</a>
+                                <a href="/login" class="pr-2 mr-2  border-r-2 border-gray-300 border-solid text-white hover:text-gray-200">Đăng Nhập</a>
+                                <a href="/register" class="text-white hover:text-gray-200">Đăng Ký</a>
                             </div>
                         </ng-template>
                 </div>
@@ -113,7 +116,7 @@
                                    placeholder="Search for a street"
                                    [formControl]="controlSearchInput"
                                    [matAutocomplete]="auto"
-                                   class="w-full h-full pl-5 text-xl focus:outline-none"
+                                   class="w-full h-full ml-2 pl-5 text-xl focus:outline-none"
                                  
                                    >
                                 <mat-autocomplete #auto="matAutocomplete">
