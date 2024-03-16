@@ -1,29 +1,36 @@
-<p-carousel [value]="groupCategory"
+<p *ngIf="listItemCategoryGroupOne.length <= 0 && !isLoading" class="text-center font-bold">
+    No Data
+</p>
+
+<p-carousel *ngIf="listItemCategoryGroupOne.length > 0"  [value]="groupCategory"
             [numVisible]="1"
             [numScroll]="1">
     <ng-template let-images pTemplate="item">
         <div class="grid grid-cols-10 grid-rows-2 mb-5"> 
             <ng-container *ngIf="images === '1'">
-                <div  class="grid grid-rows-2 grid-flow-col border-gray-200 border-2 hover:shadow-lg hover:border-gray-400 cursor-pointer" *ngFor="let item of listItemCategoryGroupOne" (click)="getPageCategory(item)">
+                <div  class="grid grid-rows-2 grid-flow-col border-gray-200 border-2 hover:shadow-lg hover:border-gray-400 cursor-pointer" *ngFor="let item of listItemCategoryGroupOne" (click)="getPageCategory(item.name)">
                     <div class="grid-rows-1">
-                        <img [src]="srcImageFake" alt=""  class="w-20 block m-auto">
+                        <img [src]="item.image" alt=""  class="w-20 block m-auto">
                     </div>
                     <div class="grid-rows-1 w-24 text-center justify-center mx-auto">
-                        <span class="text-center break-normal grid-rows-2 m-auto w-28">Khung giờ săn sale {{item}}</span>
+                        <span class="text-center break-normal grid-rows-2 m-auto w-28">{{item.name}}</span>
                     </div>
                 </div>
             </ng-container>
             <ng-container *ngIf="images === '2'">
-                <div class="grid grid-rows-2 grid-flow-col border-gray-200 border-2 hover:shadow-lg hover:border-gray-400 cursor-pointer" *ngFor="let item of listItemCategoryGroupTwo" (click)="getPageCategory(item)">
+                <div class="grid grid-rows-2 grid-flow-col border-gray-200 border-2 hover:shadow-lg hover:border-gray-400 cursor-pointer" *ngFor="let item of listItemCategoryGroupTwo" (click)="getPageCategory(item.name)">
                     <div class="grid-rows-1">
-                        <img [src]="srcImageFake" alt=""  class="w-20 block m-auto">
+                        <img [src]="item.image" alt=""  class="w-20 block m-auto">
                     </div>
                     <div class="grid-rows-1 w-24 text-center justify-center mx-auto">
-                        <span class="text-center break-normal grid-rows-2 m-auto w-28">Khung giờ săn sale {{item}}</span>
+                        <span class="text-center break-normal grid-rows-2 m-auto w-28">{{item.name}}</span>
                     </div>
                 </div>
             </ng-container>
         </div> 
     </ng-template>
 </p-carousel>
-  
+
+<div class="grid grid-cols-1 justify-center mt-10" *ngIf="isLoading">
+    <app-loading-util class="col-span-1 m-auto" ></app-loading-util>
+</div>

@@ -61,6 +61,7 @@ import { LoginComponent } from './components/login/login.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { BoxCommentComponent } from './components/chat/box-comment/box-comment.component';
 import { PickerComponent } from '@ctrl/ngx-emoji-mart';
+import { GraphQLModule } from './config/graphql.module';
 
 @NgModule({
   declarations: [
@@ -130,7 +131,8 @@ import { PickerComponent } from '@ctrl/ngx-emoji-mart';
     ToastModule,
     MatCheckboxModule,
     DialogModule,
-    PickerComponent
+    PickerComponent,
+    GraphQLModule
  ],
   providers: [CartService, ProductService, CategoryService, MessageService],
   bootstrap: [AppComponent]
