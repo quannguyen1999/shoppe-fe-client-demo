@@ -14,7 +14,7 @@ export class AppComponent implements OnInit, OnDestroy{
 
   dataLoremFake: string = dataLoremFake;
   imgFake: string = imageDataFakeThree;
-  visible: boolean = true;
+  visible: boolean = false;
 
   isLoginPage: boolean = false;
   isRegisterPage: boolean = false;

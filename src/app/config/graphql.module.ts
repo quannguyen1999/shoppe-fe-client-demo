@@ -5,9 +5,19 @@ import { ApolloClientOptions, ApolloLink, InMemoryCache,from } from '@apollo/cli
 import { environment } from '../../environments/environment';
 import { ACCESS_TOKEN } from '../constants/constant-value-model';
 
+
+const listFilterPublic = ["CategoryDetail", "ProductDetail"];
+
 const customHeader = new ApolloLink((operation, forward) => {
-  if(operation.operationName === "CategoryDetail"){
-    return forward(operation); 
+  let isSecure = true;
+  listFilterPublic.some((value)=>{
+    if(operation.operationName === value){
+        isSecure = false;
+    }
+  })
+
+  if(!isSecure){
+    return forward(operation);
   }
 
   operation.setContext(({ headers = {} }) => ({

@@ -4,6 +4,7 @@ import { MessageService } from 'primeng/api';
 import { imageDataFakeOne, imageDataFakeTwo } from 'src/app/constants/data-fake.model';
 import { ImageCommon } from 'src/app/models/image-common.model';
 import { CartService } from 'src/app/services/cart.service';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-detail-product',
@@ -39,7 +40,8 @@ export class DetailProductComponent implements OnInit {
 
   constructor(private router: Router,
             private cartService: CartService,
-            private messageService: MessageService
+            private messageService: MessageService,
+            private productService: ProductService
     ){
     
   }
