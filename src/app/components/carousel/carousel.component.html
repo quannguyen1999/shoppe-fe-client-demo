@@ -1,11 +1,11 @@
 <div id="carousel" class="overflow-hidden grid grid-cols-3 grid-flow-row">
     <div class="col-span-2">
-        <p-carousel [value]="cars" [autoplayInterval]="3000"> 
-            <ng-template let-car pTemplate="item"> 
+        <p-carousel [value]="images" [autoplayInterval]="3000"> 
+            <ng-template let-images pTemplate="item"> 
                 <div class="product-item cursor-pointer"> 
                     <div class="product-item-content"> 
                         <div class="p-mb-3"></div> 
-                        <img [src]="srcImageFake" alt="" id="main-img-carousel" class="m-auto">
+                        <img [src]="images.uri" alt="" id="main-img-carousel" class="m-auto">
                     </div> 
                 </div> 
             </ng-template> 
@@ -14,10 +14,10 @@
     <div class="col-span-1">
         <div class="grid grid-rows-2 grid-flow-col">
             <div class="row-span-1 cursor-pointer">
-                <img [src]="srcImageFake" alt="" class="block w-fit m-auto">
+                <img [src]="imageFakeTwo" alt="" class="block w-fit m-auto">
             </div>
             <div class="row-span-1 cursor-pointer">
-                <img [src]="srcImageFake" alt="" class="block w-fit m-auto">
+                <img [src]="imageFakeThree" alt="" class="block w-fit m-auto">
             </div>
         </div>
     </div>

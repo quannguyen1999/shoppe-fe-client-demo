@@ -12,3 +12,11 @@ background-color: white;
     background-color: transparent;
     display: none;
 }
+
+.app-bg{
+    background-image: url("/assets/images/body-background.jpg");
+    background-repeat: space;
+    background-size: contain;
+    background-attachment: fixed; /* Keep the background fixed while scrolling */
+    background-position: center bottom; /* Position the background image at the bottom center */
+}

@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
 import { imageDataFakeOne } from 'src/app/constants/data-fake.model';
 
-interface Car { 
-  id?: string; 
-  name?: string; 
-  description?: string; 
-  price?: number; 
+interface Image { 
+  id?: string,
+  uri?: string
 } 
 
 
@@ -17,30 +15,31 @@ interface Car {
 export class CarouselComponent {
   srcImageFake: string = imageDataFakeOne;
 
-  cars: Car[] = []; 
+  imageFakeOne: string = 'https://www.desktopbackground.org/p/2015/12/26/1063236_teddy-bear-wallpapers-new-hd-images_1600x900_h.jpg';
+
+  imageFakeTwo: string = 'https://static.vecteezy.com/system/resources/thumbnails/033/343/258/small_2x/pastel-fluffy-teddy-bear-wallpaper-fluffy-teddy-bear-background-teddy-bear-background-teddy-bear-wallpaper-ai-generative-photo.jpg';
+
+  imageFakeThree: string = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-5iOFgLQfmNQSuSnxMpPWJDWpgSsyrcYc-nrYWydaPg&s';
+
+  images: Image[] = []; 
   
   constructor() { } 
 
   ngOnInit() { 
-      this.cars = [ 
+      this.images = [ 
           { 
               id: '1', 
-              name: 'Bugatti', 
-              description: 'Racing car', 
-              price: 800, 
+             uri:  'https://marketplace.canva.com/EAFHu3xC03I/1/0/1600w/canva-beige-bear-desktop-wallpaper-9Vrb-3w_jP8.jpg'
           }, 
           { 
               id: '2', 
-              name: 'Ferrari', 
-              description: 'The Prancing Horse', 
-              price: 1500, 
+              uri:  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-5iOFgLQfmNQSuSnxMpPWJDWpgSsyrcYc-nrYWydaPg&s'
+              
           }, 
           { 
               id: '3', 
-              name: 'Porsche', 
-              description: 'Full spectrum', 
-              price: 10000, 
-          }, 
+             uri: 'https://c1.wallpaperflare.com/preview/307/680/936/lucky-pig-pig-swim-figure.jpg'
+          }
       ]; 
   } 
 }

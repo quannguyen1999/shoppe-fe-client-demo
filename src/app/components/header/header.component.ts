@@ -13,6 +13,8 @@ export class HeaderComponent implements OnInit{
 
   @Input() isAuthorization: boolean = false;
 
+  headerBackgroundImage: string =  'assets/images/header-background.jpg';
+
   imageFake: string = imageDataFakeOne;
 
   dataLoremFake: string = dataLoremFake;
