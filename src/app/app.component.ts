@@ -14,14 +14,12 @@ export class AppComponent implements OnInit, OnDestroy{
 
   dataLoremFake: string = dataLoremFake;
   imgFake: string = imageDataFakeThree;
-  visible: boolean = false;
 
   isLoginPage: boolean = false;
   isRegisterPage: boolean = false;
+  isHomePage: boolean = false;
 
-  closePopup(){
-    this.visible = false;
-  }
+
 
   constructor(private router: Router){}
 
@@ -33,13 +31,11 @@ export class AppComponent implements OnInit, OnDestroy{
   }
 
   ngOnInit(): void {
-    this.visible = false;
     this.routerSubscription = this.router.events.subscribe((val) => {
       if(val instanceof NavigationEnd){
-        this.visible = false;
-
         this.isLoginPage = val.url === '/login';
         this.isRegisterPage = val.url === '/register';
+        this.isHomePage = val.url === '/home';
       }
     })
   }

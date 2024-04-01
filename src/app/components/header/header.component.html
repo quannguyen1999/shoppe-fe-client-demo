@@ -2,7 +2,7 @@
 <div class="header-bg fixed top-0 z-20 bg-gradient-to-r from-orange-400 to-orange-600 w-full h-32"
 [style.background-image]="'url(' + headerBackgroundImage + ')'"
 >
-    <div class="grid col-span-2 grid-flow-row w-8/12 m-auto pt-1 ">
+    <div class="grid col-span-2 grid-flow-row m-auto pt-1 " [ngClass]="isOnScreenDevice ? '' : 'w-8/12'">
         <div class="firstLine">
             <div class="grid row-span-2 grid-flow-col text-base text-white">
                 <div class="grid row-span-3 grid-flow-col w-96">

@@ -50,7 +50,6 @@ import { ToastModule } from 'primeng/toast';
 import { FlashProductComponent } from './components/products/flash-product/flash-product.component';
 import { CartComponent } from './components/cart/cart.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-import { PopupComponent } from './utils/popup/popup.component';
 import { DialogModule } from 'primeng/dialog';
 import { CategoryComponent } from './components/category/category.component';
 import { CartService } from './services/cart.service';
@@ -80,7 +79,6 @@ import { GraphQLModule } from './config/graphql.module';
     ReviewProductComponent,
     FlashProductComponent,
     CartComponent,
-    PopupComponent,
     CategoryComponent,
     LoginComponent,
     ChatComponent,

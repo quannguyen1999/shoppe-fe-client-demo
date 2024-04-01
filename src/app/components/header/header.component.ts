@@ -4,6 +4,7 @@ import { Observable, filter, map, startWith } from 'rxjs';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { OverlayPanel } from 'primeng/overlaypanel';
 import { dataLoremFake, imageDataFakeOne } from 'src/app/constants/data-fake.model';
+import { SettingService } from 'src/app/services/setting.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -30,8 +31,20 @@ export class HeaderComponent implements OnInit{
   filteredSearchInput!: Observable<string[]>;
 
   isShopping!: boolean;
+
+  isOnScreenDevice: boolean = false;
   
-  constructor(private router: Router){
+  constructor(
+    private router: Router, 
+    private settingService: SettingService
+  ){
+    this.settingService.width$.subscribe(width => {
+      console.log(width)
+      if(width <= 500){
+        this.isOnScreenDevice = true;
+        console.log("ok")
+      }
+    })
     router.events.subscribe((val) => {
       if(val instanceof NavigationEnd){
         let url = val.url;

@@ -16,10 +16,8 @@ export class CarouselComponent {
   srcImageFake: string = imageDataFakeOne;
 
   imageFakeOne: string = 'https://www.desktopbackground.org/p/2015/12/26/1063236_teddy-bear-wallpapers-new-hd-images_1600x900_h.jpg';
-
-  imageFakeTwo: string = 'https://static.vecteezy.com/system/resources/thumbnails/033/343/258/small_2x/pastel-fluffy-teddy-bear-wallpaper-fluffy-teddy-bear-background-teddy-bear-background-teddy-bear-wallpaper-ai-generative-photo.jpg';
-
-  imageFakeThree: string = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-5iOFgLQfmNQSuSnxMpPWJDWpgSsyrcYc-nrYWydaPg&s';
+  imageFakeTwo: string = 'https://sme.vn/wp-content/uploads/2022/09/san-hang-gia-re-shopee.jpg';
+  imageFakeThree: string = 'https://images.samsung.com/is/image/samsung/assets/vn/offer/flashsale/20240229/time-slot-MO-V2.jpg?$720_N(540)_JPG$';
 
   images: Image[] = []; 
   
@@ -28,17 +26,12 @@ export class CarouselComponent {
   ngOnInit() { 
       this.images = [ 
           { 
-              id: '1', 
-             uri:  'https://marketplace.canva.com/EAFHu3xC03I/1/0/1600w/canva-beige-bear-desktop-wallpaper-9Vrb-3w_jP8.jpg'
+            id: '1', 
+            uri:  'https://marketplace.canva.com/EAFHu3xC03I/1/0/1600w/canva-beige-bear-desktop-wallpaper-9Vrb-3w_jP8.jpg'
           }, 
           { 
-              id: '2', 
-              uri:  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-5iOFgLQfmNQSuSnxMpPWJDWpgSsyrcYc-nrYWydaPg&s'
-              
-          }, 
-          { 
-              id: '3', 
-             uri: 'https://c1.wallpaperflare.com/preview/307/680/936/lucky-pig-pig-swim-figure.jpg'
+            id: '2', 
+            uri:  'https://www.theteddybearshop.com/cdn/shop/files/TeddyBearShop_WebContent_Au23_0021_2500px_10a48632-ec6d-4887-ba7f-b39f301675f4.jpg?v=1706051020&width=2048'  
           }
       ]; 
   } 

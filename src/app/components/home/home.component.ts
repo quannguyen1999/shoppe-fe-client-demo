@@ -9,9 +9,22 @@ import { imageDataFakeOne } from 'src/app/constants/data-fake.model';
 export class HomeComponent implements OnInit{
   srcImageFake: string = imageDataFakeOne;
   listItemCategory: Array<string> = [];
+  visible: boolean = true;
 
   ngOnInit(): void {
     this.listItemCategory = ['1','2','3','4','5','6','7','8']
   }
+
+  closePopup(){
+    this.visible = false;
+  }
+
+  onDialogVisibilityChange(event: boolean) {
+    if (!event) {
+      this.closePopup();
+    }
+  }
+
+
  
 }
