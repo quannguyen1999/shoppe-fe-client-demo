@@ -4,6 +4,7 @@ import { imageDataFakeOne } from 'src/app/constants/data-fake.model';
 import { NavigationEnd, Router, Scroll } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { NAME_BRANCH } from 'src/app/constants/constant-value-model';
+import { AccountService } from 'src/app/services/account.service';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +29,9 @@ export class LoginComponent implements OnInit, OnDestroy{
 
   constructor(private formBuilderLogin: FormBuilder,
     private formBuilderRegister: FormBuilder,
-            private router: Router){}
+            private router: Router,
+            private acountService: AccountService
+            ){}
 
   ngOnDestroy(): void {
     this.routerSubscription.unsubscribe();
@@ -36,7 +39,6 @@ export class LoginComponent implements OnInit, OnDestroy{
 
   ngOnInit(): void {
     this.routerSubscription = this.router.events.subscribe((val) => {
-      console.log(val)
       if(val instanceof Scroll){
         this.isPageRegister = val.routerEvent.url === '/register';
       }
@@ -53,7 +55,8 @@ export class LoginComponent implements OnInit, OnDestroy{
   }
 
   submitLoginPage(){
-
+    this.acountService.requestLoginPage(this.formLogin.value?.username, this.formLogin.value?.password);
+    this.router.navigate(['/home']);
   }
 
   replacePage(){

@@ -6,6 +6,7 @@ import { CartComponent } from './components/cart/cart.component';
 import { ProductsComponent } from './components/products/products.component';
 import { CategoryComponent } from './components/category/category.component';
 import { LoginComponent } from './components/login/login.component';
+import { authServiceGuard } from './services/auth-service.guard';
 
 const routes: Routes = [
   {
@@ -14,7 +15,8 @@ const routes: Routes = [
   },
   {
     path: `cart`,
-    component: CartComponent
+    component: CartComponent,
+    canActivate: [authServiceGuard]
   },
   {
     path: `login`,
@@ -40,7 +42,8 @@ const routes: Routes = [
 
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  // enabled go to top page
+  imports: [RouterModule.forRoot(routes, {scrollPositionRestoration: 'enabled'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

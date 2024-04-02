@@ -89,10 +89,34 @@
                             <span>Account</span>
                         </div>
                         <ng-template #accountNotLogin>
-                            <div class="grid row-span-2 grid-flow-col" id="label-title">
+                            <div class="grid row-span-2 grid-flow-col" id="label-title" *ngIf="!isAuthen; else authen">
                                 <a href="/login" class="pr-2 mr-2  border-r-2 border-gray-300 border-solid text-white hover:text-gray-200">Đăng Nhập</a>
                                 <a href="/register" class="text-white hover:text-gray-200">Đăng Ký</a>
                             </div>
+                            <ng-template #authen>
+                                <div class="grid row-span-2 grid-flow-col" id="label-title">
+                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpCsTe3aMFLzOkE6XsCliWxemFMttaPPMtw-d6UEcxnQ&s"  class="w-10 h-7 cursor-pointer rounded-full" alt="" [matMenuTriggerFor]="menuAvatar">
+                                    <mat-menu #menuAvatar="matMenu">
+                                        <button mat-menu-item  class="grid grid-cols-2">
+                                            <mat-icon>
+                                                perm_identity
+                                            </mat-icon>
+                                            <div>
+                                                Thông tin cá nhân
+                                            </div>
+                                        </button>
+                                        <button mat-menu-item  class="grid grid-cols-2">
+                                            <mat-icon>
+                                                exit_to_app
+                                            </mat-icon>
+                                            <div>
+                                                Đăng Xuất
+                                            </div>
+                                        </button>
+
+                                    </mat-menu>
+                                </div>
+                            </ng-template>
                         </ng-template>
                 </div>
             </div>

@@ -6,6 +6,8 @@ import { OverlayPanel } from 'primeng/overlaypanel';
 import { dataLoremFake, imageDataFakeOne } from 'src/app/constants/data-fake.model';
 import { SettingService } from 'src/app/services/setting.service';
 import { NAME_BRANCH } from 'src/app/constants/constant-value-model';
+import { AccountService } from 'src/app/services/account.service';
+import { authServiceGuard } from 'src/app/services/auth-service.guard';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -36,11 +38,16 @@ export class HeaderComponent implements OnInit{
   isShopping!: boolean;
 
   isOnScreenDevice: boolean = false;
+
+  isAuthen: boolean = false;
   
   constructor(
     private router: Router, 
-    private settingService: SettingService
+    private settingService: SettingService,
+    private accountService: AccountService,
+    private authen: authServiceGuard
   ){
+    this.isAuthen = this.accountService.isAuthen();
     this.settingService.width$.subscribe(width => {
       if(width <= 500){
         this.isOnScreenDevice = true;
