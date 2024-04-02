@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
-import { DEFAULT_PRODUCT_COLUMNS } from 'src/app/constants/constant-value-model';
+import { DEFAULT_PRODUCT_COLUMNS, NAME_BRANCH } from 'src/app/constants/constant-value-model';
 import { imageDataFakeOne, imageDataFakeTwo } from 'src/app/constants/data-fake.model';
 import { ImageCommon } from 'src/app/models/image-common.model';
 import { Product, ProductRequestModel } from 'src/app/models/product.model';
@@ -30,6 +30,8 @@ export class DetailProductComponent implements OnInit {
     isGetTopProduct: false,
     isSuggestProduct: false
   };
+
+  nameBranch: string = NAME_BRANCH;
   
   cities!: string[];
 

@@ -13,10 +13,14 @@ background-color: white;
     display: none;
 }
 
-.app-bg{
+.bg-app{
     background-image: url("/assets/images/body-background.jpg");
     background-repeat: space;
     background-size: contain;
     background-attachment: fixed; /* Keep the background fixed while scrolling */
     background-position: center bottom; /* Position the background image at the bottom center */
+}
+
+.bg-login{
+    background-image: url("/assets/images/body-background.jpg");
 }

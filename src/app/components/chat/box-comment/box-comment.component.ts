@@ -82,7 +82,6 @@ export class BoxCommentComponent implements OnInit, AfterViewInit{
 
     scrollToBottom() {
       try {
-        // Set the scrollTop property to the maximum value to scroll to the bottom
         this.messageContainer.nativeElement.scrollTop = this.messageContainer.nativeElement.scrollHeight;
       } catch (err) {
         console.error(err);
@@ -136,7 +135,6 @@ export class BoxCommentComponent implements OnInit, AfterViewInit{
     }
 
     onFileSelected(event: any): void {
-      console.log("file is selected")
       const file: File = event.target.files[0];
       if (file) {
         // Handle the selected file, for example, by uploading it

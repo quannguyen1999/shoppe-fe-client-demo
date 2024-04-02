@@ -106,7 +106,7 @@
                             <mat-icon  class=" text-5xl text-end" id="icon" >shopping_basket</mat-icon>
                         </div>
                         <div class="my-auto text-start text-3xl text-white -ml-8  icon-logo">
-                            <span class="text-4xl">Shopee</span>
+                            <span class="text-4xl">{{nameBranch}}</span>
                         </div>
                     </div>
                </div>
@@ -186,7 +186,7 @@
                             <mat-icon  class="text-5xl text-end" id="icon" >shopping_basket</mat-icon>
                         </div>
                         <div class="my-auto text-start text-4xl text-white -ml-8 mr-10  icon-logo border-r-2 border-red-500 border-solid pr-2 hide-element">
-                            <span class="">Shopee</span>
+                            <span class="">{{nameBranch}}</span>
                         </div>
                         <div class="my-auto text-start text-2xl text-white -ml-8 mt-4 icon-logo hide-element">
                             <span class="">Giỏ Hàng</span>
@@ -195,7 +195,7 @@
                 </div>
                 <div class="flex  w-1/2">
                     <div class="p-inputgroup h-10 m-auto">
-                        <input type="text" pInputText placeholder="SHOPEE THỜI TRANG" class="pl-1"/>
+                        <input type="text" pInputText placeholder="{{nameBranch}} THỜI TRANG" class="pl-1"/>
                         <button class="text-white px-6 bg-red-700" type="button" pButton icon="pi pi-refresh" styleClass="p-button-warn">
                             <mat-icon>search</mat-icon>
                         </button>
@@ -209,7 +209,7 @@
                             <mat-icon  class="text-5xl cursor-pointer text-end" id="icon" >shopping_basket</mat-icon>
                         </div>
                         <div class="my-auto text-start text-4xl cursor-pointer text-white -ml-8 mr-10  icon-logo border-r-2 border-red-500 border-solid pr-2 hide-element" (click)="redirectHomePage()">
-                            <span class="">Shopee</span>
+                            <span class="">{{nameBranch}}</span>
                         </div>
                         <div class="my-auto text-start text-2xl text-white -ml-8 mt-4 icon-logo hide-element">
                             <span class="">Đăng Nhập</span>

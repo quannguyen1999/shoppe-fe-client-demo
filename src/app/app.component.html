@@ -1,6 +1,6 @@
 <p-toast></p-toast>
 <app-header [isAuthorization]="isLoginPage || isRegisterPage"></app-header>
-<div class="test mt-32 w-full" [ngClass]="isLoginPage || isRegisterPage ? 'bg-orange-600' : 'app-bg'">
+<div class="test mt-32 w-full" [ngClass]="isLoginPage || isRegisterPage ? 'bg-login' : 'bg-app'">
     <div class="m-auto flex flex-col">
         <div class="content m-auto">
             <router-outlet></router-outlet>

@@ -3,6 +3,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Cart } from 'src/app/models/cart.model';
 import {SelectionModel} from '@angular/cdk/collections';
 import { dataLoremFake, imageDataFakeOne } from 'src/app/constants/data-fake.model';
+import { NAME_BRANCH } from 'src/app/constants/constant-value-model';
 
 const listCart: Cart[] = [
   { 
@@ -85,6 +86,7 @@ const listCart: Cart[] = [
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent {
+  nameBranch: string = NAME_BRANCH;
   displayedColumns: string[] = ['select','product', 'price', 'quantity', 'money', 'function'];
   // displayedColumns: string[] = ['product'];
   dataSource = new MatTableDataSource<Cart>(listCart);

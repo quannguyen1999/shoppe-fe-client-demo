@@ -1,12 +1,12 @@
 
-<div class="flex flex-row bg-orange-600 w-full self-stretch" style="height: 565px;">
+<div class="bg-login flex flex-row bg-login w-full self-stretch" style="height: 565px;">
     <div class="flex flex-col w-1/2 items-center m-auto  text-white">
         <div class="">
             <div class="justify-center">
                  <mat-icon class="text-center" id="icon" >shopping_cart</mat-icon>
             </div>       
         </div>
-        <span class="text-5xl font-bold flex-1">Shopee</span>
+        <span class="text-5xl font-bold flex-1">{{nameBranch}}</span>
         <span class="mt-10 text-center text-2xl mx-10">Nền tảng thương mại điện tử yêu thích ở Động Nam Á & Đài Loan</span>
     </div>
     <div class="flex flex-col w-1/2 m-auto ">
@@ -93,13 +93,13 @@
                 <img [src]="imageFake" class="w-72 m-auto cursor-pointer" alt="">
             </div>
             <div *ngIf="isQRCode" class="text-center text-xl">
-                <span>Quét mã QR bằng ứng dụng Shopee</span>
+                <span>Quét mã QR bằng ứng dụng {{nameBranch}}</span>
             </div>
             <div *ngIf="isQRCode"  class="text-center text-xl my-4">
                 <a href="#" class="text-blue-500">Làm thế nào Để Quét Mã</a>
             </div>
             <div class="text-center">
-                <span class="text-gray-400">Bạn mới biết đến Shopee? <span  class="text-orange-600 m-3 cursor-pointer" (click)="replacePage()">Đăng ký</span></span>
+                <span class="text-gray-400">Bạn mới biết đến {{nameBranch}}? <span  class="text-orange-600 m-3 cursor-pointer" (click)="replacePage()">Đăng ký</span></span>
             </div>
         </form>
         <form class="bg-white flex flex-col p-5 m-5 max-w-md h-auto shadow-2xl" *ngIf="isPageRegister" [formGroup]="formRegister">
@@ -152,7 +152,7 @@
                     </button>
             </div>
             <div *ngIf="isQRCode"  class="text-center text-xs my-4">
-                <a href="#" class="text-blue-500">Bằng việc đăng kí, bạn đã đồng ý với Shopee</a>
+                <a href="#" class="text-blue-500">Bằng việc đăng kí, bạn đã đồng ý với {{nameBranch}}</a>
             </div>
             <div class="text-center">
                 <span class="text-gray-400">Bạn đã có tài khoản? <span class="text-orange-600 m-3 cursor-pointer" (click)="replacePage()">Đăng nhập</span></span>

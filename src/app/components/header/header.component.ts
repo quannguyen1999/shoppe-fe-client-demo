@@ -5,6 +5,7 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { OverlayPanel } from 'primeng/overlaypanel';
 import { dataLoremFake, imageDataFakeOne } from 'src/app/constants/data-fake.model';
 import { SettingService } from 'src/app/services/setting.service';
+import { NAME_BRANCH } from 'src/app/constants/constant-value-model';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -13,6 +14,8 @@ import { SettingService } from 'src/app/services/setting.service';
 export class HeaderComponent implements OnInit{
 
   @Input() isAuthorization: boolean = false;
+
+  nameBranch: string = NAME_BRANCH;
 
   headerBackgroundImage: string =  'assets/images/header-background.jpg';
 
@@ -39,10 +42,8 @@ export class HeaderComponent implements OnInit{
     private settingService: SettingService
   ){
     this.settingService.width$.subscribe(width => {
-      console.log(width)
       if(width <= 500){
         this.isOnScreenDevice = true;
-        console.log("ok")
       }
     })
     router.events.subscribe((val) => {

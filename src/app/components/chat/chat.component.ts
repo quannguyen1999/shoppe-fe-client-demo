@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NAME_BRANCH } from 'src/app/constants/constant-value-model';
 import { dataLoremFake, imageDataFakeOne } from 'src/app/constants/data-fake.model';
 import { Chat } from 'src/app/models/chat.model';
 import { generateRandomId } from 'src/app/utils/util-fnc.model';
@@ -9,6 +10,8 @@ import { generateRandomId } from 'src/app/utils/util-fnc.model';
   styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent implements OnInit{
+
+  nameBranch: string = NAME_BRANCH;
 
   currentSelectChat: Chat | undefined;
   

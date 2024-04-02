@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { imageDataFakeOne } from 'src/app/constants/data-fake.model';
 import { NavigationEnd, Router, Scroll } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { NAME_BRANCH } from 'src/app/constants/constant-value-model';
 
 @Component({
   selector: 'app-login',
@@ -10,6 +11,8 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit, OnDestroy{
+
+  nameBranch: string = NAME_BRANCH;
 
   private routerSubscription!: Subscription;
 
