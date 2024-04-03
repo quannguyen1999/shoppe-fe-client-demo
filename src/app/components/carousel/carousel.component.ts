@@ -16,7 +16,7 @@ export class CarouselComponent {
   srcImageFake: string = imageDataFakeOne;
 
   imageFakeOne: string = 'https://www.desktopbackground.org/p/2015/12/26/1063236_teddy-bear-wallpapers-new-hd-images_1600x900_h.jpg';
-  imageFakeTwo: string = 'https://sme.vn/wp-content/uploads/2022/09/san-hang-gia-re-shopee.jpg';
+  imageFakeTwo: string = 'https://afamilycdn.com/2019/5/22/photo-1-1558509891449589673755.jpg';
   imageFakeThree: string = 'https://images.samsung.com/is/image/samsung/assets/vn/offer/flashsale/20240229/time-slot-MO-V2.jpg?$720_N(540)_JPG$';
 
   images: Image[] = []; 
