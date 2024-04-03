@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { ACCESS_TOKEN, NUMBER_TRY_REQUEST, REFRESH_TOKEN } from '../constants/constant-value-model';
+import { ACCESS_TOKEN, NUMBER_TRY_REQUEST, REFRESH_TOKEN, USERNAME } from '../constants/constant-value-model';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { LocalStorageCustomService } from './local-storage-custom.service';
 import { ToastrService } from './toastr.service';
+import { Observable } from 'rxjs';
+import { ACCOUNT_INFO } from '../constants/api-value';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -14,7 +17,8 @@ export class AccountService {
   constructor(
     private http: HttpClient,
     private localStorageCustom: LocalStorageCustomService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private router: Router
   ) {
   }
 
@@ -59,6 +63,18 @@ export class AccountService {
     localStorage.setItem(NUMBER_TRY_REQUEST, (Number.parseInt(value.toString()) + 1).toString());
   }
 
+  getInfo(): Observable<any>{
+    return this.http.get(ACCOUNT_INFO);
+  }
+
+  getUserName() {
+    if(this.localStorageCustom.getDataInSession(USERNAME) == null){
+        this.router.navigate(['/login']);
+        return null;
+    }
+    return this.localStorageCustom.getDataInSession(USERNAME);
+  }
+
   getToken() {
     return localStorage.getItem(ACCESS_TOKEN);
   }
@@ -72,6 +88,9 @@ export class AccountService {
   }
 
   handlerSaveToken(response: any) {
+    this.getInfo().subscribe((data)=>{
+      this.localStorageCustom.setDataInSession(USERNAME, data.username);
+    })
     localStorage.setItem(ACCESS_TOKEN, response.access_token);
     localStorage.setItem(REFRESH_TOKEN, response.refresh_token);
   }
