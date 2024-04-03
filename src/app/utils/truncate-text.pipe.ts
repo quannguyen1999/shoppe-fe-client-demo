@@ -6,6 +6,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class TruncateTextPipe implements PipeTransform {
   transform(value: string, limit: number): string {
+    if(value == undefined || value.length <= 0){
+      return '';
+    }
     if (value.length > limit) {
       return value.substring(0, limit) + '...';
     }

@@ -32,11 +32,14 @@ export class LocalStorageCustomService {
     return item.value;
   }
 
-  setDataInSession(key: string, value: string) {
-    sessionStorage.setItem(key, JSON.stringify(value));
+  setDataInStorage(key: string, value: any) {
+    if(value == null){
+      return;
+    }
+    localStorage.setItem(key, JSON.stringify(value));
   }
 
-  getDataInSession(key: string){
-    return sessionStorage.getItem(key);
+  getDataInStorage(key: string){
+    return localStorage.getItem(key);
   }
 }

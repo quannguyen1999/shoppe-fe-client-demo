@@ -68,11 +68,11 @@ export class AccountService {
   }
 
   getUserName() {
-    if(this.localStorageCustom.getDataInSession(USERNAME) == null){
+    if(this.localStorageCustom.getDataInStorage(USERNAME) == null){
         this.router.navigate(['/login']);
         return null;
     }
-    return this.localStorageCustom.getDataInSession(USERNAME);
+    return this.localStorageCustom.getDataInStorage(USERNAME);
   }
 
   getToken() {
@@ -89,7 +89,7 @@ export class AccountService {
 
   handlerSaveToken(response: any) {
     this.getInfo().subscribe((data)=>{
-      this.localStorageCustom.setDataInSession(USERNAME, data.username);
+      this.localStorageCustom.setDataInStorage(USERNAME, data.username);
     })
     localStorage.setItem(ACCESS_TOKEN, response.access_token);
     localStorage.setItem(REFRESH_TOKEN, response.refresh_token);

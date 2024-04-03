@@ -5,9 +5,12 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { OverlayPanel } from 'primeng/overlaypanel';
 import { dataLoremFake, imageDataFakeOne } from 'src/app/constants/data-fake.model';
 import { SettingService } from 'src/app/services/setting.service';
-import { NAME_BRANCH } from 'src/app/constants/constant-value-model';
+import { NAME_BRANCH, ORDER_DATA } from 'src/app/constants/constant-value-model';
 import { AccountService } from 'src/app/services/account.service';
 import { authServiceGuard } from 'src/app/services/auth-service.guard';
+import { Order } from 'src/app/models/order.model';
+import { CartService } from 'src/app/services/cart.service';
+import { LocalStorageCustomService } from 'src/app/services/local-storage-custom.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -40,13 +43,24 @@ export class HeaderComponent implements OnInit{
   isOnScreenDevice: boolean = false;
 
   isAuthen: boolean = false;
+
+  order: Order = {};
   
   constructor(
     private router: Router, 
     private settingService: SettingService,
     private accountService: AccountService,
-    private authen: authServiceGuard
+    private authen: authServiceGuard,
+    private cartService: CartService,
+    private localStorageService: LocalStorageCustomService
   ){
+    const dataOrder = this.localStorageService.getDataInStorage(ORDER_DATA);
+    if(dataOrder){
+      this.order = JSON.parse(dataOrder);
+    }
+    this.cartService.dataSubject.subscribe((data)=>{
+      this.order = data;
+    })
     this.isAuthen = this.accountService.isAuthen();
     this.settingService.width$.subscribe(width => {
       if(width <= 500){
@@ -59,6 +73,7 @@ export class HeaderComponent implements OnInit{
         this.isShopping = url !== '/cart';
       }
     })
+
   } 
 
   ngOnInit() {
@@ -88,6 +103,10 @@ export class HeaderComponent implements OnInit{
 
   getPageCart(){
     this.router.navigate(['/cart']);
+  }
+
+  deleteOrder(id: number){
+    this.cartService.removeCart(id);
   }
 
 

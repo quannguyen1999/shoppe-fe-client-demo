@@ -13,4 +13,4 @@ export const DEFAULT_ACCOUNT_COLUMNS: string[] =
 export const DEFAULT_CATEGORY_COLUMNS: string[] = 
 ['id', 'name', 'image', 'created', 'updated', 'function'];
 export const DEFAULT_PRODUCT_COLUMNS: string[] = 
-['id', 'name', 'image', 'quantity', 'price', 'discount', 'created', 'updated', 'function'];
+['id', 'name', 'image', 'quantity', 'price', 'discount', 'created', 'updated', 'function', 'description'];

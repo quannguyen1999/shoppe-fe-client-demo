@@ -6,7 +6,7 @@
         [scrollWindow]="true"
         >
         <div class="col-span-1" *ngFor="let product of listProduct">
-            <p-card  [style]="{ width: '220px' }" class="cursor-pointer" (click)="detailProduct(product.id.toString())">
+            <p-card  [style]="{ width: '220px' }" class="cursor-pointer" (click)="detailProduct(product.id!.toString())">
                 <ng-template pTemplate="header">
                     <div class="grid grid-cols-1 relative" style="max-width: 100%; max-height: 100%; overflow: hidden;">
                         <div class="item-top col-span-1 absolute">
@@ -18,14 +18,14 @@
                       </div>
                 </ng-template>
                 <p class="break-normal">
-                    {{product.name | truncateText: 30 }}    
+                    {{product.name! | truncateText: 30 }}    
                 </p>
                 <p class="break-normal">
-                    {{product.description | truncateText: 50 }}    
+                    {{product.description! | truncateText: 50 }}    
                 </p>
                 <ng-template pTemplate="footer">
                     <div class="grid grid-cols-2 grid-flow-row w-full">
-                        <p class="text-start text-orange-500">{{product.price}}</p>
+                        <p class="text-start text-orange-500">{{product.price  | number: '1.0-0'}}</p>
                         <p class="text-end">Đã bán {{'99'}}</p>
                     </div>
                 </ng-template>

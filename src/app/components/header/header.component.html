@@ -163,34 +163,28 @@
                     </div>
                 </div>
                <div class="col-span-1 row-span-2 m-auto" id="title-logo">
-                    <mat-icon [matMenuTriggerFor]="menuCart" class=" text-4xl text-end cursor-pointer"  matBadge="15" id="icon" matBadgeColor="warn">shopping_cart</mat-icon>
+                    <mat-icon [matMenuTriggerFor]="menuCart" class=" text-4xl text-end cursor-pointer"  matBadge="{{order.orderDetailRequestDtoList?.length}}" id="icon" matBadgeColor="warn">shopping_cart</mat-icon>
                     <mat-menu #menuCart="matMenu">
                         <div class="flex flex-col bg-gray-100 gap-3 p-2" style="width: 500px;">
                             <div>
-                                <span class="uppercase text-start text-gray-300 font-bold">sản phẩm mới thêm</span>
+                                <span class="uppercase text-start text-black font-bold">{{order.orderDetailRequestDtoList?.length! > 0 ? 'Sản phẩm mới thêm' : ' Chưa có sản phẩm nào'}}</span>
                             </div>
-                            <div class="flex flex-row">
-                                <img [src]="imageFake" alt="" class="w-20">
-                                <div class="w-72 mx-2">
-                                    <span>{{dataLoremFake | truncateText:90}}</span>
-                                </div> 
-                                <span>{{600000 | currency}}</span>
+                            <div *ngFor="let item of order.orderDetailRequestDtoList">
+                                <div class="flex flex-row">
+                                    <img [src]="item.image" alt="" class="w-20">
+                                    <div class="w-72 mx-2">
+                                        <span>{{item.description!| truncateText:90}}</span>
+                                    </div> 
+                                    <div class="flex flex-col">
+                                        <span>{{item.price | number: '1.0-0'}}</span>
+                                        <span> x {{item.quantity}}</span>
+                                        <span><button class="bg-orange-600 text-white" (click)="deleteOrder(item.productId!)"><mat-icon>delete</mat-icon></button></span>
+                                    </div>
+                                    
+                                </div>
                             </div>
-                            <div class="flex flex-row">
-                                <img [src]="imageFake" alt="" class="w-20">
-                                <div class="w-72 mx-2">
-                                    <span>{{dataLoremFake | truncateText:90}}</span>
-                                </div> 
-                                <span>{{600000 | currency}}</span>
-                            </div>
-                            <div class="flex flex-row">
-                                <img [src]="imageFake" alt="" class="w-20">
-                                <div class="w-72 mx-2">
-                                    <span>{{dataLoremFake | truncateText:90}}</span>
-                                </div> 
-                                <span>{{600000 | currency}}</span>
-                            </div>
-                            <div class="flex flex-row">
+                        
+                            <div class="flex flex-row" *ngIf="order.orderDetailRequestDtoList?.length! > 0">
                                 <div class="w-1/2">
                                     <span>1 thêm hàng vào giỏ</span>
                                 </div>

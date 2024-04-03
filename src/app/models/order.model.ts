@@ -7,10 +7,18 @@ export interface Order {
     username?: string,
     createdAt?: Date,
     updatedAt?: Date,
+    orderDetailRequestDtoList? : OrderDetailRequestDto[]
 }
 
-export interface orderDetailRequestDtoList{
-    
+export interface OrderDetailRequestDto{
+    name?: string,
+    price?: number, 
+    image?: string,
+    description?: string
+    productId?: number,
+    discount?: number,
+    quantity?: number,
+    totalAmount?: number
 }
 
 

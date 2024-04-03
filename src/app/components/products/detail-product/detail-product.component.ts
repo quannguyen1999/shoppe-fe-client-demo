@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit, SimpleChanges } from '@angular/core';
+import { ActivatedRoute, ActivatedRouteSnapshot, ActivationEnd, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { DEFAULT_PRODUCT_COLUMNS, NAME_BRANCH } from 'src/app/constants/constant-value-model';
 import { imageDataFakeOne, imageDataFakeTwo } from 'src/app/constants/data-fake.model';
@@ -36,7 +36,6 @@ export class DetailProductComponent implements OnInit {
   cities!: string[];
 
   images: ImageCommon[] | undefined;
-  imageDataFakeOne!: string;
   listImageFake: Array<string> = [];
   starFake: number = 5;
 
@@ -53,6 +52,8 @@ export class DetailProductComponent implements OnInit {
     discount: 0,
     description: ''
   };
+
+  
 
   responsiveOptions: any[] = [
       {
@@ -76,40 +77,31 @@ export class DetailProductComponent implements OnInit {
             private routerActive: ActivatedRoute,
             private toastrService: ToastrService
     ){
-     this.productRequestModel.id = this.routerActive.snapshot.params['id'];
-     this.productService.getListProduct(0, 1, DEFAULT_PRODUCT_COLUMNS, this.productRequestModel).subscribe(
-      (data)=>{
-        this.product = data.data[0];
-        this.listImageFake = [this.product.image];
-        this.images = [{id: 1, type:'image', image: this.product.image},
-    {id: 2, type:'video', image: this.product.image},
-    {id: 3, type:'image', image: this.product.image},
-    {id: 4, type:'image', image: this.product.image},
-    {id: 5, type:'image', image: this.product.image},
-    {id: 6, type:'image', image: this.product.image}];
-        this.cities = ['Hà nội', 'Hồ Chí Minh']
-
-        this.imageDataFakeOne = imageDataFakeOne;
-
-        this.currentImage = imageDataFakeOne;
-      },
-      (error)=>{
-        toastrService.getPopUpErrorTypeString("Internal Server Error");
-      }
-     )
+      router.events.subscribe((val) => {
+        console.log(val)
+        if(val instanceof ActivationEnd){
+          this.productRequestModel.id = val.snapshot.params['id'];
+          this.productService.getListProduct(0, 1, DEFAULT_PRODUCT_COLUMNS, this.productRequestModel).subscribe(
+            (data)=>{
+              this.product = data.data[0];
+              this.listImageFake = [this.product.image!];
+              this.images = [{id: 1, type:'image', image: this.product.image!},
+              {id: 2, type:'video', image: this.product.image!},
+              {id: 3, type:'image', image: this.product.image!},
+              {id: 4, type:'image', image: this.product.image!}];
+              this.cities = ['Hà nội', 'Hồ Chí Minh']
+            },
+            (error)=>{
+              this.toastrService.getPopUpErrorTypeString("Internal Server Error");
+            }
+          )
+        }
+      })
   }
 
+
   ngOnInit() {
-    // this.images = [{id: 1, type:'image', image: imageDataFakeOne},
-    // {id: 2, type:'video', image: imageDataFakeTwo},
-    // {id: 3, type:'image', image: imageDataFakeOne},
-    // {id: 4, type:'image', image: imageDataFakeTwo},
-    // {id: 5, type:'image', image: imageDataFakeOne},
-    // {id: 6, type:'image', image: imageDataFakeTwo}];
-
-    // this.listImageFake = [imageDataFakeOne, imageDataFakeTwo, imageDataFakeOne, imageDataFakeTwo]
-
-    
+ 
   }
 
   testClick(image: string){
@@ -121,6 +113,9 @@ export class DetailProductComponent implements OnInit {
   }
 
   removeItem(){
+    if(this.numberOfItem <= 0){
+      return;
+    }
     this.numberOfItem--;
   }
 
@@ -129,7 +124,9 @@ export class DetailProductComponent implements OnInit {
   }
 
   addToCart(){
-    this.cartService.addToCart();
+    let productSave: Product = {... this.product};
+    productSave.quantity = this.numberOfItem;
+    this.cartService.addToCart(productSave);
   }
 
 
