@@ -5,7 +5,7 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { OverlayPanel } from 'primeng/overlaypanel';
 import { dataLoremFake, imageDataFakeOne } from 'src/app/constants/data-fake.model';
 import { SettingService } from 'src/app/services/setting.service';
-import { NAME_BRANCH, ORDER_DATA } from 'src/app/constants/constant-value-model';
+import { ACCESS_TOKEN, NAME_BRANCH, ORDER_DATA, REFRESH_TOKEN } from 'src/app/constants/constant-value-model';
 import { AccountService } from 'src/app/services/account.service';
 import { authServiceGuard } from 'src/app/services/auth-service.guard';
 import { Order } from 'src/app/models/order.model';
@@ -62,6 +62,10 @@ export class HeaderComponent implements OnInit{
       this.order = data;
     })
     this.isAuthen = this.accountService.isAuthen();
+    this.accountService.accountSubject.subscribe(data=>{
+      console.log("working")
+      this.isAuthen = data;
+    })
     this.settingService.width$.subscribe(width => {
       if(width <= 500){
         this.isOnScreenDevice = true;
@@ -73,6 +77,7 @@ export class HeaderComponent implements OnInit{
         this.isShopping = url !== '/cart';
       }
     })
+
 
   } 
 
@@ -107,6 +112,10 @@ export class HeaderComponent implements OnInit{
 
   deleteOrder(id: number){
     this.cartService.removeCart(id);
+  }
+
+  logout(){
+    this.accountService.logout();
   }
 
 

@@ -78,7 +78,6 @@ export class DetailProductComponent implements OnInit {
             private toastrService: ToastrService
     ){
       router.events.subscribe((val) => {
-        console.log(val)
         if(val instanceof ActivationEnd){
           this.productRequestModel.id = val.snapshot.params['id'];
           this.productService.getListProduct(0, 1, DEFAULT_PRODUCT_COLUMNS, this.productRequestModel).subscribe(

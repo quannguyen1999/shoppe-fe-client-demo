@@ -100,10 +100,8 @@ export class BoxCommentComponent implements OnInit, AfterViewInit{
 
     handleEmojiSpecific(event: any, idComment: number ){
       const existingComment: Comment = this.listComment.find(comment => comment.id === idComment)!;
-      // console.log(existingComment)
       if(existingComment != null){
         const existingEmotion: Emotion = existingComment.emotions.find(emotion => emotion.comment = event.emoji.native)!;
-        // console.log(existingEmotion)
         if(existingEmotion !== undefined){
           existingEmotion.total += 1;
         }else{

@@ -1,96 +1,80 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Cart } from 'src/app/models/cart.model';
 import {SelectionModel} from '@angular/cdk/collections';
 import { dataLoremFake, imageDataFakeOne } from 'src/app/constants/data-fake.model';
 import { NAME_BRANCH } from 'src/app/constants/constant-value-model';
-
-const listCart: Cart[] = [
-  { 
-    position: 1,
-    image: imageDataFakeOne,
-    description: dataLoremFake,
-    product: 'sex toy',
-    price: 10000,
-    quantity: 10, 
-    money: 10000
-  },
-  { 
-    position: 1,
-    image: imageDataFakeOne,
-    description: dataLoremFake,
-    product: 'sex toy',
-    price: 10000,
-    quantity: 10, 
-    money: 10000
-  },
-  { 
-    position: 1,
-    image: imageDataFakeOne,
-    description: dataLoremFake,
-    product: 'sex toy',
-    price: 10000,
-    quantity: 10, 
-    money: 10000
-  },
-  { 
-    position: 1,
-    image: imageDataFakeOne,
-    description: dataLoremFake,
-    product: 'sex toy',
-    price: 10000,
-    quantity: 10, 
-    money: 10000
-  },
-  { 
-    position: 1,
-    image: imageDataFakeOne,
-    description: dataLoremFake,
-    product: 'sex toy',
-    price: 10000,
-    quantity: 10, 
-    money: 10000
-  },
-  { 
-    position: 1,
-    image: imageDataFakeOne,
-    description: dataLoremFake,
-    product: 'sex toy',
-    price: 10000,
-    quantity: 10, 
-    money: 10000
-  },
-  { 
-    position: 1,
-    image: imageDataFakeOne,
-    description: dataLoremFake,
-    product: 'sex toy',
-    price: 10000,
-    quantity: 10, 
-    money: 10000
-  },
-  { 
-    position: 1,
-    image: imageDataFakeOne,
-    description: dataLoremFake,
-    product: 'sex toy',
-    price: 10000,
-    quantity: 10, 
-    money: 10000
-  }
-]
+import { CartService } from 'src/app/services/cart.service';
+import { Order, OrderDetailRequestDto } from 'src/app/models/order.model';
+import { Router } from '@angular/router';
+import { ToastrService } from 'src/app/services/toastr.service';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss']
 })
-export class CartComponent {
+export class CartComponent implements OnInit{
   nameBranch: string = NAME_BRANCH;
   displayedColumns: string[] = ['select','product', 'price', 'quantity', 'money', 'function'];
   // displayedColumns: string[] = ['product'];
-  dataSource = new MatTableDataSource<Cart>(listCart);
-  selection = new SelectionModel<Cart>(true, []);
+  dataSource = new MatTableDataSource<OrderDetailRequestDto>();
+  selection = new SelectionModel<OrderDetailRequestDto>(true, []);
+
+  orderSession: Order = {};
+
+  orderBuy: Order = {
+    orderDetailRequestDtoList: []
+  };
+
+  totalProduct: number = 0;
+  totalPrice: number = 0;
+
+  constructor(
+    private cartService: CartService,
+    private router: Router,
+    private toastrService: ToastrService
+    ){
+
+  }
+
+  ngOnInit(): void {
+    this.dataSource.data = this.cartService.getOrder().orderDetailRequestDtoList!;
+    this.cartService.dataSubject.subscribe((data)=>{
+      this.orderSession = data;
+      this.dataSource.data = this.orderSession.orderDetailRequestDtoList!;
+    });
+
+    this.selection.changed.subscribe(selection => {
+      if(selection.added.length > 0){
+        selection.added.forEach(data=>{
+          this.orderBuy.orderDetailRequestDtoList?.push(data);
+        })
+      }
+
+      if(selection.removed.length > 0){
+        selection.removed.forEach(data=>{
+          const index = this.orderBuy.orderDetailRequestDtoList?.findIndex(item => item.productId === data.productId)!;
+          if(index !== -1){
+            this.orderBuy.orderDetailRequestDtoList?.splice(index, 1);
+          }
+        })
+      }
+
+      this.updateTotalOrder();
+    })
+  }
+
+  updateTotalOrder(){
+    this.totalProduct =  this.orderBuy.orderDetailRequestDtoList?.reduce((total, currentItem) => {
+      return total + currentItem.quantity!;
+  }, 0)!;
+
+  this.totalPrice = this.orderBuy.orderDetailRequestDtoList?.reduce((total, currentItem) => {
+    return total + (currentItem.price! * currentItem.quantity!);
+  }, 0)!;
+  }
+
 
 
  /** Selects all rows if they are not all selected; otherwise clear selection. */
@@ -119,12 +103,51 @@ export class CartComponent {
   }
 
   
-  plusItem(){
-    // this.numberOfItem++;
+  plusItem(id: number){
+    const indexItem = this.dataSource.data.findIndex((data)=> data.productId == id);
+    if(indexItem !== -1){
+      this.dataSource.data[indexItem].quantity = this.dataSource.data[indexItem].quantity! + 1;
+    }
+
+    const index = this.orderBuy.orderDetailRequestDtoList?.findIndex(item => item.productId === id)!;
+    if(index !== -1){
+      this.orderBuy.orderDetailRequestDtoList![index].quantity = this.orderBuy.orderDetailRequestDtoList![index].quantity! + 1;
+    }
+
+    this.updateTotalOrder();
+
   }
 
-  removeItem(){
-    // this.numberOfItem--;
+  removeItem(id: number){
+    const indexItem = this.dataSource.data.findIndex((data)=> data.productId == id);
+    if(indexItem !== -1){
+      if(this.dataSource.data[indexItem].quantity! <= 1){
+        return;
+      }
+      this.dataSource.data[indexItem].quantity = this.dataSource.data[indexItem].quantity! - 1;
+
+      const index = this.orderBuy.orderDetailRequestDtoList?.findIndex(item => item.productId === id)!;
+      
+      if(index !== -1){
+        this.orderBuy.orderDetailRequestDtoList![index].quantity = this.orderBuy.orderDetailRequestDtoList![index].quantity! - 1;
+      }
+      
+      this.updateTotalOrder();
+    }
+  }
+
+  removeCart(id: number){
+    this.cartService.removeCart(id);
+  }
+
+  detailProduct(id: string){
+    this.router.navigate(['/product/detail', id]);
+  }
+
+  processOrder(){
+    if(this.orderBuy.orderDetailRequestDtoList?.length! <= 0){
+      this.toastrService.getPopUpErrorTypeString("Tối thiểu 1 order");
+    }
   }
 
 

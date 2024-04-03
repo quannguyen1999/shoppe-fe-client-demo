@@ -4,7 +4,7 @@ import { ACCESS_TOKEN, NUMBER_TRY_REQUEST, REFRESH_TOKEN, USERNAME } from '../co
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { LocalStorageCustomService } from './local-storage-custom.service';
 import { ToastrService } from './toastr.service';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { ACCOUNT_INFO } from '../constants/api-value';
 import { Router } from '@angular/router';
 
@@ -13,6 +13,8 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AccountService {
+
+  public accountSubject = new Subject<boolean>();
 
   constructor(
     private http: HttpClient,
@@ -91,8 +93,18 @@ export class AccountService {
     this.getInfo().subscribe((data)=>{
       this.localStorageCustom.setDataInStorage(USERNAME, data.username);
     })
+    this.accountSubject.next(true);
     localStorage.setItem(ACCESS_TOKEN, response.access_token);
     localStorage.setItem(REFRESH_TOKEN, response.refresh_token);
   }
+
+  logout(){
+    this.accountSubject.next(false);
+    localStorage.removeItem(ACCESS_TOKEN);
+    localStorage.removeItem(REFRESH_TOKEN);
+    this.router.navigate(['/home']);
+    this.toastrService.getPopUpSuccess("Đăng xuất thành công");
+  }
+
 
 }
