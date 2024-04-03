@@ -17,7 +17,7 @@ import { ToastrService } from 'src/app/services/toastr.service';
 export class CartComponent implements OnInit{
   nameBranch: string = NAME_BRANCH;
   displayedColumns: string[] = ['select','product', 'price', 'quantity', 'money', 'function'];
-  // displayedColumns: string[] = ['product'];
+  
   dataSource = new MatTableDataSource<OrderDetailRequestDto>();
   selection = new SelectionModel<OrderDetailRequestDto>(true, []);
 

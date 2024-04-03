@@ -1,3 +1,5 @@
+import { City } from "../models/common.model";
+
 export const AVATAR_IMAGE = "https://www.caspianpolicy.org/no-image.png"
 export const ACCESS_TOKEN = "access_token";
 export const REFRESH_TOKEN = "refreshToken";
@@ -7,6 +9,21 @@ export const NAME_BRANCH = "Ecommer";
 export const ORDER_DATA = "OrderData";
 
 export const USERNAME = "username";
+
+export const CITIES: City[] = [
+    {
+        code: 'TP Ho Chi Minh',
+        name: 'TP Ho Chi Minh'
+    },
+    {
+        code: 'TP ha Noi',
+        name: 'TP ha Noi',
+    },
+    {
+        code: 'TP Cao Bang',
+        name: 'TP Cao Bang'
+    }
+]
 
 export const DEFAULT_ACCOUNT_COLUMNS: string[] = 
 ['id', 'username', 'birthday', 'gender', 'email', 'created', 'updated', 'isActive', 'mfaEnabled', 'mfaRegistered','function'];

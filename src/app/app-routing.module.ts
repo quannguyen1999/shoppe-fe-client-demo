@@ -7,6 +7,7 @@ import { ProductsComponent } from './components/products/products.component';
 import { CategoryComponent } from './components/category/category.component';
 import { LoginComponent } from './components/login/login.component';
 import { authServiceGuard } from './services/auth-service.guard';
+import { FilterProductComponent } from './components/products/filter-product/filter-product.component';
 
 const routes: Routes = [
   {
@@ -33,6 +34,10 @@ const routes: Routes = [
   {
     path: `product/detail/:id`,
     component: DetailProductComponent
+  },
+  {
+    path: `product/filter/:id`,
+    component: FilterProductComponent
   },
   {
     path: '',

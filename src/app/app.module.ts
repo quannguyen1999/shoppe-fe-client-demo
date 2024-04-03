@@ -61,6 +61,7 @@ import { ChatComponent } from './components/chat/chat.component';
 import { BoxCommentComponent } from './components/chat/box-comment/box-comment.component';
 import { PickerComponent } from '@ctrl/ngx-emoji-mart';
 import { GraphQLModule } from './config/graphql.module';
+import { FilterProductComponent } from './components/products/filter-product/filter-product.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,8 @@ import { GraphQLModule } from './config/graphql.module';
     CategoryComponent,
     LoginComponent,
     ChatComponent,
-    BoxCommentComponent
+    BoxCommentComponent,
+    FilterProductComponent
   ],
   imports: [
     BrowserModule,

@@ -1,1 +1,105 @@
-<p>filter-product works!</p>
+<div class="grid grid-cols-10 grid-flow-row gap-4 ">
+    <div class="col-span-2">
+        <div class="grid grid-cols-8 p-4 border-b-2 border-gray-200">
+            <div class="col-span-2">
+                <mat-icon>drag_indicator</mat-icon>
+            </div>
+            <div class="col-span-6">
+                <h4>Bộ Lọc Tìm Kiếm</h4>
+            </div>
+        </div>
+        <div class="flex flex-col border-b-2 border-gray-200">
+            <span class="font-bold pl-6 pt-2">Nơi Bán</span>
+            <table mat-table [dataSource]="dataSource">
+
+                <ng-container matColumnDef="select">
+                    <th mat-header-cell *matHeaderCellDef>
+                    <mat-checkbox (change)="$event ? toggleAllRows() : null"
+                                    [checked]="selection.hasValue() && isAllSelected()"
+                                    [indeterminate]="selection.hasValue() && !isAllSelected()"
+                                >
+                    </mat-checkbox>
+                    </th>
+                    <td mat-cell *matCellDef="let row">
+                    <mat-checkbox (click)="$event.stopPropagation()"
+                                    (change)="$event ? selection.toggle(row) : null"
+                                    [checked]="selection.isSelected(row)">
+                    </mat-checkbox>
+                    </td>
+                </ng-container>
+                
+                <ng-container matColumnDef="code">
+                    <th mat-header-cell *matHeaderCellDef> <span class="font-bold">Tất cả</span>  </th>
+                    <td mat-cell *matCellDef="let element"> {{element.code}} </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+                </tr>
+            </table>
+            <div class="text-center p-3" *ngIf="dataSource.data.length! <= 0">
+                <p>No Data</p>
+            </div>
+        </div>
+        <div class="flex flex-col border-b-2 border-gray-200">
+            <span class="font-bold pl-6 pt-2">Khoảng giá</span>
+            <div class="grid grid-cols-5 p-5">
+                <input type="number" class="border-2 border-gray-400 col-span-2 pl-1">
+                <div class="text-center">
+                   -
+                </div>   
+                <input type="number" class="border-2 border-gray-400 col-span-2 pl-1">
+            </div>
+            
+        </div>
+        <div class="flex flex-col border-b-2 border-gray-200">
+            <span class="font-bold pl-6 py-2">Đánh Giá</span>
+            <div class="flex flex-row text-orange-600 px-5 cursor-pointer opacity-80 hover:opacity-100">
+                <mat-icon *ngFor="let item of [].constructor(fiveStar)">star</mat-icon>
+            </div>    
+            <div class="flex flex-row text-orange-600 px-5 cursor-pointer opacity-80 hover:opacity-100">
+                <mat-icon *ngFor="let item of [].constructor(fourStar)">star</mat-icon>
+            </div>    
+            <div class="flex flex-row text-orange-600 px-5 cursor-pointer opacity-80 hover:opacity-100">
+                <mat-icon *ngFor="let item of [].constructor(threeStar)">star</mat-icon>
+            </div>    
+            <div class="flex flex-row text-orange-600 px-5 cursor-pointer opacity-80 hover:opacity-100">
+                <mat-icon *ngFor="let item of [].constructor(twoStar)">star</mat-icon>
+            </div>    
+            <div class="flex flex-row text-orange-600 px-5 cursor-pointer opacity-80 hover:opacity-100">
+                <mat-icon *ngFor="let item of [].constructor(oneStar)">star</mat-icon>
+            </div>    
+        </div>
+        <div>
+            <button class="bg-orange-600 w-full m-2 p-2  text-white">Áp dụng</button>
+        </div>
+        <div>
+            <button class="bg-orange-600 w-full m-2 p-2 text-white">Xoá tất cả</button>
+        </div>
+
+    </div>
+    <div class="col-span-8">
+        <div class="bg-gray-100">
+            <div class="grid grid-cols-8 p-5">
+                <div>
+                    Sắp xếp theo
+                </div> 
+                <div>
+                    <button class="bg-orange-600 text-white p-2">Phổ Biến</button>
+                </div>
+                <div>
+                    <button class="bg-white text-black p-2">Mới nhất</button>
+                </div>
+                <div>
+                    <button class="bg-white text-black p-2">bán chạy</button>
+                </div>
+                <div class="card flex justify-content-center">
+                    <p-dropdown [options]="sortOrders" [(ngModel)]="selectedSortOrder" optionLabel="name" [showClear]="true" placeholder="Giá"></p-dropdown>
+                </div>
+            </div>
+        </div>
+        <div class="p-2">
+            <app-products></app-products>
+        </div>
+    </div>
+</div>
