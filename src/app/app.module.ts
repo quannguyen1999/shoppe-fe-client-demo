@@ -23,7 +23,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
@@ -62,6 +62,11 @@ import { BoxCommentComponent } from './components/chat/box-comment/box-comment.c
 import { PickerComponent } from '@ctrl/ngx-emoji-mart';
 import { GraphQLModule } from './config/graphql.module';
 import { FilterProductComponent } from './components/products/filter-product/filter-product.component';
+import { AddressCartComponent } from './components/cart/address-cart/address-cart.component';
+import { HistoryCartComponent } from './components/cart/history-cart/history-cart.component';
+import { ResultCartComponent } from './components/cart/result-cart/result-cart.component';
+import { DetailCartComponent } from './components/cart/detail-cart/detail-cart.component';
+import { IntercepterHttpTokenService } from './services/intercepter-http-token.service';
 
 @NgModule({
   declarations: [
@@ -84,7 +89,11 @@ import { FilterProductComponent } from './components/products/filter-product/fil
     LoginComponent,
     ChatComponent,
     BoxCommentComponent,
-    FilterProductComponent
+    FilterProductComponent,
+    AddressCartComponent,
+    HistoryCartComponent,
+    ResultCartComponent,
+    DetailCartComponent
   ],
   imports: [
     BrowserModule,
@@ -134,7 +143,21 @@ import { FilterProductComponent } from './components/products/filter-product/fil
     PickerComponent,
     GraphQLModule
  ],
-  providers: [CartService, ProductService, CategoryService, MessageService],
+  providers: [
+    CartService, 
+    ProductService, 
+    CategoryService, 
+    MessageService,
+    MessageService,  
+    // AuthenticationResolver, 
+
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: IntercepterHttpTokenService,
+      multi: true
+    },
+    // { provide: ErrorHandler, useClass: GlobalErrorHandlerService }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

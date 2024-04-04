@@ -1,0 +1,116 @@
+<div *ngIf="!isProcessOrderAddress else notIsProcessOrderAddress">
+    <table mat-table [dataSource]="dataSource" class="leading-7">
+
+        <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef>
+              <mat-checkbox (change)="$event ? toggleAllRows() : null"
+                            [checked]="selection.hasValue() && isAllSelected()"
+                            [indeterminate]="selection.hasValue() && !isAllSelected()"
+                           >
+              </mat-checkbox>
+            </th>
+            <td mat-cell *matCellDef="let row">
+              <mat-checkbox (click)="$event.stopPropagation()"
+                            (change)="$event ? selection.toggle(row) : null"
+                            [checked]="selection.isSelected(row)"
+                            [aria-label]="checkboxLabel(row)">
+              </mat-checkbox>
+            </td>
+          </ng-container>
+        
+        <ng-container matColumnDef="product">
+            <th mat-header-cell *matHeaderCellDef style="width: 400px; line-height: 5;"> Sản Phẩm </th>
+            <td mat-cell *matCellDef="let element">
+                <div class="grid grid-cols-10 grid-rows-2 mt-3">
+                    <div class="col-span-2 row-span-2 cursor-pointer shadow-xl m-auto" (click)="detailProduct(element.productId)">
+                        <img [src]="element.image" alt="" >
+                        
+                    </div>
+                    <div class="col-span-8 row-span-1 p-2">
+                        {{element.description | truncateText:70}}
+                    </div>
+                </div>
+    
+            </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef> Đơn giá </th>
+            <td mat-cell *matCellDef="let element"> {{element.price | number:'1.0-0'}} </td>
+          </ng-container>
+    
+          <ng-container matColumnDef="quantity">
+            <th mat-header-cell *matHeaderCellDef> Số Lượng </th>
+            <td mat-cell *matCellDef="let element">           
+                <div class="flex flex-col">
+                    <div class="flex flex-row text-center h-6 mr-8">
+                        <div class="border-r-2 border-white cursor-pointer bg-orange-600 text-white" (click)="removeItem(element.productId)">
+                            <mat-icon>remove</mat-icon>
+                        </div>
+                        <div class="w-10">
+                            <div class="">
+                                <span class="">{{element.quantity}}</span>
+                            </div>
+                        </div>
+                       
+                        <div class="border-l-2 border-white cursor-pointer bg-orange-600 text-white" (click)="plusItem(element.productId)">
+                            <mat-icon >add</mat-icon>
+                        </div>
+                    </div>
+                    <!-- <span>4 sản phẩm có sẵn</span> -->
+                </div>
+            </td>
+          </ng-container>
+    
+          <ng-container matColumnDef="money">
+            <th mat-header-cell *matHeaderCellDef> Số Tiền </th>
+            <td mat-cell *matCellDef="let element"> {{element.quantity * element.price | number:'1.0-0'}} </td>
+          </ng-container>
+    
+    
+          <ng-container matColumnDef="function">
+            <th mat-header-cell *matHeaderCellDef> Thao tác </th>
+            <td mat-cell *matCellDef="let element"> 
+                <button class="bg-orange-600 p-5 text-white" (click)="removeCart(element.productId)">Xóa</button>
+            </td>
+          </ng-container>
+    
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+          </tr>
+    </table>
+    <div class="text-center p-3" *ngIf="dataSource.data.length! <= 0">
+        <p>No Data</p>
+    </div>
+    
+    <div class="sticky bottom-0 flex flex-col">
+        <div class="bg-gray-100">
+            <div class="flex flex-row">
+                <div class="w-10/12 text-right m-3">
+                    <div class="flex flex-row justify-end mr-16">
+                        <mat-icon class="text-orange-500">facebook</mat-icon>
+                        <span class="m-1">{{nameBranch}} Voucher</span>
+                    </div>
+                    
+                </div>
+                <div>
+                    <div class="mt-3"><a href="#" class="mt-4 text-blue-500">Chọn hoặc nhập mã</a></div>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="flex flex-row w-full bg-gray-100 text-center p-4 border-t-4 border-gray-400 border-solid pt-10">
+            <div class="mx-72">
+                Tổng Thanh toán ({{totalProduct}} sản phẩm): 
+                <span class="text-orange-500 text-xl">{{totalPrice | number:'1.0-0'}}</span>
+            </div>
+            <div>
+                <button class="bg-orange-600 text-white p-3 -mt-2" (click)="processOrder()">Mua Hàng</button>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #notIsProcessOrderAddress>
+    <app-address-cart></app-address-cart>
+</ng-template>
+

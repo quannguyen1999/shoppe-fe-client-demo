@@ -22,7 +22,6 @@ export class IntercepterHttpTokenService implements HttpInterceptor {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler):  Observable<HttpEvent<Object>> {
-    
     if(this.accountService.getToken() != null){
       request = request.clone({
         setHeaders: {

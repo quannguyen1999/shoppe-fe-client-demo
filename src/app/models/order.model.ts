@@ -5,6 +5,10 @@ export interface Order {
     shippedDate?: Date,
     shipRegion?: string,
     username?: string,
+    phone?: string,
+    address?: string,
+    name?: string,
+    email?: string,
     createdAt?: Date,
     updatedAt?: Date,
     orderDetailRequestDtoList? : OrderDetailRequestDto[]
