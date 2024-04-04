@@ -1,9 +1,12 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
-import { CITIES } from 'src/app/constants/constant-value-model';
+import { ActivationEnd, Router } from '@angular/router';
+import { CITIES, DEFAULT_CATEGORY_COLUMNS } from 'src/app/constants/constant-value-model';
+import { CagegoryRequestModel, Category, ID, IMAGE, NAME } from 'src/app/models/category.model';
 import { City, SortOrder } from 'src/app/models/common.model';
+import { CategoryService } from 'src/app/services/category.service';
+import { ToastrService } from 'src/app/services/toastr.service';
 
 @Component({
   selector: 'app-filter-product',
@@ -24,11 +27,53 @@ export class FilterProductComponent implements OnInit{
   twoStar: number = 2;
   oneStar: number = 1;
 
-  constructor(private router: Router){
+  //Field To Search
+  isLoading: boolean = true;
+  categoryRequestModel: CagegoryRequestModel = {
+      id: '',
+      name: '',
+      image: '',
+      createFromDate: null,
+      createToDate: null,
+      listSorted: null,
+      listFields: DEFAULT_CATEGORY_COLUMNS
+  };
+
+  category: Category = {
+    id: 0,
+    name: '',
+    image: ''
+  };
+
+  constructor(
+    private router: Router,
+    private categoryService: CategoryService,
+    private toastrService: ToastrService
+  ){
     this.sortOrders = [
       {name: 'Từ Thấp tới Cao', code: 'DESC'},
       {name: 'Từ Cao tới Thấp', code: 'ASC'}
-    ]
+    ];
+
+    router.events.subscribe((val) => {
+      if(val instanceof ActivationEnd){
+        this.categoryRequestModel.name = val.snapshot.params['name'];
+
+        this.categoryService.getListCategory(0, 40, [NAME, ID, IMAGE], this.categoryRequestModel).subscribe((data)=>{
+          this.category = data.data[0];
+          this.isLoading = false;
+          // this.listItemCategoryGroupOne = data.data.slice(0, 20);
+          // this.listItemCategoryGroupTwo = data.data.slice(20);
+        },(error)=>{
+          this.isLoading = false;
+          this.toastrService.getPopUpErrorTypeString("Internal Server Error");
+        }) 
+
+
+      }
+    });
+
+   
   }
 
   ngOnInit(): void {

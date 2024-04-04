@@ -36,7 +36,7 @@ const routes: Routes = [
     component: DetailProductComponent
   },
   {
-    path: `product/filter/:id`,
+    path: `product/filter/:name`,
     component: FilterProductComponent
   },
   {

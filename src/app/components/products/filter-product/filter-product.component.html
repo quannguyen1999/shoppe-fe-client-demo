@@ -9,6 +9,22 @@
             </div>
         </div>
         <div class="flex flex-col border-b-2 border-gray-200">
+            <span class="font-bold pl-6 pt-2">Mặt Hàng</span>
+            <div class="flex flex-col bg-category" *ngIf="!isLoading; else notLoading">
+                <div class="grid-rows-1 m-3">
+                    <div>
+                        <img [src]="category.image" alt=""  class="w-32 block m-auto rounded-full border-gray-100 border-4">
+                    </div>  
+                </div>
+                <div class="grid-rows-1 w-24 text-center justify-center mx-auto">
+                    <span class="text-center break-normal grid-rows-2 m-auto w-28 text-white font-bold">{{category.name}}</span>
+                </div>
+            </div>
+            <ng-template #notLoading>
+                <app-loading-util   class="col-span-40 m-auto p-5" ></app-loading-util>
+            </ng-template>
+        </div>
+        <div class="flex flex-col border-b-2 border-gray-200">
             <span class="font-bold pl-6 pt-2">Nơi Bán</span>
             <table mat-table [dataSource]="dataSource">
 
@@ -43,12 +59,12 @@
         </div>
         <div class="flex flex-col border-b-2 border-gray-200">
             <span class="font-bold pl-6 pt-2">Khoảng giá</span>
-            <div class="grid grid-cols-5 p-5">
-                <input type="number" class="border-2 border-gray-400 col-span-2 pl-1">
+            <div class="grid grid-cols-7 py-5 pl-5">
+                <input type="number" class="border-2 border-gray-400 col-span-3 pl-1" placeholder="0">
                 <div class="text-center">
                    -
                 </div>   
-                <input type="number" class="border-2 border-gray-400 col-span-2 pl-1">
+                <input type="number" class="border-2 border-gray-400 col-span-3 pl-1" [placeholder]="10000000 | number:'1.0-0'">
             </div>
             
         </div>
@@ -93,13 +109,17 @@
                 <div>
                     <button class="bg-white text-black p-2">bán chạy</button>
                 </div>
-                <div class="card flex justify-content-center">
+                <div>
+                    <input type="text" placeholder="Tìm Kiếm" class="p-2 focus:outline-none">
+                </div>
+                <div class="card flex justify-content-center pl-16">
                     <p-dropdown [options]="sortOrders" [(ngModel)]="selectedSortOrder" optionLabel="name" [showClear]="true" placeholder="Giá"></p-dropdown>
                 </div>
+               
             </div>
         </div>
         <div class="p-2">
-            <app-products></app-products>
+            <app-products [numberOfCol]="'grid-cols-4'"></app-products>
         </div>
     </div>
 </div>

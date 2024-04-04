@@ -12,16 +12,16 @@ export const USERNAME = "username";
 
 export const CITIES: City[] = [
     {
-        code: 'TP Ho Chi Minh',
-        name: 'TP Ho Chi Minh'
+        code: 'TP Hồ Chí Minh',
+        name: 'HCM'
     },
     {
-        code: 'TP ha Noi',
-        name: 'TP ha Noi',
+        code: 'TP Hà Nội',
+        name: 'HN',
     },
     {
-        code: 'TP Cao Bang',
-        name: 'TP Cao Bang'
+        code: 'TP Cao Bằng',
+        name: 'CB'
     }
 ]
 

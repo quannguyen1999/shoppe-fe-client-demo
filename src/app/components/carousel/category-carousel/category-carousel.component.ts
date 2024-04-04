@@ -48,9 +48,9 @@ export class CategoryCarouselComponent implements OnInit{
     }) 
   }
 
-  getPageCategory(id: string): void{
+  getPageCategory(name: string): void{
     // this.toastrService.getPopUpErrorTypeString("Internal Server Error");
-    this.router.navigate([`/product/filter`,id]);
+    this.router.navigate([`/product/filter`,name]);
 
   }
 

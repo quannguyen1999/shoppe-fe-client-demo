@@ -1,15 +1,17 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'src/app/services/toastr.service';
 import { DESCRIPTION, DISCOUNT, ID, IMAGE, NAME, PRICE, Product, ProductRequestModel } from 'src/app/models/product.model';
 import { DEFAULT_PRODUCT_COLUMNS } from 'src/app/constants/constant-value-model';
+import { CategoryService } from 'src/app/services/category.service';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent implements OnInit{
+  @Input() numberOfCol!: string;
   listProduct: Array<Product> = [];
   isLoading=false;
   currentPage=0;
@@ -38,7 +40,9 @@ export class ProductsComponent implements OnInit{
             private router: Router,
             private activeRoute: ActivatedRoute,
             private toastrService: ToastrService
-  ){}
+  ){
+    
+  }
 
   ngOnInit(): void {
     this.loadData();
