@@ -2,9 +2,9 @@
             [numVisible]="1"
             [numScroll]="1">
     <ng-template let-images pTemplate="item">
-        <div class="grid grid-cols-10 grid-rows-2"> 
+        <div class="grid grid-cols-10 grid-rows-2" *ngIf="!isOnScreenDevice, else notInOnScreenDevice"> 
             <ng-container *ngFor="let item of (images === '1' ? listItemCategoryGroupOne : listItemCategoryGroupTwo)">
-                <div class="grid grid-rows-2 grid-flow-col border-gray-200 border-2 duration-150 hover:shadow-lg opacity-90 hover:opacity-100 hover:border-gray-400 cursor-pointer bg-category" (click)="getPageCategory(item.name!)">
+                <div class="grid grid-rows-2 grid-flow-col border-gray-200 border-2 duration-150 hover:shadow-lg opacity-90 hover:opacity-100 hover:border-gray-400 cursor-pointer" (click)="getPageCategory(item.name!)">
                     <div class="grid-rows-1">
                         <img [src]="item.image" alt=""  class="w-20 block m-auto">
                     </div>
@@ -13,10 +13,26 @@
                     </div>
                 </div>
             </ng-container>
-            
         </div> 
+        <ng-template #notInOnScreenDevice>
+            <div class="grid grid-cols-4 grid-rows-2"> 
+                <ng-container *ngFor="let item of getImageDeviceList(images)">
+                    <div class="grid grid-rows-2 grid-flow-col border-gray-200 border-2 duration-150 hover:shadow-lg opacity-90 hover:opacity-100 hover:border-gray-400 cursor-pointer" (click)="getPageCategory(item.name!)">
+                        <div class="grid-rows-1">
+                            <img [src]="item.image" alt=""  class="w-10 block m-auto">
+                        </div>
+                        <div class="grid-rows-12 text-center justify-center mx-auto">
+                            <span class="text-center break-normal grid-rows-2 m-auto text-xs">{{item.name!}}</span>
+                        </div>
+                    </div>
+                </ng-container>
+            </div> 
+        </ng-template>
+        
     </ng-template>
 </p-carousel>
+
+
 
 <p *ngIf="listItemCategoryGroupOne.length <= 0 && !isLoading" class="text-center font-bold">
     No Data

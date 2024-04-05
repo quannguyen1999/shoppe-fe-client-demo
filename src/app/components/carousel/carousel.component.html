@@ -1,4 +1,4 @@
-<div id="carousel" class="overflow-hidden grid grid-cols-3 grid-flow-row">
+<div id="carousel" class="overflow-hidden grid grid-cols-3 grid-flow-row" *ngIf="!isOnScreenDevice; else notInOnScreenDevice">
     <div class="col-span-2">
         <p-carousel [value]="images" [autoplayInterval]="3000"> 
             <ng-template let-images pTemplate="item"> 
@@ -22,3 +22,29 @@
         </div>
     </div>
 </div>
+<ng-template #notInOnScreenDevice>
+    <div class="grid grid-cols-1 grid-flow-row">
+        <div>
+            <p-carousel [value]="images" [autoplayInterval]="3000"> 
+                <ng-template let-images pTemplate="item"> 
+                    <div class="product-item cursor-pointer"> 
+                        <div> 
+                            <div class="p-mb-3"></div> 
+                            <img [src]="images.image" alt="" id="main-img-carousel" class="m-auto">
+                        </div> 
+                    </div> 
+                </ng-template> 
+            </p-carousel>
+        </div>
+        <div class="-mt-2">
+            <div class="grid grid-cols-2 p-5">
+                <div class="cursor-pointer">
+                    <img [src]="backgroundSaleOffOne" alt="" class="block m-auto w-36">
+                </div>
+                <div class="cursor-pointer">
+                    <img [src]="backgroundSaleOffTwo" alt="" class="block m-auto rounded-full w-72">
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

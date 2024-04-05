@@ -1,8 +1,10 @@
 <p-toast></p-toast>
 <app-header [isAuthorization]="isLoginPage || isRegisterPage"></app-header>
-<div class="test mt-32 w-full" [ngClass]="isLoginPage || isRegisterPage ? 'bg-login' : 'bg-app'">
+<div class="w-full" [ngClass]="isLoginPage || isRegisterPage ? 'bg-login' : 'bg-app'"
+        [ngClass]="isOnScreenDevice ? 'mt-20' : 'mt-32'"
+>
     <div class="m-auto flex flex-col">
-        <div class="content m-auto">
+        <div class="m-auto" [ngClass]="isOnScreenDevice ? '' : 'content'">
             <router-outlet></router-outlet>
         </div>
         <div class="bg-gray-100 border-t-4 border-orange-600 border-solid">

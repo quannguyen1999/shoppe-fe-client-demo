@@ -9,13 +9,10 @@
 } 
 
 #main-img-carousel{
-    width: 700px;
+    width: 702px;
 }
-
-@media (max-width: 1050px){
-    #hide-element{
-        display: none;
-    }
+::ng-deep .p-carousel-indicator{
+    display: none;
 }
 
 ::ng-deep .p-carousel-indicator .p-link{

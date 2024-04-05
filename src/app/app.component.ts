@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { DATA_LOREM_FAKE, HOME, IMAGE_DATA_FAKE_ONE, LOGIN, REGISTER } from './constants/constant-value-model';
+import { SettingService } from './services/setting.service';
 
 @Component({
   selector: 'app-root',
@@ -17,8 +18,9 @@ export class AppComponent implements OnInit, OnDestroy{
   isLoginPage: boolean = false;
   isRegisterPage: boolean = false;
   isHomePage: boolean = false;
+  isOnScreenDevice: boolean = false;
 
-  constructor(private router: Router){}
+  constructor(private router: Router, private settingService: SettingService){}
 
   ngOnDestroy(): void {
     // Unsubscribe from the router events when the component is destroyed
@@ -35,5 +37,13 @@ export class AppComponent implements OnInit, OnDestroy{
         this.isHomePage = val.url === HOME;
       }
     })
+
+    this.settingService.width$.subscribe(width => {
+      if(width <= 500){
+        this.isOnScreenDevice = true;
+      }
+    })
+
+
   }
 }
