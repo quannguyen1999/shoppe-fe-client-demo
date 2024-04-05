@@ -3,6 +3,7 @@ import { environment } from '../../environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { AccountService } from './account.service';
+import { ACCOUNT_TOKEN, LOGIN } from '../constants/constant-value-model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ export class authServiceGuard  implements CanActivate {
     const code = route.queryParams['code'];
     if (code && this.accountService.getToken() == null && numberOfRequest <= 1
     ) { 
-      const tokenEndpoint = environment.apiUrl + 'accounts/token';
+      const tokenEndpoint = environment.apiUrl + ACCOUNT_TOKEN;
       const redirectUri = environment.redirectUrl;
       const headers = new HttpHeaders({
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -33,7 +34,7 @@ export class authServiceGuard  implements CanActivate {
         error: this.accountService.handlerErrorResponse.bind(this)
       });
     } else if (this.accountService.getToken() == null && numberOfRequest <= 1){
-      this.router.navigate(['/login']);
+      this.router.navigate([LOGIN]);
     } else if(numberOfRequest >= 2) {
       return false;
     }

@@ -1,1 +1,0 @@
-export const mainColor: string = 'bg-gray-600';

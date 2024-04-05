@@ -1,5 +1,5 @@
 export interface ImageCommon {
-    id: number;
-    type: string;
-    image: string;
+    id?: number;
+    type?: string;
+    image?: string;
 }

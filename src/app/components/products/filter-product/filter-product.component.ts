@@ -14,10 +14,12 @@ import { ToastrService } from 'src/app/services/toastr.service';
   styleUrls: ['./filter-product.component.scss']
 })
 export class FilterProductComponent implements OnInit{
-
-  sortOrders: SortOrder[] | undefined;
+  //Init
+  sortOrders: SortOrder[] = [
+    {name: 'Từ Thấp tới Cao', code: 'DESC'},
+    {name: 'Từ Cao tới Thấp', code: 'ASC'}
+  ];
   selectedSortOrder: SortOrder | undefined;
-
   dataSource = new MatTableDataSource<City>();
   selection = new SelectionModel<City>(true, []);
   displayedColumns: string[] = ['select','code'];
@@ -26,8 +28,6 @@ export class FilterProductComponent implements OnInit{
   threeStar: number = 3;
   twoStar: number = 2;
   oneStar: number = 1;
-
-  //Field To Search
   isLoading: boolean = true;
   categoryRequestModel: CagegoryRequestModel = {
       id: '',
@@ -38,7 +38,6 @@ export class FilterProductComponent implements OnInit{
       listSorted: null,
       listFields: DEFAULT_CATEGORY_COLUMNS
   };
-
   category: Category = {
     id: 0,
     name: '',
@@ -50,17 +49,12 @@ export class FilterProductComponent implements OnInit{
     private categoryService: CategoryService,
     private toastrService: ToastrService
   ){
-    this.sortOrders = [
-      {name: 'Từ Thấp tới Cao', code: 'DESC'},
-      {name: 'Từ Cao tới Thấp', code: 'ASC'}
-    ];
-
     router.events.subscribe((val) => {
       if(val instanceof ActivationEnd){
         this.categoryRequestModel.name = val.snapshot.params['name'];
 
         this.categoryService.getListCategory(0, 40, [NAME, ID, IMAGE], this.categoryRequestModel).subscribe((data)=>{
-          this.category = data.data[0];
+          this.category = data.data![0];
           this.isLoading = false;
           // this.listItemCategoryGroupOne = data.data.slice(0, 20);
           // this.listItemCategoryGroupTwo = data.data.slice(20);
@@ -72,8 +66,6 @@ export class FilterProductComponent implements OnInit{
 
       }
     });
-
-   
   }
 
   ngOnInit(): void {

@@ -27,7 +27,7 @@
                 <div class="flex flex-col">
                     <div *ngIf="comment.referComment !== undefined" class="p-2 ml-14 bg-gray-200 rounded-tr-lg text-gray-400 cursor-pointer w-32">
                         <div>
-                            <span>{{comment.referComment.comment  | truncateText:10}}</span>
+                            <span>{{comment.referComment.comment!  | truncateText:10}}</span>
                         </div>
                     </div>
                     <div class="flex flex-row" 
@@ -87,7 +87,7 @@
                 >
                     <div *ngIf="comment.referComment !== undefined"  class="flex flex-row text-end justify-end items-end max-w-2xl">
                         <div  class="rounded-lg p-1 rounded-r-lg bg-gray-200 text-gray-400 -mb-3  rounded-xl-full max-w-2xl cursor-pointer">
-                            <span class="p-4">{{comment.referComment.comment | truncateText:10}}</span>
+                            <span class="p-4">{{comment.referComment.comment! | truncateText:10}}</span>
                         </div>
                     </div>
                     <div class="flex flex-row text-end justify-end items-end ">
@@ -131,7 +131,7 @@
                 <span class="font-bold text-xl">Replying to {{currentReplyComment.username === currentAccount ? 'YourSelf' : currentReplyComment.username}}</span>
             </div>
             <div>
-                <span>{{currentReplyComment.comment | truncateText: 30}}</span>
+                <span>{{currentReplyComment.comment! | truncateText: 30}}</span>
             </div>
             
         </div>

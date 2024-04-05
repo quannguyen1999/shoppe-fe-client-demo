@@ -1,32 +1,24 @@
 <div ></div>
 <app-carousel class="mt-10"></app-carousel>
-
 <!-- TODO hiding -->
 <!-- <app-tip-carousel id="hide-element" [srcImageFake]="srcImageFake" 
     [listItemCategory]="listItemCategory"
 ></app-tip-carousel> -->
-
 <div class="bg-title">
     <h1>DANH MỤC</h1>
 </div>
 <div>
-    <app-category-carousel [srcImageFake]="srcImageFake" ></app-category-carousel>
+    <app-category-carousel></app-category-carousel>
 </div>
-
 <img src="https://down-vn.img.susercontent.com/file/vn-50009109-22cb2c8d41c60a1261a7ef7d102601ce" class="h-52 m-auto">
-
-
 <div class="mt-8 bg-title">
     <h1>TOP HÀNG BÁN CHẠY</h1>
 </div>
-<app-flash-product>
-
-</app-flash-product>
+<app-flash-product></app-flash-product>
 <div class="mt-8 bg-title">
     <h1>GỢI Ý HÔM NAY</h1>
 </div>
 <app-products></app-products>
-
 <p-dialog [visible]="visible" [modal]="true" [style]="{ 'background-color': 'transparent', 'border':'none', 'box-shadow':'none' }" [draggable]="false" [resizable]="false" [dismissableMask]="true" (visibleChange)="onDialogVisibilityChange($event)">
     <div class="relative">'
         <div class="grid grid-cols-1 relative">

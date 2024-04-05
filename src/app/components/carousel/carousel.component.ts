@@ -1,10 +1,6 @@
 import { Component } from '@angular/core';
-import { imageDataFakeOne } from 'src/app/constants/data-fake.model';
-
-interface Image { 
-  id?: string,
-  uri?: string
-} 
+import { BACKGROUND_BEAR_ONE, BACKGROUND_BEAR_TWO, BACKGROUND_SALE_OFF_ONE, BACKGROUND_SALE_OFF_TWO, BACKGROUND_TEDDY_ONE } from 'src/app/constants/constant-value-model';
+import { ImageCommon } from 'src/app/models/image-common.model';
 
 
 @Component({
@@ -13,26 +9,25 @@ interface Image {
   styleUrls: ['./carousel.component.scss']
 })
 export class CarouselComponent {
-  srcImageFake: string = imageDataFakeOne;
-
-  imageFakeOne: string = 'https://www.desktopbackground.org/p/2015/12/26/1063236_teddy-bear-wallpapers-new-hd-images_1600x900_h.jpg';
-  imageFakeTwo: string = 'https://afamilycdn.com/2019/5/22/photo-1-1558509891449589673755.jpg';
-  imageFakeThree: string = 'https://images.samsung.com/is/image/samsung/assets/vn/offer/flashsale/20240229/time-slot-MO-V2.jpg?$720_N(540)_JPG$';
-
-  images: Image[] = []; 
+  backgroundTeddyOne: string | any;
+  backgroundSaleOffOne: string | any;
+  backgroundSaleOffTwo: string | any;
+  images: ImageCommon[] = []; 
   
-  constructor() { } 
+  constructor() { 
+    this.backgroundTeddyOne = BACKGROUND_TEDDY_ONE;
+    this.backgroundSaleOffOne = BACKGROUND_SALE_OFF_ONE;
+    this.backgroundSaleOffTwo = BACKGROUND_SALE_OFF_TWO;
 
-  ngOnInit() { 
-      this.images = [ 
-          { 
-            id: '1', 
-            uri:  'https://marketplace.canva.com/EAFHu3xC03I/1/0/1600w/canva-beige-bear-desktop-wallpaper-9Vrb-3w_jP8.jpg'
-          }, 
-          { 
-            id: '2', 
-            uri:  'https://www.theteddybearshop.com/cdn/shop/files/TeddyBearShop_WebContent_Au23_0021_2500px_10a48632-ec6d-4887-ba7f-b39f301675f4.jpg?v=1706051020&width=2048'  
-          }
-      ]; 
+    this.images = [ 
+      { 
+        id: 1, 
+        image:  BACKGROUND_BEAR_ONE
+      }, 
+      { 
+        id: 2, 
+        image:  BACKGROUND_BEAR_TWO
+      }
+  ]; 
   } 
 }

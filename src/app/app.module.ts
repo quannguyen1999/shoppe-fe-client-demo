@@ -149,14 +149,11 @@ import { IntercepterHttpTokenService } from './services/intercepter-http-token.s
     CategoryService, 
     MessageService,
     MessageService,  
-    // AuthenticationResolver, 
-
     {
       provide: HTTP_INTERCEPTORS,
       useClass: IntercepterHttpTokenService,
       multi: true
     },
-    // { provide: ErrorHandler, useClass: GlobalErrorHandlerService }
   ],
   bootstrap: [AppComponent]
 })

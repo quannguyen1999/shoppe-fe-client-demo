@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { CagegoryRequestModel, Category } from '../models/category.model';
-import { imageDataFakeOne } from '../constants/data-fake.model';
 import { Observable, map } from 'rxjs';
 import { CommonPageInfo } from '../models/common-page.model';
 import { getCategoryDetail } from '../constants/graphql-query-model';
@@ -15,9 +14,8 @@ export class CategoryService {
 
   queryRequest: string = getCategoryDetail;
 
-  constructor(private http: HttpClient,
-    private apollo: Apollo,
-    private router: Router
+  constructor(
+    private apollo: Apollo
   ) {
   }
 

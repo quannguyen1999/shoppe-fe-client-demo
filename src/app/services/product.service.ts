@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, delay, map, of } from 'rxjs';
 import { Product, ProductRequestModel } from '../models/product.model';
-import { imageDataFakeOne } from '../constants/data-fake.model';
 import { HttpClient } from '@angular/common/http';
 import { Apollo, gql } from 'apollo-angular';
 import { Router } from '@angular/router';
@@ -12,16 +11,13 @@ import { getProductDetail } from '../constants/graphql-query-model';
   providedIn: 'root'
 })
 export class ProductService {
-
-  private totalItems=20;
-
+  //Init
+  private totalItems = 20;
   queryRequest: string = getProductDetail;
 
-  constructor(private http: HttpClient,
-    private apollo: Apollo,
-    private router: Router) { 
-
-  }
+  constructor(
+    private apollo: Apollo
+  ) {}
 
   getListProduct(page: number, 
     size: number, 

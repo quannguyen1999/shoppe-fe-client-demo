@@ -1,7 +1,6 @@
 
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { UntypedFormBuilder } from '@angular/forms';
-import { dataLoremFake, imageDataFakeOne, listComment } from 'src/app/constants/data-fake.model';
+import { DATA_LOREM_FAKE, IMAGE_DATA_FAKE_ONE, LIST_COMMENT} from 'src/app/constants/constant-value-model';
 import { Comment } from 'src/app/models/comment.model';
 import { Emotion } from 'src/app/models/emotion.model';
 import { generateRandomId } from 'src/app/utils/util-fnc.model';
@@ -12,32 +11,24 @@ import { generateRandomId } from 'src/app/utils/util-fnc.model';
   styleUrls: ['./box-comment.component.scss']
 })
 export class BoxCommentComponent implements OnInit, AfterViewInit{
+  //init
+  currentReplyComment: Comment | undefined;
+  isShowReplyBox: boolean = false;
+  imageTitleFake: string = IMAGE_DATA_FAKE_ONE;
+  titleBoxComment: string = DATA_LOREM_FAKE;
+  currentAccount: string = 'admin';
+  inputValueComment: string = '';
+  listComment: Array<Comment> = LIST_COMMENT;
+  shouldScrollToBottom: boolean = false;
+  customEmojiSet: '' | 'apple' | 'google' | 'twitter' | 'facebook' = '';
+  @ViewChild('messageContainer') messageContainer!: ElementRef;
+
   ngAfterViewInit(): void {
     this.scrollToBottom();
   }
 
-  currentReplyComment: Comment | undefined;
-
-  isShowReplyBox: boolean = false;
-
-  imageTitleFake: string = imageDataFakeOne;
-
-  titleBoxComment: string = dataLoremFake;
-
-  currentAccount: string = 'admin';
-
-  inputValueComment: string = '';
-
-  listComment: Array<Comment> = listComment;
-
-  shouldScrollToBottom: boolean = false;
-
-  customEmojiSet: '' | 'apple' | 'google' | 'twitter' | 'facebook' = '';
-
-
-  @ViewChild('messageContainer') messageContainer!: ElementRef;
-
   ngOnInit(): void {
+    
   }
 
   onEnterComment(){
@@ -55,7 +46,7 @@ export class BoxCommentComponent implements OnInit, AfterViewInit{
       username: 'admin',
       comment: this.inputValueComment,
       dateCreated: new Date(),
-      avatar: imageDataFakeOne,
+      avatar: IMAGE_DATA_FAKE_ONE,
       emotions: [],
       referComment: this.currentReplyComment !== undefined ? {
         id: this.currentReplyComment.id,
@@ -101,11 +92,11 @@ export class BoxCommentComponent implements OnInit, AfterViewInit{
     handleEmojiSpecific(event: any, idComment: number ){
       const existingComment: Comment = this.listComment.find(comment => comment.id === idComment)!;
       if(existingComment != null){
-        const existingEmotion: Emotion = existingComment.emotions.find(emotion => emotion.comment = event.emoji.native)!;
+        const existingEmotion: Emotion = existingComment.emotions!.find(emotion => emotion.comment = event.emoji.native)!;
         if(existingEmotion !== undefined){
-          existingEmotion.total += 1;
+          existingEmotion.total! += 1;
         }else{
-          existingComment.emotions.push({
+          existingComment.emotions!.push({
             id: generateRandomId(),
             comment: event.emoji.native,
             total: 1,
@@ -118,13 +109,12 @@ export class BoxCommentComponent implements OnInit, AfterViewInit{
     }
     
     onChangeLike(){
-
       this.listComment.push({
         id: 1,
         username: 'admin',
         comment:  '👍',
         dateCreated: new Date(),
-        avatar: imageDataFakeOne,
+        avatar: IMAGE_DATA_FAKE_ONE,
         emotions: []
       })
 
@@ -159,8 +149,5 @@ export class BoxCommentComponent implements OnInit, AfterViewInit{
       this.listComment.find(data => data.id === comment.id)!
       .isElementVisible = false;
     }
-
-
-
 
 }

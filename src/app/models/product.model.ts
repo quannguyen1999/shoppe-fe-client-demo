@@ -10,21 +10,21 @@ export interface Product {
 
 
 export interface ProductRequestModel {
-    id: string,
-    name: string | null,
-    image: string | null,
-    quantity: number | null,
-    price: number | null,
-    discount: number | null, 
-    idCategory: string | null,
+    id?: string,
+    name?: string | null,
+    image?: string | null,
+    quantity?: number | null,
+    price?: number | null,
+    discount?: number | null, 
+    idCategory?: string | null,
 
     //Search
-    createFromDate: Date | null,
-    createToDate: Date | null,
-    listSorted: any[] | null,
-    listFields: any[] | undefined,
-    isGetTopProduct: boolean,
-    isSuggestProduct: boolean
+    createFromDate?: Date | null,
+    createToDate?: Date | null,
+    listSorted?: any[] | null,
+    listFields?: any[] | undefined,
+    isGetTopProduct?: boolean,
+    isSuggestProduct?: boolean
 
 }
 

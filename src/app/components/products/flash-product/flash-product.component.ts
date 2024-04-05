@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { DEFAULT_PRODUCT_COLUMNS } from 'src/app/constants/constant-value-model';
+import { DEFAULT_PRODUCT_COLUMNS, PRODUCT_DETAIL } from 'src/app/constants/constant-value-model';
 import { DISCOUNT, ID, IMAGE, NAME, PRICE, Product, ProductRequestModel } from 'src/app/models/product.model';
 import { ProductService } from 'src/app/services/product.service';
 import { ToastrService } from 'src/app/services/toastr.service';
@@ -11,11 +11,9 @@ import { ToastrService } from 'src/app/services/toastr.service';
   styleUrls: ['./flash-product.component.scss']
 })
 export class FlashProductComponent implements OnInit{
+  //Init
   isLoading: boolean = true;
-  
   listTopProductSale: Array<Product> = [];
-
-  //Field To Search
   productRequestModel: ProductRequestModel = {
     id: '',
     name: '',
@@ -42,7 +40,7 @@ export class FlashProductComponent implements OnInit{
     this.productService.getListProduct(0, 10, [ID, NAME, IMAGE, DISCOUNT, PRICE], this.productRequestModel).subscribe(
       (data)=>{
         this.isLoading = false;
-        this.listTopProductSale = data.data;
+        this.listTopProductSale = data.data!;
       },(error)=>{
         this.isLoading = false;
         this.toastrService.getPopUpErrorTypeString("Internal Server Error");
@@ -51,7 +49,7 @@ export class FlashProductComponent implements OnInit{
   }
 
   detailProduct(id: string){
-    this.router.navigate(['/product/detail', id]);
+    this.router.navigate([PRODUCT_DETAIL, id]);
   }
  
 

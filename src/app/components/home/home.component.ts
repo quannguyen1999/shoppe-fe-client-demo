@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { imageDataFakeOne } from 'src/app/constants/data-fake.model';
+import { IMAGE_DATA_FAKE_ONE } from 'src/app/constants/constant-value-model';
 
 @Component({
   selector: 'app-home',
@@ -7,7 +7,8 @@ import { imageDataFakeOne } from 'src/app/constants/data-fake.model';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit{
-  srcImageFake: string = imageDataFakeOne;
+  //Init
+  srcImageFake: string = IMAGE_DATA_FAKE_ONE;
   listItemCategory: Array<string> = [];
   visible: boolean = true;
 

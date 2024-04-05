@@ -21,4 +21,8 @@ export class ToastrService {
     this.messageService.add({severity:'error', summary: 'Error', detail: value});
   }
 
+  getPopUpInternalServerError(){
+    this.messageService.add({severity:'error', summary: 'Error', detail: 'Internal Server Error'});
+  }
+
 }

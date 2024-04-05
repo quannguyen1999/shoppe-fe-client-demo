@@ -2,7 +2,6 @@ import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, ActivatedRouteSnapshot, ActivationEnd, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { DEFAULT_PRODUCT_COLUMNS, NAME_BRANCH } from 'src/app/constants/constant-value-model';
-import { imageDataFakeOne, imageDataFakeTwo } from 'src/app/constants/data-fake.model';
 import { ImageCommon } from 'src/app/models/image-common.model';
 import { Product, ProductRequestModel } from 'src/app/models/product.model';
 import { CartService } from 'src/app/services/cart.service';
@@ -15,34 +14,15 @@ import { ToastrService } from 'src/app/services/toastr.service';
   styleUrls: ['./detail-product.component.scss']
 })
 export class DetailProductComponent implements OnInit {
+  //Init
   productRequestModel: ProductRequestModel = {
-    id: '',
-    name: '',
-    image: '',
     quantity: 0,
     price: 0,
     discount: 0,
-    idCategory: '',
-    createFromDate: null,
-    createToDate: null,
-    listSorted: null,
     listFields: DEFAULT_PRODUCT_COLUMNS,
     isGetTopProduct: false,
     isSuggestProduct: false
   };
-
-  nameBranch: string = NAME_BRANCH;
-  
-  cities!: string[];
-
-  images: ImageCommon[] | undefined;
-  listImageFake: Array<string> = [];
-  starFake: number = 5;
-
-  currentImage: string = '';
-
-  numberOfItem: number = 1;
-
   product: Product = {
     id: 0,
     name: '',
@@ -52,23 +32,27 @@ export class DetailProductComponent implements OnInit {
     discount: 0,
     description: ''
   };
-
-  
-
   responsiveOptions: any[] = [
-      {
-          breakpoint: '1024px',
-          numVisible: 5
-      },
-      {
-          breakpoint: '768px',
-          numVisible: 3
-      },
-      {
-          breakpoint: '560px',
-          numVisible: 1
-      }
-  ];
+    {
+        breakpoint: '1024px',
+        numVisible: 5
+    },
+    {
+        breakpoint: '768px',
+        numVisible: 3
+    },
+    {
+        breakpoint: '560px',
+        numVisible: 1
+    }
+];
+  nameBranch: string = NAME_BRANCH;
+  cities!: string[];
+  images: ImageCommon[] | undefined;
+  listImageFake: Array<string> = [];
+  starFake: number = 5;
+  currentImage: string = '';
+  numberOfItem: number = 1;
 
   constructor(private router: Router,
             private cartService: CartService,
@@ -82,7 +66,7 @@ export class DetailProductComponent implements OnInit {
           this.productRequestModel.id = val.snapshot.params['id'];
           this.productService.getListProduct(0, 1, DEFAULT_PRODUCT_COLUMNS, this.productRequestModel).subscribe(
             (data)=>{
-              this.product = data.data[0];
+              this.product = data.data![0];
               this.listImageFake = [this.product.image!];
               this.images = [{id: 1, type:'image', image: this.product.image!},
               {id: 2, type:'video', image: this.product.image!},

@@ -1,60 +1,43 @@
 import { Component, OnInit, ViewChild,Input  } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable, filter, map, startWith } from 'rxjs';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { OverlayPanel } from 'primeng/overlaypanel';
-import { dataLoremFake, imageDataFakeOne } from 'src/app/constants/data-fake.model';
 import { SettingService } from 'src/app/services/setting.service';
-import { ACCESS_TOKEN, NAME_BRANCH, ORDER_DATA, REFRESH_TOKEN } from 'src/app/constants/constant-value-model';
 import { AccountService } from 'src/app/services/account.service';
-import { authServiceGuard } from 'src/app/services/auth-service.guard';
 import { Order } from 'src/app/models/order.model';
 import { CartService } from 'src/app/services/cart.service';
 import { LocalStorageCustomService } from 'src/app/services/local-storage-custom.service';
+import { CART, IMAGE_DATA_FAKE_ONE, IMAGE_DATA_FAKE_TWO, KEY_ORDER_DATA, NAME_BRANCH } from 'src/app/constants/constant-value-model';
+import { NavigationEnd, Router } from '@angular/router';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit{
-
+  //Init
   @Input() isAuthorization: boolean = false;
-
   nameBranch: string = NAME_BRANCH;
-
   headerBackgroundImage: string =  'assets/images/header-background.jpg';
-
-  imageFake: string = imageDataFakeOne;
-
-  dataLoremFake: string = dataLoremFake;
-
+  imageFake: string = IMAGE_DATA_FAKE_ONE;
+  dataLoremFake: string = IMAGE_DATA_FAKE_TWO;
   selectedLanguage!: string;
-
   isAccountLogin: boolean = false;
-
   controlSearchInput = new FormControl('');
-
   dataFakeSearch: string[] = ['NinJago', 'Robot', 'Bakugan', 'Áo lọt khe'];
-
   filteredSearchInput!: Observable<string[]>;
-
   isShopping!: boolean;
-
   isOnScreenDevice: boolean = false;
-
   isAuthen: boolean = false;
-
   order: Order = {};
   
   constructor(
     private router: Router, 
     private settingService: SettingService,
     private accountService: AccountService,
-    private authen: authServiceGuard,
     private cartService: CartService,
     private localStorageService: LocalStorageCustomService
   ){
-    const dataOrder = this.localStorageService.getDataInStorage(ORDER_DATA);
+    const dataOrder = this.localStorageService.getDataInStorage(KEY_ORDER_DATA);
     if(dataOrder){
       this.order = JSON.parse(dataOrder);
     }
@@ -63,7 +46,6 @@ export class HeaderComponent implements OnInit{
     })
     this.isAuthen = this.accountService.isAuthen();
     this.accountService.accountSubject.subscribe(data=>{
-      console.log("working")
       this.isAuthen = data;
     })
     this.settingService.width$.subscribe(width => {
@@ -74,11 +56,9 @@ export class HeaderComponent implements OnInit{
     router.events.subscribe((val) => {
       if(val instanceof NavigationEnd){
         let url = val.url;
-        this.isShopping = url !== '/cart';
+        this.isShopping = url !== CART;
       }
     })
-
-
   } 
 
   ngOnInit() {
@@ -107,7 +87,7 @@ export class HeaderComponent implements OnInit{
   }
 
   getPageCart(){
-    this.router.navigate(['/cart']);
+    this.router.navigate([CART]);
   }
 
   deleteOrder(id: number){

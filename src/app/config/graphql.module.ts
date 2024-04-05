@@ -3,8 +3,7 @@ import { HttpLink } from 'apollo-angular/http';
 import { NgModule } from '@angular/core';
 import { ApolloClientOptions, ApolloLink, InMemoryCache,from } from '@apollo/client/core';
 import { environment } from '../../environments/environment';
-import { ACCESS_TOKEN } from '../constants/constant-value-model';
-
+import { KEY_ACCESS_TOKEN } from '../constants/constant-value-model';
 
 const listFilterPublic = ["CategoryDetail", "ProductDetail"];
 
@@ -22,7 +21,7 @@ const customHeader = new ApolloLink((operation, forward) => {
 
   operation.setContext(({ headers = {} }) => ({
     headers: {
-      Authorization: `Bearer ` + localStorage.getItem(ACCESS_TOKEN)
+      Authorization: `Bearer ` + localStorage.getItem(KEY_ACCESS_TOKEN)
     }
   }));
   return forward(operation);

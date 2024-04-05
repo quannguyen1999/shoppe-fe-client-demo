@@ -1,12 +1,10 @@
 import { HttpClient, HttpErrorResponse, HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpParams, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
-
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
-import { ACCESS_TOKEN, REFRESH_TOKEN } from '../constants/constant-value-model';
 import { AccountService } from './account.service';
-import { ToastrService } from './toastr.service';
+import { ACCOUNT_REFRESH_TOKEN, ACCOUNT_TOKEN, ERROR, KEY_ACCESS_TOKEN, KEY_REFRESH_TOKEN } from '../constants/constant-value-model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +13,7 @@ export class IntercepterHttpTokenService implements HttpInterceptor {
 
   constructor(private accountService: AccountService,
             private router: Router,
-            private http: HttpClient,
-            private toastrService: ToastrService
+            private http: HttpClient
     ){
 
   }
@@ -31,7 +28,7 @@ export class IntercepterHttpTokenService implements HttpInterceptor {
     }
    
     if(this.accountService.getNumberOfRequest() >= 2){
-      this.router.navigate(["/error"]);
+      this.router.navigate([ERROR]);
       return throwError(null);
     }
 
@@ -39,10 +36,10 @@ export class IntercepterHttpTokenService implements HttpInterceptor {
       if (error instanceof HttpErrorResponse  && error.status === 401) {
         return this.handle401Error(request, next);
       }
-      if (error.url == environment.apiUrl + 'accounts/token' && error instanceof HttpErrorResponse  && error.status === 500) {
-        localStorage.removeItem(ACCESS_TOKEN);
-        localStorage.removeItem(REFRESH_TOKEN);
-        this.router.navigate(["/error"]);
+      if (error.url == environment.apiUrl + ACCOUNT_TOKEN && error instanceof HttpErrorResponse  && error.status === 500) {
+        localStorage.removeItem(KEY_ACCESS_TOKEN);
+        localStorage.removeItem(KEY_REFRESH_TOKEN);
+        this.router.navigate([ERROR]);
         return next.handle(request);
       }
       return throwError(error);
@@ -53,12 +50,12 @@ export class IntercepterHttpTokenService implements HttpInterceptor {
     let value = this.accountService.getNumberOfRequest();
     this.accountService.setNumberOfRequest(value);
     if(value >= 2){
-      this.router.navigate(["/error"]);
+      this.router.navigate([ERROR]);
       return throwError(null);
     }
     //get refresh token 
-    localStorage.removeItem(ACCESS_TOKEN);
-    const tokenEndpoint = environment.apiUrl + 'accounts/refreshToken';
+    localStorage.removeItem(KEY_ACCESS_TOKEN);
+    const tokenEndpoint = environment.apiUrl + ACCOUNT_REFRESH_TOKEN;
     const headers = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',
     });

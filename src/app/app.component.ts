@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { dataLoremFake, imageDataFakeThree } from './constants/data-fake.model';
 import { Subscription } from 'rxjs';
+import { DATA_LOREM_FAKE, HOME, IMAGE_DATA_FAKE_ONE, LOGIN, REGISTER } from './constants/constant-value-model';
 
 @Component({
   selector: 'app-root',
@@ -10,16 +10,13 @@ import { Subscription } from 'rxjs';
 })
 export class AppComponent implements OnInit, OnDestroy{
 
+  //Init
   private routerSubscription!: Subscription;
-
-  dataLoremFake: string = dataLoremFake;
-  imgFake: string = imageDataFakeThree;
-
+  dataLoremFake: string = DATA_LOREM_FAKE;
+  imgFake: string = IMAGE_DATA_FAKE_ONE;
   isLoginPage: boolean = false;
   isRegisterPage: boolean = false;
   isHomePage: boolean = false;
-
-
 
   constructor(private router: Router){}
 
@@ -33,9 +30,9 @@ export class AppComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
     this.routerSubscription = this.router.events.subscribe((val) => {
       if(val instanceof NavigationEnd){
-        this.isLoginPage = val.url === '/login';
-        this.isRegisterPage = val.url === '/register';
-        this.isHomePage = val.url === '/home';
+        this.isLoginPage = val.url === LOGIN;
+        this.isRegisterPage = val.url === REGISTER;
+        this.isHomePage = val.url === HOME;
       }
     })
   }

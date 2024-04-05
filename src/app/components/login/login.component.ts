@@ -1,9 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { imageDataFakeOne } from 'src/app/constants/data-fake.model';
-import { NavigationEnd, Router, Scroll } from '@angular/router';
+import { Router, Scroll } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { NAME_BRANCH } from 'src/app/constants/constant-value-model';
+import { IMAGE_DATA_FAKE_ONE, NAME_BRANCH } from 'src/app/constants/constant-value-model';
 import { AccountService } from 'src/app/services/account.service';
 
 @Component({
@@ -12,26 +11,21 @@ import { AccountService } from 'src/app/services/account.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit, OnDestroy{
-
+  //Init
   nameBranch: string = NAME_BRANCH;
-
   private routerSubscription!: Subscription;
-
   formLogin!: FormGroup;
-
   formRegister!: FormGroup;
-
-  imageFake: string = imageDataFakeOne;
-
+  imageFake: string = IMAGE_DATA_FAKE_ONE;
   isQRCode: boolean = false;
-
   isPageRegister: boolean = true;
 
-  constructor(private formBuilderLogin: FormBuilder,
+  constructor(
+    private formBuilderLogin: FormBuilder,
     private formBuilderRegister: FormBuilder,
-            private router: Router,
-            private acountService: AccountService
-            ){}
+    private router: Router,
+    private acountService: AccountService
+  ){}
 
   ngOnDestroy(): void {
     this.routerSubscription.unsubscribe();

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NAME_BRANCH } from 'src/app/constants/constant-value-model';
-import { dataLoremFake, imageDataFakeOne } from 'src/app/constants/data-fake.model';
+import { DATA_LOREM_FAKE, IMAGE_DATA_FAKE_ONE, NAME_BRANCH } from 'src/app/constants/constant-value-model';
 import { Chat } from 'src/app/models/chat.model';
 import { generateRandomId } from 'src/app/utils/util-fnc.model';
 
@@ -10,34 +9,28 @@ import { generateRandomId } from 'src/app/utils/util-fnc.model';
   styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent implements OnInit{
-
+  //Init
   nameBranch: string = NAME_BRANCH;
-
   currentSelectChat: Chat | undefined;
-  
   isDisplayChat: boolean = false;
-
   isDisplayComment: boolean = true;
-
   isDisplayWelcome: boolean = true;
-
   listChat: Array<Chat> = [];
-
   valueSearch: string | undefined;
 
   ngOnInit(): void {
     this.listChat.push({
       id: generateRandomId(),
       name: 'bitch',
-      comment: dataLoremFake,
-      avatar: imageDataFakeOne
+      comment: DATA_LOREM_FAKE,
+      avatar: IMAGE_DATA_FAKE_ONE
     })
 
     this.listChat.push({
       id: generateRandomId(),
       name: 'slut',
-      comment: dataLoremFake,
-      avatar: imageDataFakeOne
+      comment: DATA_LOREM_FAKE,
+      avatar: IMAGE_DATA_FAKE_ONE
     })
   }
 

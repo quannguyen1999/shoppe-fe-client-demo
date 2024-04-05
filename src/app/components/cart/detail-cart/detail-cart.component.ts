@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Cart } from 'src/app/models/cart.model';
 import {SelectionModel} from '@angular/cdk/collections';
-import { dataLoremFake, imageDataFakeOne } from 'src/app/constants/data-fake.model';
-import { NAME_BRANCH } from 'src/app/constants/constant-value-model';
+import { NAME_BRANCH, PRODUCT_DETAIL } from 'src/app/constants/constant-value-model';
 import { CartService } from 'src/app/services/cart.service';
 import { Order, OrderDetailRequestDto } from 'src/app/models/order.model';
 import { Router } from '@angular/router';
@@ -15,22 +14,18 @@ import { ToastrService } from 'src/app/services/toastr.service';
   styleUrls: ['./detail-cart.component.scss']
 })
 export class DetailCartComponent {
+  //Define value
   nameBranch: string = NAME_BRANCH;
+  isProcessOrderAddress: boolean = false;
+  totalProduct: number = 0;
+  totalPrice: number = 0;
   displayedColumns: string[] = ['select','product', 'price', 'quantity', 'money', 'function'];
-  
   dataSource = new MatTableDataSource<OrderDetailRequestDto>();
   selection = new SelectionModel<OrderDetailRequestDto>(true, []);
-
   orderSession: Order = {};
-
-  isProcessOrderAddress: boolean = false;
-
   orderBuy: Order = {
     orderDetailRequestDtoList: []
   };
-
-  totalProduct: number = 0;
-  totalPrice: number = 0;
 
   constructor(
     private cartService: CartService,
@@ -70,11 +65,11 @@ export class DetailCartComponent {
   updateTotalOrder(){
     this.totalProduct =  this.orderBuy.orderDetailRequestDtoList?.reduce((total, currentItem) => {
       return total + currentItem.quantity!;
-  }, 0)!;
+    }, 0)!;
 
-  this.totalPrice = this.orderBuy.orderDetailRequestDtoList?.reduce((total, currentItem) => {
+    this.totalPrice = this.orderBuy.orderDetailRequestDtoList?.reduce((total, currentItem) => {
     return total + (currentItem.price! * currentItem.quantity!);
-  }, 0)!;
+    }, 0)!;
   }
 
 
@@ -101,7 +96,7 @@ export class DetailCartComponent {
       if (!row) {
         return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
       }
-      return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
+      return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position! + 1}`;
     }
   
     
@@ -143,7 +138,7 @@ export class DetailCartComponent {
     }
   
     detailProduct(id: string){
-      this.router.navigate(['/product/detail', id]);
+      this.router.navigate([PRODUCT_DETAIL, id]);
     }
   
     processOrder(){

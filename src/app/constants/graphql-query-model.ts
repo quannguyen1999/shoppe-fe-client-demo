@@ -1,35 +1,6 @@
-// ACCOUNT
-export const getAccountDetail: string = `
-query AccountDetail(
-  $page: Int!,
-  $size: Int!,
-  $id: String,
-  $username: String,
-  $fromBirthday: String,
-  $toBirthday: String,
-  $createFromDate: String,
-  $createToDate: String,
-  $isActive: Boolean,
-  $gender: Boolean,
-  $email: String,
-  $listSorted: [Map]
-  ) {
-  listAccount(
-      accountRequestDto: {
-          id: $id,
-          page: $page,
-          size: $size,
-          username: $username,
-          fromBirthday: $fromBirthday,
-          toBirthday: $toBirthday,
-          createFromDate: $createFromDate,
-          createToDate: $createToDate,
-          isActive: $isActive,
-          gender: $gender,
-          email: $email,
-          listSorted: $listSorted
-      }
-  ) {
+// COMMON
+export const commonResponseField: string = `
+  {
     page,
     size,
     total,
@@ -37,70 +8,78 @@ query AccountDetail(
       $fields
     }
   }
+`;
+
+export const commonRequestField: string = `
+  $id: String,
+  $page: Int!,
+  $size: Int!,
+  $createFromDate: String,
+  $createToDate: String,
+  $listSorted: [Map],
+`;
+
+export const commonRequestMapField: string = `
+  id: $id,
+  page: $page,
+  size: $size,
+  createFromDate: $createFromDate,
+  createToDate: $createToDate,
+  listSorted: $listSorted,
+`;
+
+
+// ACCOUNT
+export const getAccountDetail: string = `
+query AccountDetail(
+  ` + commonRequestField + `
+  $username: String,
+  $fromBirthday: String,
+  $toBirthday: String,
+  $isActive: Boolean,
+  $gender: Boolean,
+  $email: String
+  ) {
+  listAccount(
+      accountRequestDto: {
+          ` + commonRequestMapField + `
+          username: $username,
+          fromBirthday: $fromBirthday,
+          toBirthday: $toBirthday,
+          isActive: $isActive,
+          gender: $gender,
+          email: $email
+      }
+  )` + commonResponseField + `
 }
 `;
 
 //CATEGORY
 export const getCategoryDetail: string = `
 query CategoryDetail(
-  $page: Int!,
-  $size: Int!,
-  $id: String,
+  ` + commonRequestField + `
   $name: String,
-  $createFromDate: String,
-  $createToDate: String,
-  $listSorted: [Map]
   ) {
   listCategory(
       categoryRequestDto: {
-          id: $id,
-          page: $page,
-          size: $size,
-          name: $name,
-          createFromDate: $createFromDate,
-          createToDate: $createToDate,
-          listSorted: $listSorted
+        ` + commonRequestMapField + `
+          name: $name
       }
-  ) {
-    page,
-    size,
-    total,
-    data{
-      $fields
-    }
-  }
+  )` + commonResponseField + `
 }
 `;
-
 
 //PRODUCT
 export const getProductDetail: string = `
 query ProductDetail(
-  $page: Int!,
-  $size: Int!,
-  $id: String,
-  $name: String,
-  $createFromDate: String,
-  $createToDate: String,
-  $listSorted: [Map]
+  ` + commonRequestField + `
+  $name: String
   ) {
   listProduct(
       productRequestDto: {
-          id: $id,
-          page: $page,
-          size: $size,
-          name: $name,
-          createFromDate: $createFromDate,
-          createToDate: $createToDate,
-          listSorted: $listSorted
+        ` + commonRequestMapField + `
+          name: $name
       }
-  ) {
-    page,
-    size,
-    total,
-    data{
-      $fields
-    }
-  }
+  )` + commonResponseField + `
 }
 `;

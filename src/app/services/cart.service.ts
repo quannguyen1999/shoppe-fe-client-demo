@@ -2,20 +2,19 @@ import { Injectable } from '@angular/core';
 import { Product } from '../models/product.model';
 import { MessageService } from 'primeng/api';
 import { LocalStorageCustomService } from './local-storage-custom.service';
-import { BehaviorSubject, Subject } from 'rxjs';
-import { Order, OrderDetailRequestDto, OrderRequestModel } from '../models/order.model';
-import { ORDER_DATA } from '../constants/constant-value-model';
+import { Subject } from 'rxjs';
+import { Order, OrderDetailRequestDto } from '../models/order.model';
 import { AccountService } from './account.service';
+import { KEY_ORDER_DATA } from '../constants/constant-value-model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
-
+  //Init
   order: Order = {
     orderDetailRequestDtoList: []
   };
-
   public dataSubject = new Subject<Order>();
 
   constructor(private messageService: MessageService,
@@ -26,7 +25,7 @@ export class CartService {
   }
 
   getOrder(){
-    const storedData = this.localStorageService.getDataInStorage(ORDER_DATA);
+    const storedData = this.localStorageService.getDataInStorage(KEY_ORDER_DATA);
     if(storedData){
       this.order = JSON.parse(storedData);
     }
@@ -55,7 +54,7 @@ export class CartService {
     }else{
       this.order.orderDetailRequestDtoList?.push(orderDetail);
     }
-    this.localStorageService.setDataInStorage(ORDER_DATA, this.order);
+    this.localStorageService.setDataInStorage(KEY_ORDER_DATA, this.order);
     this.messageService.add({ severity: 'success', summary: '', detail: 'Thêm giỏ hàng thành công' });
     this.dataSubject.next(this.order);
   }
@@ -65,7 +64,7 @@ export class CartService {
     if(removeIndex !== -1){
       this.order.orderDetailRequestDtoList?.splice(removeIndex, 1);
     }
-    this.localStorageService.setDataInStorage(ORDER_DATA, this.order);
+    this.localStorageService.setDataInStorage(KEY_ORDER_DATA, this.order);
     this.dataSubject.next(this.order);
 
   }

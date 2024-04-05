@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { imageDataFakeOne } from 'src/app/constants/data-fake.model';
+import { IMAGE_DATA_FAKE_ONE } from 'src/app/constants/constant-value-model';
 
 @Component({
   selector: 'app-review-product',
@@ -8,6 +8,6 @@ import { imageDataFakeOne } from 'src/app/constants/data-fake.model';
 })
 export class ReviewProductComponent {
   starFake: number = 5
-  imageFake: string = imageDataFakeOne;
+  imageFake: string = IMAGE_DATA_FAKE_ONE;
   listReview: number = 2;
 }
