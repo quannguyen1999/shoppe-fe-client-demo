@@ -67,7 +67,9 @@ import { HistoryCartComponent } from './components/cart/history-cart/history-car
 import { ResultCartComponent } from './components/cart/result-cart/result-cart.component';
 import { DetailCartComponent } from './components/cart/detail-cart/detail-cart.component';
 import { IntercepterHttpTokenService } from './services/intercepter-http-token.service';
-
+import { SidebarModule } from 'primeng/sidebar';
+import { AvatarModule } from 'primeng/avatar';
+import { AccordionModule } from 'primeng/accordion';
 @NgModule({
   declarations: [
     AppComponent,
@@ -141,7 +143,10 @@ import { IntercepterHttpTokenService } from './services/intercepter-http-token.s
     MatCheckboxModule,
     DialogModule,
     PickerComponent,
-    GraphQLModule
+    GraphQLModule,
+    SidebarModule,
+    AvatarModule,
+    AccordionModule
  ],
   providers: [
     CartService, 

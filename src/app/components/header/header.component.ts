@@ -8,6 +8,7 @@ import { CartService } from 'src/app/services/cart.service';
 import { LocalStorageCustomService } from 'src/app/services/local-storage-custom.service';
 import { CART, IMAGE_DATA_FAKE_ONE, IMAGE_DATA_FAKE_TWO, KEY_ORDER_DATA, NAME_BRANCH } from 'src/app/constants/constant-value-model';
 import { NavigationEnd, Router } from '@angular/router';
+import { Sidebar } from 'primeng/sidebar';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -29,6 +30,9 @@ export class HeaderComponent implements OnInit{
   isOnScreenDevice: boolean = false;
   isAuthen: boolean = false;
   order: Order = {};
+  @ViewChild('sidebarRef') sidebarRef!: Sidebar;
+  sidebarVisible: boolean = false;
+  isOpenCart: boolean = false;
   
   constructor(
     private router: Router, 
@@ -66,6 +70,15 @@ export class HeaderComponent implements OnInit{
       startWith(''),
       map(value => this.searchValue(value || '')),
     );
+  }
+
+  openSideBar(isOpenCart: boolean){
+    this.isOpenCart = isOpenCart;
+    this.sidebarVisible = true;
+  }
+
+  closeCallback(e: any): void {
+    this.sidebarRef.close(e);
   }
 
   selectLanguage(language: string) {

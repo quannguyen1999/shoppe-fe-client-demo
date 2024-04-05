@@ -27,3 +27,11 @@
         margin-left: 2px;
     }
 }
+
+.bg-header{
+    background-image: url("/assets/images/header-background.jpg");
+}
+
+::ng-deep .p-sidebar{
+    background-image: url("/assets/images/header-background.jpg");
+}

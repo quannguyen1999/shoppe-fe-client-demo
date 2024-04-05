@@ -1,8 +1,9 @@
 
 <div class="header-bg fixed top-0 z-20 bg-gradient-to-r from-orange-400 to-orange-600 w-full h-32"
 [style.background-image]="'url(' + headerBackgroundImage + ')'"
+[ngClass]="isOnScreenDevice ? 'hidden' : ''"
 >
-    <div class="grid col-span-2 grid-flow-row m-auto pt-1 " [ngClass]="isOnScreenDevice ? '' : 'w-8/12'">
+    <div class="grid col-span-2 grid-flow-row m-auto pt-1 w-8/12" >
         <div class="firstLine">
             <div class="grid row-span-2 grid-flow-col text-base text-white">
                 <div class="grid row-span-3 grid-flow-col w-96">
@@ -191,6 +192,7 @@
                                     
                                 </div>
                             </div>
+                            
                         
                             <div class="flex flex-row" *ngIf="order.orderDetailRequestDtoList?.length! > 0">
                                 <div class="w-1/2">
@@ -248,3 +250,171 @@
             </div>
     </div>
 </div>
+<!-- Reponsive -->
+<div class="header-bg fixed top-0 z-20 bg-gradient-to-r from-orange-400 to-orange-600 w-full"
+[style.background-image]="'url(' + headerBackgroundImage + ')'"
+*ngIf="isOnScreenDevice"
+>
+        <div class="grid grid-cols-10 m-1">
+            <div class="col-span-7">
+                <div class="grid grid-cols-10 grid-flow-row h-full cursor-pointer" (click)="redirectHomePage()">
+                    <div class="m-auto col-span-2">
+                        <mat-icon  class=" text-5xl text-end" id="icon" >shopping_basket</mat-icon>
+                    </div>
+                    <div class="my-auto text-start text-xl text-white icon-logo col-span-8">
+                        <span class="text-xl">{{nameBranch}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-span-1 m-auto">
+                <button class="text-white"  (click)="sidebarVisible = true">
+                    <mat-icon>
+                        search
+                    </mat-icon>
+                </button>
+            </div>
+            <div class="col-span-1 m-auto">
+                <button class="text-white" (click)="openSideBar(false)">
+                    <mat-icon>
+                        line_weight
+                    </mat-icon>
+                </button>
+            </div>
+            <div class="col-span-1 m-auto">
+                <button (click)="openSideBar(true)">
+                    <mat-icon class="text-white cursor-pointer"  matBadge="{{order.orderDetailRequestDtoList?.length}}" matBadgeColor="warn">shopping_cart</mat-icon>
+        
+                </button>
+                
+            </div>
+        </div>
+</div>
+<p-sidebar [(visible)]="sidebarVisible" ngClass="bg-header">
+    <ng-template pTemplate="header">
+        <div class="grid grid-cols-10 grid-flow-row h-full cursor-pointer bg-header" (click)="redirectHomePage()">
+            <div class="m-auto col-span-2">
+                <mat-icon  class=" text-5xl text-end" id="icon" >shopping_basket</mat-icon>
+            </div>
+            <div class="my-auto text-start text-xl text-white icon-logo col-span-8">
+                <span class="text-xl">{{nameBranch}}</span>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="content">
+        <div class="grid grid-rows-1 gap-1">
+            <div class="p-inputgroup h-10 m-auto pt-1" *ngIf="!isOpenCart; else notOpenCart">
+                <input type="text" pInputText placeholder="Search" class="pl-1"/>
+                <button class="text-white px-1 bg-red-500" type="button" pButton icon="pi pi-refresh" styleClass="p-button-warn">
+                    <mat-icon>search</mat-icon>
+                </button>
+            </div>
+            <ng-template #notOpenCart>
+                <div>
+                    <span class="uppercase text-start text-white font-bold text-xs">{{order.orderDetailRequestDtoList?.length! > 0 ? 'Sản phẩm mới thêm' : ' Chưa có sản phẩm nào'}}</span>
+                </div>
+                <div class="grid grid-rows-1 gap-2 bg-white p-2 overflow-x-auto" style="max-height: 200px;">
+                    <div class="flex flex-col gap-3">
+                       
+                        <div *ngFor="let item of order.orderDetailRequestDtoList">
+                            <div class="flex flex-row">
+                                <img [src]="item.image" alt="" class="w-14 rounded-full">
+                                <div class="mx-2">
+                                    <span>{{item.name!| truncateText:20}}</span>
+                                </div> 
+                                <div class="grid grid-cols-3">
+                                    <span>{{item.price | number: '1.0-0'}} </span>
+                                    <span> x {{item.quantity}}</span>
+                                    <span><button class="bg-orange-600 text-white text-right" (click)="deleteOrder(item.productId!)"><mat-icon>delete</mat-icon></button></span>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div *ngFor="let item of order.orderDetailRequestDtoList">
+                            <div class="flex flex-row">
+                                <img [src]="item.image" alt="" class="w-14 rounded-full">
+                                <div class="mx-2">
+                                    <span>{{item.name!| truncateText:20}}</span>
+                                </div> 
+                                <div class="grid grid-cols-3">
+                                    <span>{{item.price | number: '1.0-0'}} </span>
+                                    <span> x {{item.quantity}}</span>
+                                    <span><button class="bg-orange-600 text-white text-right" (click)="deleteOrder(item.productId!)"><mat-icon>delete</mat-icon></button></span>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div *ngFor="let item of order.orderDetailRequestDtoList">
+                            <div class="flex flex-row">
+                                <img [src]="item.image" alt="" class="w-14 rounded-full">
+                                <div class="mx-2">
+                                    <span>{{item.name!| truncateText:20}}</span>
+                                </div> 
+                                <div class="grid grid-cols-3">
+                                    <span>{{item.price | number: '1.0-0'}} </span>
+                                    <span> x {{item.quantity}}</span>
+                                    <span><button class="bg-orange-600 text-white text-right" (click)="deleteOrder(item.productId!)"><mat-icon>delete</mat-icon></button></span>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div *ngFor="let item of order.orderDetailRequestDtoList">
+                            <div class="flex flex-row">
+                                <img [src]="item.image" alt="" class="w-14 rounded-full">
+                                <div class="mx-2">
+                                    <span>{{item.name!| truncateText:20}}</span>
+                                </div> 
+                                <div class="grid grid-cols-3">
+                                    <span>{{item.price | number: '1.0-0'}} </span>
+                                    <span> x {{item.quantity}}</span>
+                                    <span><button class="bg-orange-600 text-white text-right" (click)="deleteOrder(item.productId!)"><mat-icon>delete</mat-icon></button></span>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-row bg-white -mt-2 p-2" *ngIf="order.orderDetailRequestDtoList?.length! > 0">
+                            <div class="w-1/2">
+                                <span>1 thêm hàng vào giỏ</span>
+                            </div>
+                            <div class="w-1/2 text-end">
+                                <button class="bg-orange-600 text-white p-2 " (click)="getPageCart()">Xem giỏ hàng</button>
+                            </div>
+                </div>
+            </ng-template>
+            
+            
+            <div class="grid grid-cols-3">
+                <button class="text-white px-1 bg-red-600 p-2 m-2 text-xs" type="button" pButton icon="pi pi-refresh" styleClass="p-button-warn">
+                    <mat-icon>notifications_none</mat-icon>
+                    Thông Báo
+                </button>
+                 <button class="text-white px-1 bg-red-600 p-2 m-2 text-xs" type="button" pButton icon="pi pi-refresh" styleClass="p-button-warn">
+                    <mat-icon>contact_support</mat-icon>
+                    Hỗ trợ
+                </button>
+                <button class="text-white px-1 bg-red-600 p-2 m-2 text-xs" type="button" pButton icon="pi pi-refresh" styleClass="p-button-warn">
+                    <mat-icon>contact_support</mat-icon>
+                    Ngôn Ngữ
+                </button>
+            </div>
+            <div class="grid grid-cols-1">
+                <button class="text-white px-1 bg-red-600 p-2 m-2 text-xs" type="button" pButton icon="pi pi-refresh" styleClass="p-button-warn">
+                    <mat-icon>account_circle</mat-icon>
+                    <span class="pl-4">
+                        Đăng Nhập
+                    </span>
+                </button>
+            </div>
+            <div class="grid grid-cols-1">
+                <button class="text-white px-1 bg-red-600 p-2 m-2 text-xs" type="button" pButton icon="pi pi-refresh" styleClass="p-button-warn">
+                    <mat-icon>how_to_reg</mat-icon>
+                    <span class="pl-4">
+                        Đăng Ký
+                    </span>
+                    
+                </button>
+            </div>
+        </div>
+    </ng-template>
+</p-sidebar>
