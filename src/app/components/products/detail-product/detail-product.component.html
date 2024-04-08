@@ -6,7 +6,7 @@
         <div style="width:100%; background-color: transparent;"> 
             <p-galleria [numVisible]="4" [value]="images" activeIndexChange="print($event)"> 
                 <ng-template pTemplate="item" let-item>
-                    <img   [src]="item.image" class="w-full cursor-pointer" [alt]="item.name" />
+                    <img   [src]="item.image" class="cursor-pointer" [ngClass]="!isOnScreenDevice ? 'w-72' : ''" [alt]="item.name" />
                 </ng-template> 
                 <ng-template pTemplate="thumbnail" let-item width="20%" class="bg-transparent mt-30"> 
                     <div class="grid grid-nogutter justify-content-center"> 
@@ -123,7 +123,7 @@
         </div>
     </div>
 </div>
-<div class="flex flex-col" [ngClass]="!isOnScreenDevice ? 'mt-96' : 'custom-margin-detail-product'" >
+<div class="flex flex-col" [ngClass]="!isOnScreenDevice ? 'mt-80' : 'custom-margin-detail-product'" >
     <div class="bg-gray-100 p-1">
         <span class="font-bold" [ngClass]="!isOnScreenDevice ? 'text-2xl' : 'text-xs pl-10'">CHI TIẾT SẢN PHẨM</span>
     </div>
