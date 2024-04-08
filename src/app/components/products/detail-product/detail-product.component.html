@@ -1,27 +1,25 @@
 <div class="card">
     <p-toast></p-toast>
 </div>
-
-<div class="grid grid-cols-7 grid-flow-row w-full h-80">
+<div class="grid grid-flow-row w-full h-80" [ngClass]="!isOnScreenDevice ? 'grid-cols-7' : 'grid-cols-1'">
     <div class="col-span-3">
         <div style="width:100%; background-color: transparent;"> 
             <p-galleria [numVisible]="4" [value]="images" activeIndexChange="print($event)"> 
                 <ng-template pTemplate="item" let-item>
-                    <img   [src]="item.image" class="w-full cursor-pointer" />
+                    <img   [src]="item.image" class="w-full cursor-pointer" [alt]="item.name" />
                 </ng-template> 
-                <ng-template pTemplate="thumbnail" let-item width="20%" class="bg-transparent mt-20"> 
+                <ng-template pTemplate="thumbnail" let-item width="20%" class="bg-transparent mt-30"> 
                     <div class="grid grid-nogutter justify-content-center"> 
-                        <img 
-                        [src]="item.image" width=100% (mouseover)="testClick(item.image)"/> 
+                        <img [src]="item.image" width=100% (mouseover)="testClick(item.image)" [alt]="item.name"/> 
                     </div> 
                 </ng-template> 
             </p-galleria> 
         </div>
     </div>
-    <div class="col-span-4 bg-gray-100 pt-12 pl-10">
+    <div class="col-span-4 bg-gray-100 pl-10" [ngClass]="!isOnScreenDevice ? 'pt-12' : '-pt-10'">
         <div class="flex flex-col leading-9">
                 <span class="text-lg ml-2">{{product.name}}</span>
-                <div class="grid grid-cols-8 grid-flow-row text-center">
+                <div class="grid grid-cols-8 grid-flow-row text-center" *ngIf="!isOnScreenDevice; else notInOnScreenDeviceDetailProductOne">
                     <div class="col-span-2">
                         <div class="flex flex-row text-orange-600">
                             <span class="mr-2 ml-2"><u>{{starFake}}</u></span> 
@@ -39,11 +37,31 @@
                         Tố cáo
                     </div>
                 </div>
-                <div class="bg-gray-200 h-14 text-2xl pt-3 pl-4 text-orange-700 w-full m-auto">
+                <ng-template #notInOnScreenDeviceDetailProductOne>
+                    <div class="grid grid-cols-2 grid-flow-row text-left">
+                        <div>
+                            <div class="flex flex-row text-orange-600">
+                                <span class="mr-2 ml-2"><u>{{starFake}}</u></span> 
+                                <mat-icon *ngFor="let item of [].constructor(starFake)">star</mat-icon>
+                            </div>
+                          
+                        </div>
+                        <div class="pl-2 border-l-gray-400">
+                            <u>3</u> Đánh giá
+                        </div>
+                        <div class="pl-2 border-l-gray-400">
+                            <u>3</u> Đã Bán
+                        </div>
+                        <div class="cursor-pointer">
+                            Tố cáo
+                        </div>
+                    </div>
+                </ng-template>
+                <div class="bg-gray-200 pl-4 text-orange-700 w-full m-auto" [ngClass]="!isOnScreenDevice ? 'h-14 text-2xl pt-3' : 'h-10 text-xl pt-1'">
                     <span> {{product.price  | number: '1.0-0'}}</span>
                 </div>
                 <div class="mt-5">
-                    <div class="grid grid-cols-5">
+                    <div class="grid grid-cols-5" *ngIf="!isOnScreenDevice; else notInOnScreenDeviceDetailProductTwo">
                         <div class="col-span-1 row-span-2">
                             Vận Chuyển
                         </div>
@@ -56,8 +74,23 @@
                             </div>
                         </div>
                     </div>
+                    <ng-template #notInOnScreenDeviceDetailProductTwo>
+                        <div class="grid grid-cols-5">
+                            <div class="col-span-2 row-span-2">
+                                Vận Chuyển
+                            </div>
+                            <div class="col-span-3">
+                                <div class="flex flex-row">
+                                    <div class="flex flex-row">
+                                        <mat-icon class="mt-1 mr-3" >shopping_cart</mat-icon>
+                                        <p>Miễn phí vận chuyển</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
                 </div>
-                <div class="grid grid-cols-5 grid-flow-row">
+                <div class="grid grid-cols-5 grid-flow-row ">
                     <div class="col-span-1 row-span-2">
                         Số Lượng
                     </div>
@@ -90,11 +123,11 @@
         </div>
     </div>
 </div>
-<div class="flex flex-col mt-96  ">
-    <div class="bg-gray-100 p-10">
-        <span class="font-bold text-2xl">CHI TIẾT SẢN PHẨM</span>
+<div class="flex flex-col" [ngClass]="!isOnScreenDevice ? 'mt-96' : 'custom-margin-detail-product'" >
+    <div class="bg-gray-100 p-1">
+        <span class="font-bold" [ngClass]="!isOnScreenDevice ? 'text-2xl' : 'text-xs pl-10'">CHI TIẾT SẢN PHẨM</span>
     </div>
-    <div class="grid grid-cols-10 grid-flow-row ml-10 mt-10 leading-10">
+    <div class="grid grid-cols-10 grid-flow-row ml-10  leading-10" [ngClass]="!isOnScreenDevice ? 'mt-10' : 'mt-1'">
         <div class="col-span-2">
             Danh Mục 
         </div>
@@ -115,8 +148,8 @@
         </div>
     </div>
     <div>
-        <div class="bg-gray-100 p-10">
-            <span class="font-bold text-2xl">MÔ TẢ SẢN PHẨM</span>
+        <div class="bg-gray-100 " [ngClass]="!isOnScreenDevice ? 'p-10' : 'p-1 pl-10'">
+            <span class="font-bold " [ngClass]="!isOnScreenDevice ? 'text-2xl' : 'text-xs'">MÔ TẢ SẢN PHẨM</span>
         </div>
         <div class="flex flex-col ml-10 mt-10 leading-8">
             <span>Thương Hiệu : LEGO / LEGO</span>
@@ -134,7 +167,7 @@
 <app-review-product></app-review-product>
 <div class="flex flex-col">
     <div class="bg-gray-100 p-10">
-        <span class="font-bold text-2xl"> CÓ THỂ BẠN CŨNG THÍCH</span>
+        <span class="font-bold" [ngClass]="!isOnScreenDevice ? 'text-2xl' :'text-xs'"> CÓ THỂ BẠN CŨNG THÍCH</span>
     </div>
     <app-products></app-products>
 </div>

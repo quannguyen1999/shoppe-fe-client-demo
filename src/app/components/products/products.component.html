@@ -1,5 +1,5 @@
-<div class="search-results grid  gap-5"
-        [ngClass]="numberOfCol != null ? numberOfCol : 'grid-cols-5'"
+<div class="search-results grid gap-5"
+        [ngClass]="handlerSize()"
         infiniteScroll
         [infiniteScrollDistance]="2"
         [infiniteScrollThrottle]="500"
@@ -11,27 +11,34 @@
                 <ng-template pTemplate="header">
                     <div class="grid grid-cols-1 relative" style="max-width: 100%; max-height: 100%; overflow: hidden;">
                         <div class="item-top col-span-1 absolute">
-                          <img [src]="product.image" class="w-fit" style="width: 100%; height: auto;">
+                          <img [src]="product.image" class="w-fit" style="width: 100%; height: auto;" alt="product.name">
                         </div>
                         <div class="item-bottom col-span-1 z-10">
-                          <img src="https://down-vn.img.susercontent.com/file/vn-50009109-4efce4541b088cd8e07f320804e8846d">
+                          <img src="https://down-vn.img.susercontent.com/file/vn-50009109-4efce4541b088cd8e07f320804e8846d" alt="product.name">
                         </div>
                       </div>
                 </ng-template>
-                <p class="break-normal">
-                    {{product.name! | truncateText: 30 }}    
+                <p class="break-normal" *ngIf="!isOnScreenDevice">
+                    {{product.name! | truncateText: 30 }}  
+                    
                 </p>
-                <p class="break-normal">
+                <p class="break-normal" *ngIf="!isOnScreenDevice">
                     {{product.description! | truncateText: 50 }}    
                 </p>
                 <ng-template pTemplate="footer">
-                    <!-- <div class="grid grid-rows-2 grid-flow-row w-full">
-                      
-                    </div> -->
-                    <div class="flex flex-row">
+                    <div class="flex flex-row" *ngIf="!isOnScreenDevice;else notInOnDevicePCard">
                         <p class="text-start text-orange-500 pr-5">{{product.price  | number: '1.0-0'}}</p>
                         <p class="text-end">Đã bán {{'0'}}</p>
                     </div>
+                    <ng-template #notInOnDevicePCard>
+                        <div class="flex flex-col">
+                            <p>
+                                {{product.name! | truncateText: 30 }}                
+                            </p>
+                            <p class="text-orange-500 pr-5">{{product.price  | number: '1.0-0'}}</p>
+                            <p class="">Đã bán {{'0'}}</p>
+                        </div>
+                    </ng-template>
                 </ng-template>
             </p-card>
         </div>

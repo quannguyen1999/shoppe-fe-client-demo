@@ -1,5 +1,4 @@
-
-<div class="flex flex-col"  class="pb-10">
+<div class="flex flex-col"  class="pb-10" *ngIf="!isOnScreenDevice; else noOnScreenDevice">
     <p-carousel [value]="listTopProductSale" [autoplayInterval]="5000"   [numVisible]="4"
     [numScroll]="1" *ngIf="!isLoading"> 
         <ng-template let-item pTemplate="item"> 
@@ -65,3 +64,73 @@
         <app-loading-util class="col-span-1 m-auto" ></app-loading-util>
     </div>
 </div>
+
+<ng-template #noOnScreenDevice>
+    <div class="flex flex-col m-auto">
+        <p-carousel [value]="listTopProductSale" [autoplayInterval]="5000"   [numVisible]="2"
+        [numScroll]="1" *ngIf="!isLoading"> 
+            <ng-template let-item pTemplate="item"> 
+                <div class="flex flex-col cursor-pointer opacity-90 hover:opacity-100 border-2 border-gray-100" (click)="detailProduct(item.id)">
+                    <div class="grid grid-cols-1 relative"  style="max-width: 100%; max-height: 100%; overflow: hidden;">
+                            <div class="item-top col-span-1 absolute">
+                                <img [src]="item.image" class="w-fit" style="width: 100%; height: auto;" alt="test">
+                            </div>
+                            <div class="item-bottom col-span-1 z-10">
+                                <img src="https://down-vn.img.susercontent.com/file/vn-50009109-4efce4541b088cd8e07f320804e8846d" alt="test">
+                            </div>
+        
+                            <div class="bg-yellow-300 text-orange-600 item-bottom col-span-1 absolute right-0 top-1">
+                                <div class="grid grid-cols-2 w-12 h-5 m-auto text-center">
+                                    <mat-icon class="text-sm">offline_bolt</mat-icon>
+                                    <span class="text-xs">-{{item.discount}}%</span>
+                                </div>
+                            </div>
+        
+                            <div class="bg-orange-600 text-white text-xs item-bottom col-span-1 absolute left-0 top-1">
+                                    <span class="m-1">Yêu Thích</span>
+                            </div>
+                    </div>
+                    
+                    <div class="text-orange-600 text-center">
+                        <div class="grid grid-cols-1 relative "  style="max-width: 100%; max-height: 100%; overflow: hidden;">
+                            <span class="text-xs">{{item.price | number: '1.0-0'}}</span> 
+                            <span class="text-xs">{{item.name}}</span>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="grid grid-cols-1 relative bg-orange-400 w-full">
+                            <div class="item-top col-span-1 absolute bg-orange-400" style="height: 30px;">
+                                <div class="m-auto">
+                                    <div class="bg-orange-700" id="percent-flash-product" style="height: 30px;">
+                                        <span class="m-auto">.</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item-bottom col-span-1 z-10 text-white">
+                                <div class="flex flex-row">
+                                    <div class="m-auto">
+                                        <mat-icon>
+                                            offline_bolt
+                                        </mat-icon>
+                                    </div>
+                                    <span class="text-xs m-auto">
+                                        Đang Bán Chạy
+                                    </span>
+                                </div>      
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-template> 
+        </p-carousel>
+    
+        <p *ngIf="listTopProductSale.length <= 0 && !isLoading" class="text-center font-bold">
+            No Data
+        </p>
+        
+        <div class="grid grid-cols-1 justify-center mt-10" *ngIf="isLoading">
+            <app-loading-util class="col-span-1 m-auto" ></app-loading-util>
+        </div>
+    </div>
+</ng-template>
+

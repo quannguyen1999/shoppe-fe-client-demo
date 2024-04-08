@@ -6,7 +6,7 @@ import { AccountService } from 'src/app/services/account.service';
 import { Order } from 'src/app/models/order.model';
 import { CartService } from 'src/app/services/cart.service';
 import { LocalStorageCustomService } from 'src/app/services/local-storage-custom.service';
-import { CART, IMAGE_DATA_FAKE_ONE, IMAGE_DATA_FAKE_TWO, KEY_ORDER_DATA, NAME_BRANCH } from 'src/app/constants/constant-value-model';
+import { CART, DATA_SIZE_DEVICE, IMAGE_DATA_FAKE_ONE, IMAGE_DATA_FAKE_TWO, KEY_ORDER_DATA, NAME_BRANCH } from 'src/app/constants/constant-value-model';
 import { NavigationEnd, Router } from '@angular/router';
 import { Sidebar } from 'primeng/sidebar';
 @Component({
@@ -53,7 +53,7 @@ export class HeaderComponent implements OnInit{
       this.isAuthen = data;
     })
     this.settingService.width$.subscribe(width => {
-      if(width <= 500){
+      if(width <= DATA_SIZE_DEVICE){
         this.isOnScreenDevice = true;
       }
     })

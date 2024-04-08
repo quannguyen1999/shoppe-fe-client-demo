@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { DEFAULT_CATEGORY_COLUMNS, PRODUCT_FILTER } from 'src/app/constants/constant-value-model';
+import { DATA_SIZE_DEVICE, DEFAULT_CATEGORY_COLUMNS, PRODUCT_FILTER } from 'src/app/constants/constant-value-model';
 import { CagegoryRequestModel, Category, ID, IMAGE, NAME } from 'src/app/models/category.model';
 import { CategoryService } from 'src/app/services/category.service';
 import { SettingService } from 'src/app/services/setting.service';
@@ -58,7 +58,7 @@ export class CategoryCarouselComponent implements OnInit{
     });
 
     this.settingService.width$.subscribe(width => {
-      if(width <= 500){
+      if(width <= DATA_SIZE_DEVICE){
         this.isOnScreenDevice = true;
         this.groupCategory = ['1','2','3','4','5']
       }

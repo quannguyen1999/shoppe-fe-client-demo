@@ -3,7 +3,8 @@ import { ProductService } from 'src/app/services/product.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'src/app/services/toastr.service';
 import { DESCRIPTION, DISCOUNT, ID, IMAGE, NAME, PRICE, Product, ProductRequestModel } from 'src/app/models/product.model';
-import { DEFAULT_PRODUCT_COLUMNS, PRODUCT_DETAIL } from 'src/app/constants/constant-value-model';
+import { DATA_SIZE_DEVICE, DEFAULT_PRODUCT_COLUMNS, PRODUCT_DETAIL } from 'src/app/constants/constant-value-model';
+import { SettingService } from 'src/app/services/setting.service';
 
 @Component({
   selector: 'app-products',
@@ -17,6 +18,7 @@ export class ProductsComponent implements OnInit{
   isLoading=false;
   currentPage=0;
   itemsPerPage=10;
+  isOnScreenDevice: boolean = false;
   productRequestModel: ProductRequestModel = {
     id: '',
     name: '',
@@ -37,13 +39,21 @@ export class ProductsComponent implements OnInit{
   constructor(private productService: ProductService,
             private router: Router,
             private activeRoute: ActivatedRoute,
-            private toastrService: ToastrService
+            private toastrService: ToastrService,
+            private settingService: SettingService
   ){}
 
   toggleLoading = () =>  this.isLoading=!this.isLoading;
 
   ngOnInit(): void {
     this.loadData();
+
+    this.settingService.width$.subscribe(width => {
+      if(width <= DATA_SIZE_DEVICE){
+        this.isOnScreenDevice = true;
+      }
+    })
+
   }
 
   // it will be called when this component gets initialized.
@@ -79,6 +89,14 @@ export class ProductsComponent implements OnInit{
 
   detailProduct(id: string){
     this.router.navigate([PRODUCT_DETAIL, id]);
+  }
+
+  handlerSize(): string{
+    if(this.isOnScreenDevice){
+      return 'grid-cols-2';
+    }
+    return this.numberOfCol ?? 'grid-cols-5';
+
   }
 
 }

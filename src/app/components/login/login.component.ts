@@ -2,8 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, Scroll } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { IMAGE_DATA_FAKE_ONE, NAME_BRANCH } from 'src/app/constants/constant-value-model';
+import { DATA_SIZE_DEVICE, IMAGE_DATA_FAKE_ONE, NAME_BRANCH } from 'src/app/constants/constant-value-model';
 import { AccountService } from 'src/app/services/account.service';
+import { SettingService } from 'src/app/services/setting.service';
 
 @Component({
   selector: 'app-login',
@@ -19,13 +20,21 @@ export class LoginComponent implements OnInit, OnDestroy{
   imageFake: string = IMAGE_DATA_FAKE_ONE;
   isQRCode: boolean = false;
   isPageRegister: boolean = true;
+  isOnScreenDevice: boolean = false;
 
   constructor(
     private formBuilderLogin: FormBuilder,
     private formBuilderRegister: FormBuilder,
     private router: Router,
-    private acountService: AccountService
-  ){}
+    private acountService: AccountService,
+    private settingService: SettingService
+  ){
+    this.settingService.width$.subscribe(width => {
+      if(width <= DATA_SIZE_DEVICE){
+        this.isOnScreenDevice = true;
+      }
+    })
+  }
 
   ngOnDestroy(): void {
     this.routerSubscription.unsubscribe();

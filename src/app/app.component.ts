@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { DATA_LOREM_FAKE, HOME, IMAGE_DATA_FAKE_ONE, LOGIN, REGISTER } from './constants/constant-value-model';
+import { DATA_LOREM_FAKE, DATA_SIZE_DEVICE, HOME, IMAGE_DATA_FAKE_ONE, LOGIN, REGISTER } from './constants/constant-value-model';
 import { SettingService } from './services/setting.service';
 
 @Component({
@@ -37,13 +37,14 @@ export class AppComponent implements OnInit, OnDestroy{
         this.isHomePage = val.url === HOME;
       }
     })
+  }
 
+  ngAfterViewInit(): void {
     this.settingService.width$.subscribe(width => {
-      if(width <= 500){
+      if(width <= DATA_SIZE_DEVICE){
         this.isOnScreenDevice = true;
       }
     })
-
-
+    
   }
 }

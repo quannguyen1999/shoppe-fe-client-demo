@@ -1,11 +1,12 @@
 import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, ActivatedRouteSnapshot, ActivationEnd, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
-import { DEFAULT_PRODUCT_COLUMNS, NAME_BRANCH } from 'src/app/constants/constant-value-model';
+import { DATA_SIZE_DEVICE, DEFAULT_PRODUCT_COLUMNS, NAME_BRANCH } from 'src/app/constants/constant-value-model';
 import { ImageCommon } from 'src/app/models/image-common.model';
 import { Product, ProductRequestModel } from 'src/app/models/product.model';
 import { CartService } from 'src/app/services/cart.service';
 import { ProductService } from 'src/app/services/product.service';
+import { SettingService } from 'src/app/services/setting.service';
 import { ToastrService } from 'src/app/services/toastr.service';
 
 @Component({
@@ -23,6 +24,7 @@ export class DetailProductComponent implements OnInit {
     isGetTopProduct: false,
     isSuggestProduct: false
   };
+  isOnScreenDevice: boolean = false;
   product: Product = {
     id: 0,
     name: '',
@@ -59,13 +61,14 @@ export class DetailProductComponent implements OnInit {
             private messageService: MessageService,
             private productService: ProductService,
             private routerActive: ActivatedRoute,
-            private toastrService: ToastrService
+            private toastrService: ToastrService,
+            private settingService: SettingService
     ){
       router.events.subscribe((val) => {
         if(val instanceof ActivationEnd){
           this.productRequestModel.id = val.snapshot.params['id'];
-          this.productService.getListProduct(0, 1, DEFAULT_PRODUCT_COLUMNS, this.productRequestModel).subscribe(
-            (data)=>{
+          this.productService.getListProduct(0, 1, DEFAULT_PRODUCT_COLUMNS, this.productRequestModel).subscribe({
+            next: data => {
               this.product = data.data![0];
               this.listImageFake = [this.product.image!];
               this.images = [{id: 1, type:'image', image: this.product.image!},
@@ -74,10 +77,16 @@ export class DetailProductComponent implements OnInit {
               {id: 4, type:'image', image: this.product.image!}];
               this.cities = ['Hà nội', 'Hồ Chí Minh']
             },
-            (error)=>{
-              this.toastrService.getPopUpErrorTypeString("Internal Server Error");
+            error: data => {
+              this.toastrService.getPopUpInternalServerError();
             }
-          )
+          })
+        };
+    });
+
+      this.settingService.width$.subscribe(width => {
+        if(width <= DATA_SIZE_DEVICE){
+          this.isOnScreenDevice = true;
         }
       })
   }

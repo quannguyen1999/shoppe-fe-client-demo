@@ -1,9 +1,9 @@
 <p-toast></p-toast>
 <app-header [isAuthorization]="isLoginPage || isRegisterPage"></app-header>
 <div class="w-full" [ngClass]="isLoginPage || isRegisterPage ? 'bg-login' : 'bg-app'"
-        [ngClass]="isOnScreenDevice ? 'mt-20' : 'mt-32'"
->
-    <div class="m-auto flex flex-col">
+        [ngStyle]="{'margin-top': isOnScreenDevice ? '5rem' : '8rem'}"
+        >
+    <div class="m-auto flex flex-col ">
         <div class="m-auto" [ngClass]="isOnScreenDevice ? '' : 'content'">
             <router-outlet></router-outlet>
         </div>
@@ -13,4 +13,4 @@
     </div>
 </div>
 
-<app-chat></app-chat>
+<app-chat *ngIf="!isOnScreenDevice"></app-chat>

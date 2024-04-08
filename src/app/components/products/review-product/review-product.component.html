@@ -1,11 +1,11 @@
 <div class="flex flex-col">
     <div class="bg-gray-100 p-5 mb-5">
-        <span class="font-bold text-2xl uppercase">Đánh Giá Sản Phẩm</span>
+        <span class="font-bold text-2xl uppercase" [ngClass]="!isOnScreenDevice ? 'text-2xl' : 'text-xs'">Đánh Giá Sản Phẩm</span>
     </div>
-    <div class="grid grid-cols-10 grid-flow-row bg-orange-200">
+    <div class="grid grid-flow-row bg-orange-200" [ngClass]="!isOnScreenDevice ? 'grid-cols-10 ' :'grid-cols-1'">
         <div class="col-span-2">
-            <div class="flex flex-col text-center m-10">
-                <div class="text-orange-600 text-2xl">
+            <div class="flex flex-col text-center" [ngClass]="!isOnScreenDevice ? 'm-10' : 'm-1'">
+                <div class="text-orange-600 " [ngClass]="!isOnScreenDevice ? 'text-2xl' : 'text-xs'">
                     <span class="text-4xl">5</span> trên <span>5</span>
                 </div>
                 <div>
@@ -13,8 +13,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-span-8 mt-10">
-            <div class="flex flex-row gap-5">
+        <div class="" [ngClass]="!isOnScreenDevice ? 'mt-10' : 'mt-1'">
+            <div  [ngClass]="!isOnScreenDevice ? 'flex flex-row gap-5' : 'grid grid-cols-4 gap-3'">
                 <div class="border-2 border-black cursor-pointer hover:border-orange-600 hover:text-orange-500 border-solid p-2">
                     <span>Tất Cả</span>
                 </div>
@@ -44,13 +44,13 @@
     </div>
     <div class="flex flex-col">
         <div class="grid grid-cols-10"  *ngFor="let item of [].constructor(listReview)">
-            <div class="col-span-1">
+            <div class=""  [ngClass]="!isOnScreenDevice ? 'col-span-1' : 'col-span-3'">
                 <div class="bg-gray-50 m-5 ml-10 border-2 border-black p-2 cursor-pointer">
                     <mat-icon>shopping_cart</mat-icon>
                 </div>
                
             </div>
-            <div class="col-span-9">
+            <div class=""  [ngClass]="!isOnScreenDevice ? 'col-span-9' : 'col-span-7'">
                 <div class="flex flex-col mt-4 gap-2">
                     <div>
                         <span>nick****name</span>
@@ -65,11 +65,23 @@
                     <div class="">
                         Địt mọe hàng như cái đầu bùi
                     </div>
-                    <div class="flex flex-row">
+                    <div class="flex flex-row" *ngIf="!isOnScreenDevice; else notOnScreenDevice">
                         <img class="w-24" [src]="imageFake" alt="">
                         <img class="w-24" [src]="imageFake" alt="">
                         <img class="w-24" [src]="imageFake" alt="">
                     </div>
+                    <ng-template #notOnScreenDevice>
+                        <p-accordion [activeIndex]="0">
+                            <p-accordionTab header="Images">
+                                <div class="grid grid-cols-3">
+                                    <img class="w-24" [src]="imageFake" alt="">
+                                    <img class="w-24" [src]="imageFake" alt="">
+                                    <img class="w-24" [src]="imageFake" alt="">
+                                </div>
+                            </p-accordionTab>
+                        </p-accordion>
+                    </ng-template>
+                    
                     <div class="flex flex-row">
                         <mat-icon class="text-gray-400">shopping_cart</mat-icon>
                         <span class="text-xl ml-2">3</span>

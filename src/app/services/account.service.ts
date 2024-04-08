@@ -93,12 +93,12 @@ export class AccountService {
   }
 
   handlerSaveToken(response: any) {
-    this.getInfo().subscribe((data)=>{
-      this.localStorageCustom.setDataInStorage(KEY_USERNAME, data.username);
-    })
     this.accountSubject.next(true);
     localStorage.setItem(KEY_ACCESS_TOKEN, response.access_token);
     localStorage.setItem(KEY_REFRESH_TOKEN, response.refresh_token);
+    this.getInfo().subscribe((data)=>{
+      this.localStorageCustom.setDataInStorage(KEY_USERNAME, data.username);
+    })
   }
 
   logout(){
