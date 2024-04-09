@@ -70,6 +70,7 @@ import { IntercepterHttpTokenService } from './services/intercepter-http-token.s
 import { SidebarModule } from 'primeng/sidebar';
 import { AvatarModule } from 'primeng/avatar';
 import { AccordionModule } from 'primeng/accordion';
+import { InputOtpModule } from 'primeng/inputotp';
 @NgModule({
   declarations: [
     AppComponent,
@@ -146,7 +147,8 @@ import { AccordionModule } from 'primeng/accordion';
     GraphQLModule,
     SidebarModule,
     AvatarModule,
-    AccordionModule
+    AccordionModule,
+    InputOtpModule
  ],
   providers: [
     CartService, 

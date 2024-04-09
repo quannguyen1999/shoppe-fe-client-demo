@@ -102,7 +102,7 @@
                 <span class="text-gray-400">Bạn mới biết đến {{nameBranch}}? <span  class="text-orange-600 m-3 cursor-pointer" (click)="replacePage()">Đăng ký</span></span>
             </div>
         </form>
-        <form class="bg-white flex flex-col p-5 m-5 max-w-md h-auto shadow-2xl w-fit" *ngIf="isPageRegister" [formGroup]="formRegister">
+        <form class="bg-white flex flex-col p-5 m-5 max-w-md h-auto shadow-2xl " [ngClass]="!isOnScreenDevice ? 'w-full' : 'w-fit'" *ngIf="isPageRegister && !isConfirmCode; else onConfirmCode" [formGroup]="formRegister">
             <div class="flex flex-row items-start">
                 <div class="m-auto">
                     <span class="text-2xl">Đăng Ký</span>
@@ -110,16 +110,16 @@
             </div>
             <div>
                 <input type="number" 
-                formControlName="phone" 
+                formControlName="username" 
                 placeholder="Số điện thoại" 
                 required class="w-full border-2 border-solid"
-                [ngClass]="formRegister.get('phone')?.hasError('phone') && formRegister.get('phone')?.touched ? 'border-red-600 p-4 mt-6 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent' :'border-gray-200 p-4 mt-6 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent'"
+                [ngClass]="formRegister.get('username')?.hasError('username') && formRegister.get('username')?.touched ? 'border-red-600 p-4 mt-6 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent' :'border-gray-200 p-4 mt-6 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent'"
                 >
             </div>
-            <div class="mx-2"  *ngIf="formRegister.get('phone')?.hasError('required') && formRegister.get('phone')?.touched">
+            <div class="mx-2"  *ngIf="formRegister.get('username')?.hasError('required') && formRegister.get('username')?.touched">
                 <span class="text-red-600">Phone is required</span> 
             </div>
-            <div class="mx-2"  *ngIf="formRegister.get('phone')?.hasError('minlength')  && formRegister.get('phone')?.touched">
+            <div class="mx-2"  *ngIf="formRegister.get('username')?.hasError('minlength')  && formRegister.get('username')?.touched">
                 <span class="text-red-600">phone is require 10 character</span> 
             </div>
             <div>
@@ -152,6 +152,28 @@
                 <span class="text-gray-400">Bạn đã có tài khoản? <span class="text-orange-600 m-3 cursor-pointer" (click)="replacePage()">Đăng nhập</span></span>
             </div>
         </form>
+
+        <ng-template #onConfirmCode>
+            <div class="bg-white flex flex-col p-5 m-5 max-w-md h-auto shadow-2xl " [ngClass]="!isOnScreenDevice ? 'w-full' : 'w-fit'" *ngIf="isPageRegister">
+                <div class="flex flex-row items-start">
+                    <div class="m-auto">
+                        <span class="text-2xl" >Xác minh</span>
+                    </div>
+                </div>
+                <div class="m-auto mt-10">
+                    <p-inputOtp [(ngModel)]="codeVerify"></p-inputOtp>
+                </div>
+                <div>
+                    <button (click)="submitCodeVerfiy()" class="uppercase w-full mt-5 p-4 bg-orange-600 text-white" [ngClass]="codeVerify == undefined || codeVerify < 4 ? 'bg-orange-100 text-black cursor-not-allowed' : 'bg-orange-600 text-white '">Xác nhận</button>
+                </div>
+                <div *ngIf="isQRCode"  class="text-center text-xs my-4">
+                    <a href="#" class="text-blue-500">Bằng việc đăng kí, bạn đã đồng ý với {{nameBranch}}</a>
+                </div>
+            </div>
+        </ng-template>
+
+        
+        
         
     </div>
 </div>

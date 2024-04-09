@@ -3,8 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, Scroll } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { DATA_SIZE_DEVICE, IMAGE_DATA_FAKE_ONE, NAME_BRANCH } from 'src/app/constants/constant-value-model';
+import { Account } from 'src/app/models/account.model';
 import { AccountService } from 'src/app/services/account.service';
 import { SettingService } from 'src/app/services/setting.service';
+import { ToastrService } from 'src/app/services/toastr.service';
 
 @Component({
   selector: 'app-login',
@@ -17,9 +19,11 @@ export class LoginComponent implements OnInit, OnDestroy{
   private routerSubscription!: Subscription;
   formLogin!: FormGroup;
   formRegister!: FormGroup;
+  codeVerify : number = 1111;
   imageFake: string = IMAGE_DATA_FAKE_ONE;
   isQRCode: boolean = false;
   isPageRegister: boolean = true;
+  isConfirmCode: boolean = false;
   isOnScreenDevice: boolean = false;
 
   constructor(
@@ -27,7 +31,8 @@ export class LoginComponent implements OnInit, OnDestroy{
     private formBuilderRegister: FormBuilder,
     private router: Router,
     private acountService: AccountService,
-    private settingService: SettingService
+    private settingService: SettingService,
+    private toastrService: ToastrService
   ){
     this.settingService.width$.subscribe(width => {
       if(width <= DATA_SIZE_DEVICE){
@@ -53,7 +58,7 @@ export class LoginComponent implements OnInit, OnDestroy{
     });
 
     this.formRegister = this.formBuilderRegister.group({
-      phone: ['', [Validators.required, Validators.minLength(10)]]
+      username: ['', [Validators.required, Validators.minLength(10)]]
     });
   }
 
@@ -71,6 +76,26 @@ export class LoginComponent implements OnInit, OnDestroy{
   }
 
   submitRegister(){
-    console.log('register work')
+    const account: Account = {
+      username: this.formRegister.value.username
+    }
+    this.acountService.registerAccount(account).subscribe({
+      next: data => {
+        this.isConfirmCode = true;
+      },
+      error: data => {
+        this.toastrService.getPopUpInternalServerError();
+      }
+    });
+   
+  }
+
+  submitCodeVerfiy(){
+    console.log(this.codeVerify)
+    if(this.codeVerify == undefined || this.codeVerify < 4){
+      this.toastrService.getPopUpErrorTypeString("Invalid code");
+      return;
+    };
+    this.toastrService.getPopUpSuccess("Đăng Ký Thành Công");
   }
 }

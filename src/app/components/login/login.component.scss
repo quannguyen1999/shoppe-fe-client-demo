@@ -8,3 +8,8 @@
     background-image: url("/assets/images/header-background.jpg");
     opacity: 0.8;
 }
+
+::ng-deep .p-inputtext{
+    border: 1px solid black;
+    height: 50px;
+}

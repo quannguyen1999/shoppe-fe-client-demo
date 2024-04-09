@@ -6,6 +6,8 @@ import { ToastrService } from './toastr.service';
 import { Observable, Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { ACCOUNT_INFO, ACCOUNT_REFRESH_TOKEN, ACCOUNT_TOKEN, HOME, KEY_ACCESS_TOKEN, KEY_NUMBER_TRY_REQUEST, KEY_REFRESH_TOKEN, KEY_USERNAME } from '../constants/constant-value-model';
+import { Account } from '../models/account.model';
+import { ACCOUNT_REGISTER } from './api-value';
 
 
 
@@ -37,6 +39,10 @@ export class AccountService {
         this.toastrService.getPopUpErrorTypeString("Invalid username or password");
       }
     });
+  }
+
+  registerAccount(account: Account) {
+    return this.http.post(ACCOUNT_REGISTER, account);
   }
 
   requestRefreshToken() {
