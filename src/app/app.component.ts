@@ -3,6 +3,8 @@ import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { DATA_LOREM_FAKE, DATA_SIZE_DEVICE, HOME, IMAGE_DATA_FAKE_ONE, LOGIN, REGISTER } from './constants/constant-value-model';
 import { SettingService } from './services/setting.service';
+import { MenuItem } from 'primeng/api';
+import { ToastrService } from './services/toastr.service';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +12,8 @@ import { SettingService } from './services/setting.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy{
-
+  tooltipItems: MenuItem[] | undefined;
+  
   //Init
   private routerSubscription!: Subscription;
   dataLoremFake: string = DATA_LOREM_FAKE;
@@ -20,7 +23,7 @@ export class AppComponent implements OnInit, OnDestroy{
   isHomePage: boolean = false;
   isOnScreenDevice: boolean = false;
 
-  constructor(private router: Router, private settingService: SettingService){}
+  constructor(private router: Router, private toastrService: ToastrService, private settingService: SettingService){}
 
   ngOnDestroy(): void {
     // Unsubscribe from the router events when the component is destroyed
@@ -37,7 +40,29 @@ export class AppComponent implements OnInit, OnDestroy{
         this.isHomePage = val.url === HOME;
       }
     })
-  }
+
+    this.tooltipItems = [
+        {
+            icon: 'pi pi-facebook',
+            label: 'facebook',
+            command: () => {
+                this.toastrService.getPopUpSuccess("facebook work");
+            }
+        },
+        {
+            icon: 'pi pi-phone',
+            command: () => {
+              this.toastrService.getPopUpSuccess("phone work");
+            }
+        },
+        {
+            icon: 'pi pi-instagram',
+            command: () => {
+              this.toastrService.getPopUpSuccess("instagram work");
+            }
+        }
+      ];
+    }
 
   ngAfterViewInit(): void {
     this.settingService.width$.subscribe(width => {

@@ -23,3 +23,31 @@
 .bg-login{
     background-image: url("/assets/images/body-background.jpg");
 }
+
+::ng-deep .p-speeddial-action{
+    background-image: url("/assets/images/header-background.jpg");
+    color: white;
+}
+
+:host ::ng-deep {
+    .speeddial-tooltip-demo {
+        .p-speeddial-direction-up {
+            &.speeddial-left {
+                left: 0;
+                bottom: 0;
+            }
+
+            &.speeddial-right {
+                right: 0;
+                bottom: 0;
+            }
+        }
+    }
+    .p-speeddial-button{
+        background-image: url("/assets/images/body-background.jpg");
+        height: 40px;
+        width: 40px;
+        color: white;
+        
+    }
+}

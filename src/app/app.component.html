@@ -2,7 +2,7 @@
     <p-toast></p-toast>
     <p-toast position="bottom-center" key="bc"></p-toast>
 </div>
-<app-header [isAuthorization]="isLoginPage || isRegisterPage"></app-header>
+<app-header [isAuthorization]="isLoginPage || isRegisterPage"></app-header> 
 <div class="w-full" [ngClass]="isLoginPage || isRegisterPage ? 'bg-login' : 'bg-app'"
         [ngStyle]="{'margin-top': !isOnScreenDevice ? '150px' : '70px'}"
         >
@@ -10,7 +10,7 @@
         <div class="m-auto" [ngClass]="isOnScreenDevice ? '' : 'content'">
             <router-outlet></router-outlet>
         </div>
-        <div class="bg-gray-100 border-t-4 border-orange-600 border-solid">
+        <div class="bg-gray-100 border-t-4 border-orange-600 border-solid ">
             <app-footer></app-footer>
         </div>
     </div>
@@ -18,3 +18,11 @@
 
 
 <app-chat *ngIf="!isOnScreenDevice"></app-chat>
+
+
+<div class="card header-bg bg-red-400 fixed top-96 z-30 black w-fit"  style="position: fixed; right: 10px;" *ngIf="isOnScreenDevice">
+    <div class="speeddial-tooltip-demo">
+        <p-toast></p-toast>
+        <p-speedDial [model]="tooltipItems!" className="speeddial-right" direction="up" ></p-speedDial>
+    </div>
+</div>

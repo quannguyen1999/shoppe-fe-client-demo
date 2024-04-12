@@ -71,6 +71,7 @@ import { SidebarModule } from 'primeng/sidebar';
 import { AvatarModule } from 'primeng/avatar';
 import { AccordionModule } from 'primeng/accordion';
 import { InputOtpModule } from 'primeng/inputotp';
+import { SpeedDialModule } from 'primeng/speeddial';
 @NgModule({
   declarations: [
     AppComponent,
@@ -148,7 +149,8 @@ import { InputOtpModule } from 'primeng/inputotp';
     SidebarModule,
     AvatarModule,
     AccordionModule,
-    InputOtpModule
+    InputOtpModule,
+    SpeedDialModule 
     
  ],
   providers: [

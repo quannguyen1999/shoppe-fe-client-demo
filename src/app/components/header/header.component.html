@@ -1,4 +1,3 @@
-
 <div class="header-bg fixed top-0 z-20 bg-gradient-to-r from-orange-400 to-orange-600 w-full h-32"
 [style.background-image]="'url(' + headerBackgroundImage + ')'"
 [ngClass]="isOnScreenDevice ? 'hidden' : ''"
@@ -161,7 +160,7 @@ style="min-width: 1300px;"
                                     </mat-option>
                                 </mat-autocomplete>
                           </form> 
-                        <button type="button" pButton icon="pi pi-refresh" styleClass="p-button-primary" class="bg-red-500 text-white p-4" >
+                        <button type="button" pButton styleClass="p-button-primary" class="bg-red-500 text-white p-4" >
                             <mat-icon>search</mat-icon>
                         </button> 
                     </div>
@@ -225,7 +224,7 @@ style="min-width: 1300px;"
                 <div class="flex  w-1/2">
                     <div class="p-inputgroup h-10 m-auto">
                         <input type="text" pInputText placeholder="{{nameBranch}} THỜI TRANG" class="pl-1"/>
-                        <button class="text-white px-6 bg-red-700" type="button" pButton icon="pi pi-refresh" styleClass="p-button-warn">
+                        <button class="text-white px-6 bg-red-700" type="button" pButton  styleClass="p-button-warn">
                             <mat-icon>search</mat-icon>
                         </button>
                     </div>
@@ -356,15 +355,15 @@ style="min-width: 1300px;"
             
             
             <div class="grid grid-cols-3">
-                <button class="text-white px-1 bg-red-600 p-2 m-2 text-xs" type="button" pButton icon="pi pi-refresh" styleClass="p-button-warn">
+                <button class="text-white px-1 bg-red-600 p-2 m-2 text-xs" type="button" pButton  styleClass="p-button-warn">
                     <mat-icon>notifications_none</mat-icon>
                     Thông Báo
                 </button>
-                 <button class="text-white px-1 bg-red-600 p-2 m-2 text-xs" type="button" pButton icon="pi pi-refresh" styleClass="p-button-warn">
+                 <button class="text-white px-1 bg-red-600 p-2 m-2 text-xs" type="button" pButton  styleClass="p-button-warn">
                     <mat-icon>contact_support</mat-icon>
                     Hỗ trợ
                 </button>
-                <button class="text-white px-1 bg-red-600 p-2 m-2 text-xs" type="button" pButton icon="pi pi-refresh" styleClass="p-button-warn">
+                <button class="text-white px-1 bg-red-600 p-2 m-2 text-xs" type="button" pButton  styleClass="p-button-warn">
                     <mat-icon>contact_support</mat-icon>
                     Ngôn Ngữ
                 </button>
@@ -375,7 +374,7 @@ style="min-width: 1300px;"
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpCsTe3aMFLzOkE6XsCliWxemFMttaPPMtw-d6UEcxnQ&s"  class="w-1/2 m-auto cursor-pointer rounded-full" alt="">
                 </div> -->
                 <div class="grid grid-cols-1">
-                    <button class="text-white px-1 bg-red-600 p-2 m-2 text-xs" type="button" pButton icon="pi pi-refresh" styleClass="p-button-warn">
+                    <button class="text-white px-1 bg-red-600 p-2 m-2 text-xs" type="button" pButton  styleClass="p-button-warn">
                         <mat-icon>perm_identity</mat-icon>
                         <span class="pl-4">
                             Thông tin cá nhân
@@ -383,7 +382,7 @@ style="min-width: 1300px;"
                     </button>
                 </div>
                 <div class="grid grid-cols-1">
-                    <button class="text-white px-1 bg-red-600 p-2 m-2 text-xs" type="button" pButton icon="pi pi-refresh" styleClass="p-button-warn">
+                    <button class="text-white px-1 bg-red-600 p-2 m-2 text-xs" type="button" pButton  styleClass="p-button-warn">
                         <mat-icon>history</mat-icon>
                         <span class="pl-4">
                             Lịch sử đặt hàng
@@ -391,7 +390,7 @@ style="min-width: 1300px;"
                     </button>
                 </div>
                 <div class="grid grid-cols-1">
-                    <button class="text-white px-1 bg-red-600 p-2 m-2 text-xs" type="button" pButton icon="pi pi-refresh" styleClass="p-button-warn" (click)="logout()">
+                    <button class="text-white px-1 bg-red-600 p-2 m-2 text-xs" type="button" pButton  styleClass="p-button-warn" (click)="logout()">
                         <mat-icon>exit_to_app</mat-icon>
                         <span class="pl-4">
                             Đăng Xuất
@@ -402,7 +401,7 @@ style="min-width: 1300px;"
 
             <ng-template #notOnAuthen>
                 <div class="grid grid-cols-1">
-                    <button class="text-white px-1 bg-red-600 p-2 m-2 text-xs" type="button" pButton icon="pi pi-refresh" styleClass="p-button-warn" (click)="redirectLoginPage()">
+                    <button class="text-white px-1 bg-red-600 p-2 m-2 text-xs" type="button" pButton styleClass="p-button-warn" (click)="redirectLoginPage()">
                         <mat-icon>account_circle</mat-icon>
                         <span class="pl-4">
                             Đăng Nhập
@@ -410,7 +409,7 @@ style="min-width: 1300px;"
                     </button>
                 </div>
                 <div class="grid grid-cols-1">
-                    <button class="text-white px-1 bg-red-600 p-2 m-2 text-xs" type="button" pButton icon="pi pi-refresh" styleClass="p-button-warn" (click)="redirectRegisterPage()">
+                    <button class="text-white px-1 bg-red-600 p-2 m-2 text-xs" type="button" pButton styleClass="p-button-warn" (click)="redirectRegisterPage()">
                         <mat-icon>how_to_reg</mat-icon>
                         <span class="pl-4">
                             Đăng Ký
