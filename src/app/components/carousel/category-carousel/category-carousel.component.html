@@ -22,7 +22,7 @@
                             <img [src]="item.image" alt=""  class="w-10 block m-auto">
                         </div>
                         <div class="grid-rows-12 text-center justify-center mx-auto">
-                            <span class="text-center break-normal grid-rows-2 m-auto text-xs">{{item.name!}}</span>
+                            <span class="text-center break-normal grid-rows-2 m-auto text-xs">{{item.name! | truncateText: 18}}</span>
                         </div>
                     </div>
                 </ng-container>
