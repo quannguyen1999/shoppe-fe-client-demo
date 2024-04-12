@@ -19,8 +19,6 @@ export class IntercepterHttpTokenService implements HttpInterceptor {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler):  Observable<HttpEvent<Object>> {
-    console.log("fuck");
-    console.log(this.accountService.getToken());
     if(this.accountService.getToken() !== null){
       console.log("ok")
       request = request.clone({

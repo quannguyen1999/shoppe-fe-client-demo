@@ -7,7 +7,8 @@ import { Observable, Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { ACCOUNT_INFO, ACCOUNT_REFRESH_TOKEN, ACCOUNT_TOKEN, HOME, KEY_ACCESS_TOKEN, KEY_NUMBER_TRY_REQUEST, KEY_REFRESH_TOKEN, KEY_USERNAME } from '../constants/constant-value-model';
 import { Account } from '../models/account.model';
-import { ACCOUNT_REGISTER } from './api-value';
+import { ACCOUNT_REGISTER, ACCOUNT_VERIFY } from './api-value';
+import { Otp } from '../models/otp.model';
 
 
 
@@ -31,18 +32,15 @@ export class AccountService {
       '?grantType=custom_password' +
       '&userName=' + username +
       '&password=' + password;
-    this.http.post(authorizationUrl, {}).subscribe({
-      next: data => {
-        this.handlerSaveToken(data);
-      },
-      error: data => {
-        this.toastrService.getPopUpErrorTypeString("Invalid username or password");
-      }
-    });
+    return this.http.post(authorizationUrl, {});
   }
 
   registerAccount(account: Account) {
     return this.http.post(ACCOUNT_REGISTER, account);
+  }
+
+  verifyOtp(otp: Otp) {
+    return this.http.post(ACCOUNT_VERIFY, otp);
   }
 
   requestRefreshToken() {

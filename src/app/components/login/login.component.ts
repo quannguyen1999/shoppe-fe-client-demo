@@ -4,6 +4,7 @@ import { Router, Scroll } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { DATA_SIZE_DEVICE, IMAGE_DATA_FAKE_ONE, NAME_BRANCH } from 'src/app/constants/constant-value-model';
 import { Account } from 'src/app/models/account.model';
+import { Otp } from 'src/app/models/otp.model';
 import { AccountService } from 'src/app/services/account.service';
 import { SettingService } from 'src/app/services/setting.service';
 import { ToastrService } from 'src/app/services/toastr.service';
@@ -63,8 +64,17 @@ export class LoginComponent implements OnInit, OnDestroy{
   }
 
   submitLoginPage(){
-    this.acountService.requestLoginPage(this.formLogin.value?.username, this.formLogin.value?.password);
-    this.router.navigate(['/home']);
+    this.acountService.requestLoginPage(this.formLogin.value?.username, this.formLogin.value?.password).subscribe({
+      next: data => {
+        this.router.navigate(['/home']);
+        this.toastrService.getPopUpSuccess("Đăng Nhập Thành Công")
+        this.acountService.handlerSaveToken(data);
+      },
+      error: data => {
+        this.toastrService.getPopUpErrorTypeString("Invalid username or password");
+      }
+    });;
+    
   }
 
   replacePage(){
@@ -82,8 +92,13 @@ export class LoginComponent implements OnInit, OnDestroy{
     this.acountService.registerAccount(account).subscribe({
       next: data => {
         this.isConfirmCode = true;
+        this.toastrService.getPopUpSuccess("Mã Otp đã gữi qua điện thoại của bạn");
       },
       error: data => {
+        if(data.status == 400){
+          this.toastrService.getPopUpErrorTypeString(data.error.details[0]);
+          return;
+        }
         this.toastrService.getPopUpInternalServerError();
       }
     });
@@ -91,11 +106,28 @@ export class LoginComponent implements OnInit, OnDestroy{
   }
 
   submitCodeVerfiy(){
-    console.log(this.codeVerify)
     if(this.codeVerify == undefined || this.codeVerify < 4){
       this.toastrService.getPopUpErrorTypeString("Invalid code");
-      return;
     };
-    this.toastrService.getPopUpSuccess("Đăng Ký Thành Công");
+    const otp: Otp = {
+      username: this.formRegister.value.username,
+      value: this.codeVerify
+    }
+    this.acountService.verifyOtp(otp).subscribe({
+      next: data => {
+        this.toastrService.getPopUpSuccess("Đăng Ký Thành Công");
+        this.toastrService.getPopUpSuccess("Mật khẩu đã gửi qua sim của bạn");
+        this.isConfirmCode = false;
+        this.isPageRegister = false;
+      },
+      error: data => {
+        if(data.status == 400){
+          this.toastrService.getPopUpErrorTypeString(data.error.details[0]);
+          return;
+        }
+        this.toastrService.getPopUpInternalServerError();
+      }
+    });
+    
   }
 }
