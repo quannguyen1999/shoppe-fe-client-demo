@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Cart } from 'src/app/models/cart.model';
 import {SelectionModel} from '@angular/cdk/collections';
@@ -14,6 +14,9 @@ import { ToastrService } from 'src/app/services/toastr.service';
   styleUrls: ['./detail-cart.component.scss']
 })
 export class DetailCartComponent {
+
+  @Input() isOnScreenDevice: boolean = false;
+
   //Define value
   nameBranch: string = NAME_BRANCH;
   isProcessOrderAddress: boolean = false;
@@ -146,6 +149,11 @@ export class DetailCartComponent {
         this.toastrService.getPopUpErrorTypeString("Tối thiểu 1 order");
       }
       this.isProcessOrderAddress = true;
+    }
+
+    getDisplayedColumns(): string[] {
+      return this.displayedColumns;
+        // .filter(cd => cd !== 'product');
     }
 
 

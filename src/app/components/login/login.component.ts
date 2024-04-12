@@ -87,7 +87,7 @@ export class LoginComponent implements OnInit, OnDestroy{
 
   submitRegister(){
     const account: Account = {
-      username: this.formRegister.value.username
+      username: this.formRegister.value?.username
     }
     this.acountService.registerAccount(account).subscribe({
       next: data => {

@@ -28,6 +28,7 @@ export class HeaderComponent implements OnInit{
   filteredSearchInput!: Observable<string[]>;
   isShopping!: boolean;
   isOnScreenDevice: boolean = false;
+  isInputSearchOpen: boolean = false;
   isAuthen: boolean = false;
   order: Order = {};
   @ViewChild('sidebarRef') sidebarRef!: Sidebar;
@@ -72,6 +73,8 @@ export class HeaderComponent implements OnInit{
     );
   }
 
+
+
   openSideBar(isOpenCart: boolean){
     this.isOpenCart = isOpenCart;
     this.sidebarVisible = true;
@@ -96,10 +99,12 @@ export class HeaderComponent implements OnInit{
   }
 
   redirectHomePage(){
+    this.sidebarVisible = false;
     this.router.navigate(['/']);
   }
 
   getPageCart(){
+    this.sidebarVisible = false;
     this.router.navigate([CART]);
   }
 
@@ -108,8 +113,19 @@ export class HeaderComponent implements OnInit{
   }
 
   logout(){
+    this.sidebarVisible = false;
     this.accountService.logout();
   }
 
+  redirectLoginPage(){
+    this.sidebarVisible = false;
+    this.router.navigate(['/login']);
+  }
+
+  redirectRegisterPage(){
+    this.sidebarVisible = false;
+    this.router.navigate(['/register']);
+
+  }
 
 }

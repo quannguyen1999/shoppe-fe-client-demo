@@ -6,6 +6,7 @@ import { Subject } from 'rxjs';
 import { Order, OrderDetailRequestDto } from '../models/order.model';
 import { AccountService } from './account.service';
 import { KEY_ORDER_DATA } from '../constants/constant-value-model';
+import { ToastrService } from './toastr.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,9 +18,10 @@ export class CartService {
   };
   public dataSubject = new Subject<Order>();
 
-  constructor(private messageService: MessageService,
+  constructor(private toastrService: ToastrService,
               private localStorageService: LocalStorageCustomService,
-              private accountService: AccountService
+              private accountService: AccountService,
+
     ) { 
      
   }
@@ -55,7 +57,7 @@ export class CartService {
       this.order.orderDetailRequestDtoList?.push(orderDetail);
     }
     this.localStorageService.setDataInStorage(KEY_ORDER_DATA, this.order);
-    this.messageService.add({ severity: 'success', summary: '', detail: 'Thêm giỏ hàng thành công' });
+    this.toastrService.getPopUpSuccess("Thêm Vào Giỏ Hàng Thành Công");
     this.dataSubject.next(this.order);
   }
 

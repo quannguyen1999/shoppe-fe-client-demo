@@ -41,6 +41,8 @@ export const CATEGORY: string = '/category';
 
 
 // Define common value
+export const ERROR_VALUE: string = "error";
+export const SUCCESS_VALUE: string = "success";
 export const MAIN_COLOR: string = 'bg-gray-600';
 export const NAME_BRANCH = "Ecommer";
 export const DATA_LOREM: string = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam venenatis et lorem sit amet vehicula. Etiam vel nibh nec nisi euismod mollis ultrices condime';

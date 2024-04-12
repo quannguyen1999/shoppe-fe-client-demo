@@ -1,7 +1,10 @@
-<p-toast></p-toast>
+<div class="card">
+    <p-toast></p-toast>
+    <p-toast position="bottom-center" key="bc"></p-toast>
+</div>
 <app-header [isAuthorization]="isLoginPage || isRegisterPage"></app-header>
 <div class="w-full" [ngClass]="isLoginPage || isRegisterPage ? 'bg-login' : 'bg-app'"
-        [ngStyle]="{'margin-top': isOnScreenDevice ? '5rem' : '8rem'}"
+        [ngStyle]="{'margin-top': !isOnScreenDevice ? '150px' : '70px'}"
         >
     <div class="m-auto flex flex-col ">
         <div class="m-auto" [ngClass]="isOnScreenDevice ? '' : 'content'">
@@ -12,5 +15,6 @@
         </div>
     </div>
 </div>
+
 
 <app-chat *ngIf="!isOnScreenDevice"></app-chat>

@@ -1,5 +1,5 @@
 
-<div class="bg-login flex flex-row bg-login w-full self-stretch" [ngStyle]="{'height' : !isOnScreenDevice ? '565px' : '600px'}" >
+<div class="bg-login flex flex-row bg-login w-full self-stretch" [ngStyle]="{'height' : !isOnScreenDevice ? '565px' : '550px'}" >
     <div class="flex flex-col w-1/2 items-center m-auto  text-white" *ngIf="!isOnScreenDevice">
         <div class="">
             <div class="justify-center">
@@ -9,7 +9,7 @@
         <span class="text-5xl font-bold flex-1">{{nameBranch}}</span>
         <span class="mt-10 text-center text-2xl mx-10">Nền tảng thương mại điện tử yêu thích ở Động Nam Á & Đài Loan</span>
     </div>
-    <div class="flex flex-col m-auto " [ngClass]="!isOnScreenDevice ? 'w-1/2 ' : 'w-fit mt-10'">
+    <div class="flex flex-col m-auto " [ngClass]="!isOnScreenDevice ? 'w-1/2 ' : 'w-fit mt-1'">
         <form class="bg-white flex flex-col p-5 m-5 max-w-md h-auto shadow-2xl" [formGroup]="formLogin" *ngIf="!isPageRegister">
             <div class="flex flex-row">
                 <div class="m-auto">
@@ -109,7 +109,7 @@
                 </div>
             </div>
             <div>
-                <input type="number" 
+                <input type="text" 
                 formControlName="username" 
                 placeholder="Số điện thoại" 
                 required class="w-full border-2 border-solid"

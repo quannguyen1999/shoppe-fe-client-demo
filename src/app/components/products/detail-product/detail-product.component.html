@@ -1,6 +1,4 @@
-<div class="card">
-    <p-toast></p-toast>
-</div>
+
 <div class="grid grid-flow-row w-full h-80" [ngClass]="!isOnScreenDevice ? 'grid-cols-7' : 'grid-cols-1'">
     <div class="col-span-3">
         <div style="width:100%; background-color: transparent;"> 
@@ -16,7 +14,7 @@
             </p-galleria> 
         </div>
     </div>
-    <div class="col-span-4 bg-gray-100 pl-10" [ngClass]="!isOnScreenDevice ? 'pt-12' : '-pt-10'">
+    <div class="col-span-4 bg-gray-100 " [ngClass]="!isOnScreenDevice ? 'pt-12 pl-10' : '-pt-10 pl-5'">
         <div class="flex flex-col leading-9">
                 <span class="text-lg ml-2">{{product.name}}</span>
                 <div class="grid grid-cols-8 grid-flow-row text-center" *ngIf="!isOnScreenDevice; else notInOnScreenDeviceDetailProductOne">
@@ -123,7 +121,7 @@
         </div>
     </div>
 </div>
-<div class="flex flex-col" [ngClass]="!isOnScreenDevice ? 'mt-80' : 'custom-margin-detail-product'" >
+<div class="flex flex-col" [ngClass]="!isOnScreenDevice ? 'mt-36' : 'custom-margin-detail-product'" >
     <div class="bg-gray-100 p-1">
         <span class="font-bold" [ngClass]="!isOnScreenDevice ? 'text-2xl' : 'text-xs pl-10'">CHI TIẾT SẢN PHẨM</span>
     </div>

@@ -1,9 +1,9 @@
-<div class="p-10">
+<div [ngClass]="isOnScreenDevice ? 'p-2' : 'p-10'" class="text-xs">
     <h1>Thanh toán</h1>
 </div>
-<app-detail-cart></app-detail-cart>
+<app-detail-cart [isOnScreenDevice]="isOnScreenDevice"></app-detail-cart>
 <!-- <app-result-cart></app-result-cart> -->
-<div class="mt-8">
+<div class="mt-8 text-xs p-2">
     <h1>GỢI Ý SẢN PHẨM</h1>
 </div>
 <app-products></app-products>
