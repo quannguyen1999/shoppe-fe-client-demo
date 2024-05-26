@@ -5,5 +5,6 @@ export interface Cart {
     product?: string,
     price?: number,
     quantity?: number, 
-    money?: number
+    money?: number,
+    productId?: number
 }

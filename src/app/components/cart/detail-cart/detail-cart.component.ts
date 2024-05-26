@@ -24,11 +24,7 @@ export class DetailCartComponent {
   totalPrice: number = 0;
   displayedColumns: string[] = ['select','product', 'price', 'quantity', 'money', 'function'];
   dataSource = new MatTableDataSource<OrderDetailRequestDto>();
-  selection = new SelectionModel<OrderDetailRequestDto>(true, []);
-  orderSession: Order = {};
-  orderBuy: Order = {
-    orderDetailRequestDtoList: []
-  };
+  selection = new SelectionModel<number>(true, []);
 
   constructor(
     private cartService: CartService,
@@ -39,25 +35,27 @@ export class DetailCartComponent {
   }
 
   ngOnInit(): void {
+    this.updateTotalOrder();
     this.dataSource.data = this.cartService.getOrder().orderDetailRequestDtoList!;
     this.cartService.dataSubject.subscribe((data)=>{
-      this.orderSession = data;
-      this.dataSource.data = this.orderSession.orderDetailRequestDtoList!;
+      this.dataSource.data = data.orderDetailRequestDtoList!;
+      // this.selection.select(data)
     });
-
+ 
+    // this.cartService.getOrder().orderDetailRequestDtoList?.forEach(t => {
+    //   this.selection.select(t);
+    // });
+  
     this.selection.changed.subscribe(selection => {
       if(selection.added.length > 0){
         selection.added.forEach(data=>{
-          this.orderBuy.orderDetailRequestDtoList?.push(data);
+          this.cartService.addItemToCheckout(data);
         })
       }
 
       if(selection.removed.length > 0){
         selection.removed.forEach(data=>{
-          const index = this.orderBuy.orderDetailRequestDtoList?.findIndex(item => item.productId === data.productId)!;
-          if(index !== -1){
-            this.orderBuy.orderDetailRequestDtoList?.splice(index, 1);
-          }
+          this.cartService.removeItemInCheckout(data.productId || -1);
         })
       }
 
@@ -66,16 +64,15 @@ export class DetailCartComponent {
   }
 
   updateTotalOrder(){
-    this.totalProduct =  this.orderBuy.orderDetailRequestDtoList?.reduce((total, currentItem) => {
+    const data = this.cartService.getCurrentCheckout();
+    this.totalProduct =  data.orderDetailRequestDtoList?.reduce((total, currentItem) => {
       return total + currentItem.quantity!;
     }, 0)!;
 
-    this.totalPrice = this.orderBuy.orderDetailRequestDtoList?.reduce((total, currentItem) => {
+    this.totalPrice = data.orderDetailRequestDtoList?.reduce((total, currentItem) => {
     return total + (currentItem.price! * currentItem.quantity!);
     }, 0)!;
   }
-
-
 
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   toggleAllRows() {
@@ -84,56 +81,49 @@ export class DetailCartComponent {
       return;
     }
 
-    this.selection.select(...this.dataSource.data);
+    // this.selection.select(...this.dataSource.data);
+  }
+
+  isSelected(row: OrderDetailRequestDto){
+    let isMatch: boolean = false;
+    this.cartService.getCurrentCheckout().orderDetailRequestDtoList?.forEach(t => {
+        if(t.productId === row.productId){
+          // this.selection.select(row);
+          isMatch = true;
+        }
+    })
+    return isMatch;
   }
 
     /** Whether the number of selected elements matches the total number of rows. */
     isAllSelected() {
-      const numSelected = this.selection.selected.length;
-      const numRows = this.dataSource.data.length;
-      return numSelected === numRows;
+      // const numSelected = this.selection.selected.length;
+      // const numRows = this.dataSource.data.length;
+      // return numSelected === numRows;
+      return false;
     }
   
      /** The label for the checkbox on the passed row */
-     checkboxLabel(row?: Cart): string {
+     checkboxLabel(row?: number): string {
       if (!row) {
         return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
       }
-      return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position! + 1}`;
+      return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row! + 1}`;
     }
   
     
     plusItem(id: number){
-      const indexItem = this.dataSource.data.findIndex((data)=> data.productId == id);
-      if(indexItem !== -1){
-        this.dataSource.data[indexItem].quantity = this.dataSource.data[indexItem].quantity! + 1;
-      }
-  
-      const index = this.orderBuy.orderDetailRequestDtoList?.findIndex(item => item.productId === id)!;
-      if(index !== -1){
-        this.orderBuy.orderDetailRequestDtoList![index].quantity = this.orderBuy.orderDetailRequestDtoList![index].quantity! + 1;
-      }
-  
+      this.cartService.addItemToCheckoutById(id);
       this.updateTotalOrder();
-  
+      this.dataSource.data = this.cartService.getOrder().orderDetailRequestDtoList!;
     }
   
     removeItem(id: number){
-      const indexItem = this.dataSource.data.findIndex((data)=> data.productId == id);
+      const indexItem = this.cartService.removeItemToCheckoutById(id);
       if(indexItem !== -1){
-        if(this.dataSource.data[indexItem].quantity! <= 1){
-          return;
-        }
-        this.dataSource.data[indexItem].quantity = this.dataSource.data[indexItem].quantity! - 1;
-  
-        const index = this.orderBuy.orderDetailRequestDtoList?.findIndex(item => item.productId === id)!;
-        
-        if(index !== -1){
-          this.orderBuy.orderDetailRequestDtoList![index].quantity = this.orderBuy.orderDetailRequestDtoList![index].quantity! - 1;
-        }
-        
         this.updateTotalOrder();
       }
+      this.dataSource.data = this.cartService.getOrder().orderDetailRequestDtoList!;
     }
   
     removeCart(id: number){
@@ -145,15 +135,15 @@ export class DetailCartComponent {
     }
   
     processOrder(){
-      if(this.orderBuy.orderDetailRequestDtoList?.length! <= 0){
+      if(this.cartService.getCurrentCheckout().orderDetailRequestDtoList?.length! <= 0){
         this.toastrService.getPopUpErrorTypeString("Tối thiểu 1 order");
+      } else {
+        this.isProcessOrderAddress = true;
       }
-      this.isProcessOrderAddress = true;
     }
 
     getDisplayedColumns(): string[] {
       return this.displayedColumns;
-        // .filter(cd => cd !== 'product');
     }
 
 

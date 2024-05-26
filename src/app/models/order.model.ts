@@ -15,11 +15,13 @@ export interface Order {
 }
 
 export interface OrderDetailRequestDto{
+
     name?: string,
     price?: number, 
     image?: string,
     description?: string
     productId?: number,
+    position?: number,
     discount?: number,
     quantity?: number,
     totalAmount?: number

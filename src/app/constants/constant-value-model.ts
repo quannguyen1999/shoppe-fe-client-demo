@@ -16,6 +16,7 @@ export const KEY_ACCESS_TOKEN = "access_token";
 export const KEY_REFRESH_TOKEN = "refreshToken";
 export const KEY_NUMBER_TRY_REQUEST = "number_try_request";
 export const KEY_ORDER_DATA = "OrderData";
+export const KEY_CHECKOUT_DATA = "CheckoutData";
 export const KEY_USERNAME = "username";
 
 // Define columns
